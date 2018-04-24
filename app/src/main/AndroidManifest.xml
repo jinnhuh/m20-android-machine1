@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.com.m20">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
+    <uses-feature android:name="android.hardware.usb.host" />
+
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        <receiver android:enabled="true" android:name=".activity.BootUpReceiver"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".activity.IntroActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MENU" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.RegActivity" android:screenOrientation="landscape" />
+        <activity android:name=".activity.MainActivity" android:screenOrientation="landscape" />
+        <activity android:name=".activity.PersonCheckupActivity" android:screenOrientation="landscape" />
+        <activity android:name=".activity.PersonTabActivity" android:screenOrientation="landscape" />
+        <activity android:name=".activity.MenuActivity" android:screenOrientation="landscape" />
+        <activity android:name=".activity.WelcomeActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.DetailActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.DetailFrontActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.DetailBackActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.DetailStartActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.EndActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.SettingActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.DetailStrongActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.WeighWanningActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.WeightDisplayActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.BodyFatActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.BodyFactWanningActivity" android:screenOrientation="landscape"></activity>
+        <activity android:name=".activity.LateEndActivity" android:screenOrientation="landscape"></activity>
+    </application>
+
+</manifest>

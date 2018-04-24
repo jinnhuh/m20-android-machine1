@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+#wrap{position:relative;overflow:hidden;width:1280px;height:800px;background:url('../../img/bg_.jpg') no-repeat center center;}
+#wrap .blink{position:absolute;left:0;top:37%;width:100%;text-align:center;font-weight:bold;font-size:24px;color:#000;z-index:99;}
+#wrap .info_txt{position:absolute;left:50%;bottom:50px;margin-left:-490px;padding-top:25px;width:980px;height:130px;line-height:36px;text-align:center;font-size:24px;color:#fff;background: rgba(0, 0, 0, 0.7);box-sizing:border-box;border-radius:5px;letter-spacing:-0.05em;z-index:99;}
+
+#wrap .prog_area{position:absolute;left:50%;top:80px;width:350px;height:530px;margin-left:-175px;background:url('../../img/prog_model_default.png') no-repeat center top;}
+#wrap .prog_area .pa_model{position:absolute;left:0;top:0;overflow:hidden;width:350px;height:auto;background:url('../../img/prog_model_light.png') no-repeat center top;}
+#wrap .prog_area .pa_model > img{position:absolute;left:0;bottom:-10px;overflow:hidden;width:350px;height:30px;}
+
+.pa_model{
+opacity:1;
+animation-name: progmodel;
+-webkit-animation-name: progmodel; /* Safari 4.0 - 8.0 */
+
+animation-duration: 3s;
+-webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+
+animation-timing-function: ease-in-out;
+-webkit-animation-timing-function: ease-in-out; /* Safari 4.0 - 8.0 */
+
+animation-direction: alternate;
+-webkit-animation-direction: alternate;
+
+animation-iteration-count: infinite;
+-webkit-animation-iteration-count: infinite;
+
+}
+@keyframes progmodel{
+		from {opacity:1; height:0px;}
+		to {opacity:1; height:540px;}
+}
+@-webkit-keyframes progmodel{
+		from {opacity:1; height:0px;}
+		to {opacity:1; height:540px;}
+}
+

@@ -1,0 +1,27 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@font-face{
+font-family:NanumGothic;
+src:url(Font/NanumGothic.eot), url(Font/NanumGothic.woff) format('woff'), url(Font/NanumGothic.ttf) format('truetype');
+}
+
+/* base */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b,u ,i, center,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td{margin:0;padding:0;border:0;outline:0;background:transparent;font-size:12px;vertical-align:top;}
+fieldset, img{border:0 none;}
+dl, ul, ol, li{list-style:none;}
+blockquote, q{quotes:none;}
+blockquote:before, blockquote:after, q:before, q:after{content:'';content:none;}
+input, select, textarea, button{vertical-align:middle;}
+input{height:26px;border:0px;}
+checkbox{border:0;}
+select{height:30px;border:0px;}
+textarea{border:0px;}
+button{border:0 none;background-color:transparent;cursor:pointer;}
+address, caption, cite, code, dfn, em, strong, th, var{font-style:normal;font-weight:normal;}
+legend, caption{visibility:hidden;height:0;width:0;}
+hr{display:none;}
+body{font-family:'nanumgothic',"나눔고딕", NanumGothic;color:#fff;font-size:20px;word-break:keep-all;-webkit-text-size-adjust:none;}
+a{text-decoration:none;cursor:pointer;}
+a:active, a:hover{text-decoration:none;}
+table{border-collapse:collapse;border-spacing:0;}
+label{cursor:pointer;}

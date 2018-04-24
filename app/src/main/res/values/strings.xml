@@ -1,0 +1,172 @@
+<resources>
+    <string name="app_name" translatable="false">m20</string>
+    <string name="title" translatable="false">PRO</string>
+    <string name="state1" translatable="false">착용하신 벨트와 M20 Pro 장비 \n연결 상태를 확인해 주세요.</string>
+    <string name="state2" translatable="false">착용하신 벨트와 MP Suit \n연결 상태를 확인해 주세요.</string>
+    <string name="end1" translatable="false">이동 하시기 전에 벨트를 벗어주세요.</string>
+    <string name="end2" translatable="false">감사합니다.</string>
+    <string name="popup" translatable="false">\"M20 Pro 운동을 종료하시겠습니까?\" \n 운동을 종료하시면 다시 시작하실 수 없습니다.</string>
+    <string name="cancel" translatable="false">취소</string>
+    <string name="ok" translatable="false">확인</string>
+
+    <string name="front_back_btn_text" translatable="false">전면/후면</string>
+
+    <string name="reg_comment" translatable="false">
+        안녕하세요~ M20 Pro 입니다. \n
+        예약번호를 입력해 주세요. \n
+    </string>
+    <string name="hello_small_size" translatable="false">
+        %s 님 반갑습니다. \n
+        \n
+        체지방 측정검사를 위하여 체중을 측정합니다. \n
+        발판 전극 위에 정확히 서 주세요! \n
+        체중은 슈트 무게를 포함하고 있습니다. \n
+    </string>
+    <string name="hello_big_size" translatable="false">
+        \n
+        움직이지 마세요! \n
+        체지방 측정 검사를 시작 합니다. \n
+    </string>
+    <string name="check_ing_title" translatable="false">
+        체지방 측정 검사를 진행 중 입니다...
+    </string>
+    <string name="check_ing_content" translatable="false">
+        체지방 측정 검사는 M20 pro 운동 횟수에 따라 1회, 5회, 10회등 5회 단위로 검사합니다. \n
+        체지방 측정 결과는 M20 어플을 통해 확인 하실 수 있습니다. \n
+    </string>
+    <string name="hello_big_size_weight" translatable="false">
+        \n
+        \n
+        움직이지 마세요! \n
+        체중 측정을 시작 합니다. \n
+    </string>
+    <string name="hello_small_body_fat" translatable="false">
+        \n
+        체지방 측정검사를 위하여 두팔을 곧게 뻗어 장비 전면 전극에 \n
+        엄지손가락을 대고 측면 전극을 잡아주세요. \n
+    </string>
+    <string name="hello_big_size_fat" translatable="false">
+        \n
+        \n
+        움직이지 마세요! \n
+        체지방 측정 검사를 시작 합니다. \n
+    </string>
+    <string name="late_end_size" translatable="false">
+        \n
+        \n
+        %s 님의 운동 예약시간은 %s 까지 입니다. \n
+        다음 예약자를 위하여 운동을 종료합니다. \n
+        \n
+        감사합니다.
+    </string>
+    <string name="weight_display" translatable="false">
+        \n
+        %s kg \n
+    </string>
+
+    <string name="result_title" translatable="false">체지방 측정 결과</string>
+    <string name="result_name" translatable="false">이름</string>
+    <string name="result_age" translatable="false">나이</string>
+    <string name="result_sex" translatable="false">성별</string>
+    <string name="result_key" translatable="false">키</string>
+    <string name="result_date" translatable="false">검사일자</string>
+    <string name="result_tab1" translatable="false">비만 진단 및 운동목표</string>
+    <string name="result_anal_result" translatable="false">체성분 분석결과</string>
+    <string name="result_diagnose_result" translatable="false">진단결과</string>
+    <string name="result_average_less" translatable="false">표준이하</string>
+    <string name="result_average" translatable="false">표준</string>
+    <string name="result_average_more" translatable="false">표준이상</string>
+    <string name="result_sports_purpose" translatable="false">운동목표</string>
+    <string name="result_control_purpose" translatable="false">조절목표</string>
+    <string name="result_weight" translatable="false">체중</string>
+    <string name="result_body_fat_ratio" translatable="false">체지방률</string>
+    <string name="result_muscle_ratio">근육량(골격근)</string>
+    <string name="result_bmi">BMI(체질량지수)</string>
+    <string name="result_one_calorie">1일 권장 칼로리</string>
+    <string name="result_basic_ratio">기초대사량</string>
+    <string name="result_digest_ratio">소화대사량</string>
+    <string name="result_activity_ratio">활동대사량</string>
+    <string name="result_mass_of_body_water">체수분</string>
+    <string name="result_protein">단백질</string>
+    <string name="result_minerals">무기질</string>
+    <string name="result_body_fat">체지방</string>
+    <string name="result_check_ratio">측정량</string>
+    <string name="result_average_range">표준범위</string>
+    <string name="result_evaluate">평가</string>
+    <string name="result_movie_popup">추천 프로그램으로 이동하시겠습니까?</string>
+    <string name="yes">예</string>
+    <string name="no">아니오</string>
+    <string name="program_title">PROGRAM</string>
+    <string name="program_setting">설정</string>
+    <string name="program_menu_buldup">BULDUP \nProgram</string>
+    <string name="program_menu_shaping">SHAPING \nProgram</string>
+    <string name="program_menu_healthcare">HEALTHCARE \nProgram</string>
+    <string name="program_menu_massage">MASSAGE \nProgram</string>
+    <string name="program_menu_my">MY \nProgram</string>
+
+    <string name="detail_5">
+        시작을 누르면 전체 강도가 올라갑니다. \n
+        적당한 강도에 멈춤을 눌러주세요. \n
+        전체 강도 설정 후 부위별로 계속 진행됩니다. \n
+    </string>
+
+    <string name="regnumberwrong">
+        예약번호가 맞지 않습니다.\n
+        다시 입력해 주세요.\n
+        (%d)
+    </string>
+
+    <string name="program_menu_buldup_title">BULDUP PROGRAM</string>
+    <string name="program_menu_shaping_title">SHAPING PROGRAM</string>
+    <string name="program_menu_healthcare_title">HEALTHCARE PROGRAM</string>
+    <string name="program_menu_massage_title">MASSAGE PROGRAM</string>
+    <string name="program_menu_my_title">MY PROGRAM</string>
+
+    <string name="program_seleted">프로그램을 선택하세요!</string>
+
+    <string name="program_strong_setting_title">부위별 강도 설정</string>
+
+    <string name="program_buldup_menu1">근육강화 </string>
+    <string name="program_buldup_menu2">근력강화 </string>
+    <string name="program_buldup_menu3">순발력 강화</string>
+    <string name="program_buldup_menu4">근지구력 강화</string>
+    <string name="program_buldup_menu5">지구력 강화</string>
+
+    <string name="program_shaping_menu1">체지방 </string>
+    <string name="program_shaping_menu2">셀룰라이트</string>
+    <string name="program_shaping_menu3">마른체형 근육  </string>
+    <string name="program_shaping_menu4">마른체형 근력</string>
+    <string name="program_shaping_menu5">스트레칭  </string>
+
+    <string name="program_healthcare_menu1"> 위축된 근육 컨디션 조절</string>
+    <string name="program_healthcare_menu2">정상 근육 컨디션 조절</string>
+    <string name="program_healthcare_menu3">위축된 근력 컨디션 조절</string>
+    <string name="program_healthcare_menu4">정상 근력 컨디션 조절</string>
+    <string name="program_healthcare_menu5">혈액순환 개선</string>
+
+    <string name="program_massage_menu1">저속 마사지</string>
+    <string name="program_massage_menu2">중속 마사지</string>
+    <string name="program_massage_menu3">고속 마사지</string>
+    <string name="program_massage_menu4">림프 마사지</string>
+    <string name="program_massage_menu5">회복 마사지</string>
+
+    <string name="channel1">흉부</string>
+    <string name="channel2">복부</string>
+    <string name="channel3">상완(팔)</string>
+    <string name="channel4">옆구리</string>
+    <string name="channel5">어깨</string>
+    <string name="channel6">허리</string>
+    <string name="channel7">허벅다리</string>
+    <string name="channel8">둔부(엉덩이)</string>
+
+
+
+    <string name="program_my_menu1"></string>
+    <string name="program_my_menu2"></string>
+    <string name="program_my_menu3"></string>
+    <string name="program_my_menu4"></string>
+    <string name="program_my_menu5"></string>
+
+
+
+</resources>

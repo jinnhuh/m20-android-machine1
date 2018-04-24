@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    />
+
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/bg" />-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/ivBar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/prog_line_light" />-->
+    <!--</LinearLayout>-->
+
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="72dp">-->
+        <!--<ImageView-->
+            <!--android:id="@+id/ivPerson2"-->
+            <!--android:layout_width="190dp"-->
+            <!--android:layout_height="530dp"-->
+            <!--android:background="@drawable/prog_model_default" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="72dp">-->
+
+        <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/ivPerson"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="190dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="1dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="@drawable/prog_model_light" />&ndash;&gt;-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="312dp"-->
+        <!--android:gravity="center"-->
+
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtComment1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/check_ing_title"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="15pt" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginTop="637dp">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/txtComment2"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingTop="15dp"-->
+            <!--android:layout_width="975dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/check_ing_content"-->
+            <!--android:textSize="12pt"-->
+            <!--android:background="@android:color/black"/>-->
+    <!--</LinearLayout>-->
+</RelativeLayout>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_back"
+            android:layout_marginTop="15dp"
+            android:gravity="center" /-->
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!--<TextView-->
+            <!--android:id="@+id/programTitle"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/program_title"-->
+            <!--android:textSize="17.5pt"-->
+            <!--android:textColor="#fff"-->
+            <!--android:textStyle="bold" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnMenu1"
+            android:layout_width="180dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_selector2"
+            android:paddingTop="60dp"
+            android:gravity="center_horizontal"
+            android:text="@string/program_menu_buldup"
+            android:textSize="22dp" />
+
+        <Button
+            android:id="@+id/btnMenu2"
+            android:layout_width="180dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_selector2"
+            android:paddingTop="60dp"
+            android:gravity="center_horizontal"
+            android:text="@string/program_menu_shaping"
+            android:textSize="22dp" />
+
+        <Button
+            android:id="@+id/btnMenu3"
+            android:layout_width="180dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_selector2"
+            android:paddingTop="60dp"
+            android:gravity="center_horizontal"
+            android:text="@string/program_menu_healthcare"
+            android:textSize="22dp" />
+
+        <Button
+            android:id="@+id/btnMenu4"
+            android:layout_width="180dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_selector2"
+            android:paddingTop="60dp"
+            android:gravity="center_horizontal"
+            android:text="@string/program_menu_massage"
+            android:textSize="22dp" />
+
+        <Button
+            android:id="@+id/btnMenu5"
+            android:layout_width="180dp"
+            android:layout_height="210dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/button_selector2"
+            android:paddingTop="60dp"
+            android:gravity="center_horizontal"
+            android:text="@string/program_menu_my"
+            android:textSize="22dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="430dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtProgramSeleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/txt_bg"
+            android:gravity="center"
+            android:text="@string/program_seleted"
+            android:textSize="15pt" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/subMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="70dp"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/submenu_bg"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/txtTitle"
+                            android:layout_marginTop="41dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="BULDUP PROGRAM"
+                            android:textColor="#fff200"
+                            android:textSize="25pt"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/submenu_tit_line" />
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/ivClose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_close" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btnMenu11"
+                    android:layout_width="570dp"
+                    android:layout_height="65dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_selector5"
+                    android:text="@string/program_buldup_menu1"
+                    android:textColor="#fff"
+                    android:textSize="17pt" />
+
+                <Button
+                    android:id="@+id/btnMenu12"
+                    android:layout_width="570dp"
+                    android:layout_height="65dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_selector5"
+                    android:text="@string/program_buldup_menu2"
+                    android:textColor="#fff"
+                    android:textSize="17pt" />
+
+                <Button
+                    android:id="@+id/btnMenu13"
+                    android:layout_width="570dp"
+                    android:layout_height="65dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_selector5"
+                    android:text="@string/program_buldup_menu3"
+                    android:textColor="#fff"
+                    android:textSize="17pt" />
+
+                <Button
+                    android:id="@+id/btnMenu14"
+                    android:layout_width="570dp"
+                    android:layout_height="65dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_selector5"
+                    android:text="@string/program_buldup_menu4"
+                    android:textColor="#fff"
+                    android:textSize="17pt" />
+
+                <Button
+                    android:id="@+id/btnMenu15"
+                    android:layout_width="570dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/button_selector5"
+                    android:text="@string/program_buldup_menu5"
+                    android:textColor="#fff"
+                    android:textSize="17pt" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

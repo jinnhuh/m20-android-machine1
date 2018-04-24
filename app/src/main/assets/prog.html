@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+
+<title>M20 PRO</title>
+<script type="text/javascript" src="file:///android_asset/common/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="file:///android_asset/common/js/common.js"></script>
+<link rel="stylesheet" href="file:///android_asset/common/css/common.css" />
+<link rel="stylesheet" href="file:///android_asset/common/css/layout_prog.css" />
+
+</head>
+<body>
+
+<div id="wrap">
+	<span class="blink">체지방 측정 검사를 진행 중입니다...</span>
+	<div class="info_txt">
+		체지방 측정 검사는 M20  pro 운동 횟수에 따라 1회, 5회, 10회 등 5회 단위로 검사합니다.<br />
+		체지방 측정 결과는 M20  어플을 통해 확인 하실 수 있습니다.
+	</div>
+	<div class="prog_area">
+		<div class="pa_model"><img src="img/prog_line_light.png" alt="" /></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	var element = $(".blink");
+	var shown = true;
+
+	$(".pa_model").css("animation-duration", "0s");
+	$(".pa_model").css("-webkit-animation-duration", "0s");
+	$(".pa_model").css("animation-name", "");
+	$(".pa_model").css("-webkit-animation-name", "");
+
+	$("#startClick").on("click", function(){
+		$(".pa_model").css("animation-duration", "3s");
+		$(".pa_model").css("-webkit-animation-duration", "3s");
+
+		$(".pa_model").css("animation-name", "progmodel");
+		$(".pa_model").css("-webkit-animation-name", "progmodel");
+	});
+
+	$("#endClick").on("click", function(){
+		$(".pa_model").css("animation-duration", "0s");
+		$(".pa_model").css("-webkit-animation-duration", "0s");
+
+		$(".pa_model").css("animation-name", "");
+		$(".pa_model").css("-webkit-animation-name", "");
+	});
+
+	setInterval(toggle, 500);
+
+	function toggle() {
+	   if(shown) {
+		   element.hide();
+		   shown = false;
+	   } else {
+		   element.show();
+		   shown = true;
+	   }
+	}
+});
+</script>
+
+</body>
+</html>

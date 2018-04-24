@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_all">
+
+    <TextView
+        android:id="@+id/txtInform"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="564dp"
+        android:gravity="center"
+        android:text="Logo를 Touch 하세요"
+        android:textColor="#fff"
+        android:textSize="15pt" />
+
+    <LinearLayout
+        android:id="@+id/introLL"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/introTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"
+            android:text="@string/title" />
+
+    </LinearLayout>
+</RelativeLayout>
