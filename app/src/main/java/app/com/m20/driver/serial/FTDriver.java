@@ -270,10 +270,14 @@ public class FTDriver {
             return len;
         }
 
-        if (channel >= mSelectedDeviceInfo.mNumOfChannels) {
-            return -1;
+        if( channel >= getNumberOfChannels()) {
+            Log.d(TAG,"read error: Reconnect USB after terminating application, channels >= getNumberOfChannels");
+            return 0;
         }
-        
+//        if ( channel >= mSelectedDeviceInfo.mNumOfChannels) {
+//            return -1;
+//        }
+
         if (buf.length <= mReadbufRemain) {
             if (!mReadPakcetChecker) {
                 System.arraycopy(mReadbuf, mReadbufOffset, buf, 0, buf.length);

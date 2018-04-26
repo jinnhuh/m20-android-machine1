@@ -231,6 +231,14 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
             ImageButton imageButton = findViewById(R.id.btn_play);
             imageButton.setBackground(this.getResources().getDrawable(R.drawable.play_btn_on, this.getTheme()));
+            imageButton.setEnabled(false);
+
+            ImageButton imageButton2 = findViewById(R.id.btn_pause);
+            imageButton2.setEnabled(true);
+
+            ImageButton imageButton3 = findViewById(R.id.btn_stop);
+            imageButton3.setEnabled(true);
+
         });
 
         btn_arsch_1 = findViewById(R.id.btn_arsch_41);
@@ -1261,12 +1269,15 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_play: // 운동시작
                 ImageButton imageButton = findViewById(R.id.btn_pause);
                 imageButton.setBackground(this.getResources().getDrawable(R.drawable.pause_btn_off, this.getTheme()));
+                imageButton.setEnabled(true);
 
                 ImageButton imageButton2 = findViewById(R.id.btn_play);
                 imageButton2.setBackground(this.getResources().getDrawable(R.drawable.play_btn_on, this.getTheme()));
+                imageButton2.setEnabled(false);
 
                 ImageButton imageButton3 = findViewById(R.id.btn_stop);
                 imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_off, this.getTheme()));
+                imageButton3.setEnabled(true);
 
                 //////////////////////////////////
                 // Serial
@@ -1284,6 +1295,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
                 switch (mStatus) {
                     case IDLE:
+                        Log.d(TAG_ACTIVITY, "R.id.btn_play: IDLE: mStatus: RUNNING");
                         mStatus = RUNNING;
 //                        Log.d("M20", "J.Y.T DetailStartActivity IDLE: ");
 //                        mCountDown = new CountDownTimer(1000 * 60 * 20, 1000) {
@@ -1307,6 +1319,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                         break;
 
                     case RUNNING:
+                        Log.d(TAG_ACTIVITY, "R.id.btn_play: RUNNING: mStatus: PAUSE");
                         mStatus = PAUSE;//상태를 멈춤으로 표시
 //                        Log.d("M20", "J.Y.T DetailStartActivity RUNNING: ");
                         break;
@@ -1317,6 +1330,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                         animationStart();  //깜빡이게 하기 위해서
                         mUsbReceiver.writeDataToSerial("S26;N");  //멈추었다가 다시 시작 S26
 //                        //현재값 가져옴
+                        Log.d(TAG_ACTIVITY, "R.id.btn_play: PAUSE: mStatus: RUNNING");
                         mStatus = RUNNING;
                         int ellapseTime = secToMillies(timerBuffer) + 1000;
                         mCountDown = new CountDownTimer(ellapseTime, 1000) {
@@ -1346,12 +1360,15 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                 animationStop();  //깜빡이던 그림 멈춰라
                 imageButton = findViewById(R.id.btn_pause);
                 imageButton.setBackground(this.getResources().getDrawable(R.drawable.pause_btn_on, this.getTheme()));
+                imageButton.setEnabled(false);
 
                 imageButton2 = findViewById(R.id.btn_play);
                 imageButton2.setBackground(this.getResources().getDrawable(R.drawable.play_btn_off, this.getTheme()));
+                imageButton2.setEnabled(true);
 
                 imageButton3 = findViewById(R.id.btn_stop);
                 imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_off, this.getTheme()));
+                imageButton3.setEnabled(true);
 
                 //////////////////////////////////
                 // Serial
@@ -1372,6 +1389,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     mFirstAllSender.cancel();
                     iFirstAlltimer = 0;
                 }
+                Log.d(TAG_ACTIVITY, "R.id.btn_pause: mStatus: PAUSE");
                 mStatus = PAUSE;//상태를 멈춤으로 표시
                 break;
 
@@ -1382,12 +1400,15 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
                  imageButton = findViewById(R.id.btn_pause);
                 imageButton.setBackground(this.getResources().getDrawable(R.drawable.pause_btn_off, this.getTheme()));
+                imageButton.setEnabled(true);
 
                  imageButton2 = findViewById(R.id.btn_play);
                 imageButton2.setBackground(this.getResources().getDrawable(R.drawable.play_btn_off, this.getTheme()));
+                imageButton2.setEnabled(true);
 
                  imageButton3 = findViewById(R.id.btn_stop);
                 imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_on, this.getTheme()));
+                imageButton3.setEnabled(false);
 
                 if (mCountDown != null) {
                     mCountDown.cancel(); // 정지
@@ -1400,7 +1421,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     mFirstAllSender.cancel();
                     iFirstAlltimer = 0;
                 }
-
+                Log.d(TAG_ACTIVITY, "R.id.btn_stop: mStatus: PAUSE");
                 mStatus = PAUSE;//상태를 멈춤으로 표시 일시정지와 동일하게 구현 해주라고 함.
                 popupDialog = new PopupDialog(this,
                         "[다이얼로그 제목]", // 제목
@@ -1710,6 +1731,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             enddataSaved();  //운동 종료 할때 저장하는 data
             startActivity(new Intent(DetailStartActivity.this, EndActivity.class));
             finish();
+
         }
     };
 
@@ -1717,12 +1739,15 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         animationStop();  //깜빡이던 그림 멈춰라
         ImageButton imageButton = findViewById(R.id.btn_pause);
         imageButton.setBackground(this.getResources().getDrawable(R.drawable.pause_btn_on, this.getTheme()));
+        imageButton.setEnabled(false);
 
         ImageButton imageButton2 = findViewById(R.id.btn_play);
         imageButton2.setBackground(this.getResources().getDrawable(R.drawable.play_btn_off, this.getTheme()));
+        imageButton2.setEnabled(true);
 
         ImageButton imageButton3 = findViewById(R.id.btn_stop);
         imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_off, this.getTheme()));
+        imageButton3.setEnabled(true);
 
         if(mCountDown != null)
             mCountDown.cancel();
@@ -1734,6 +1759,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             mFirstAllSender.cancel();
             iFirstAlltimer = 0;
         }
+        Log.d(TAG_ACTIVITY, "setRemotePause() mStatus: PAUSE");
         mStatus = PAUSE;//상태를 멈춤으로 표시
     }
 

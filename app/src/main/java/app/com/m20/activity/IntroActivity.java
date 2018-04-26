@@ -96,7 +96,7 @@ public class IntroActivity extends AppCompatActivity {
             mUsbReceiver.writeDataToSerial("S67;N"); // Connect Check 요청
 
             Log.i(TAG_ACTIVITY, "Start RegActivity.");
-            startActivity(new Intent(IntroActivity.this, RegActivity.class));
+            //startActivity(new Intent(IntroActivity.this, RegActivity.class));
             //startActivity(new Intent(IntroActivity.this, PersonCheckupActivity.class));
             //finish();
         });
@@ -148,6 +148,7 @@ public class IntroActivity extends AppCompatActivity {
     public void setConnectCheck(String str) {
         String msg = null;
 
+        Log.i(TAG_ACTIVITY, "setConnectCheck().");
 //        MediaPlayer mediaPlayer = new MediaPlayer();
 
         switch (str) {
@@ -192,6 +193,10 @@ public class IntroActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
+        if (str.equals("0") || str.equals("1")) {  //정상이면 입력 화면으로 이동
+            startActivity(new Intent(IntroActivity.this, RegActivity.class));
+            finish();
+        }
 /*
         if(str.equals("1")) {  // Connector 비 정상
             //mediaPlayer = MediaPlayer.create(this, R.raw.connect);

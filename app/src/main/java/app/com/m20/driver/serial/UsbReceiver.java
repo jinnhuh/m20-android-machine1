@@ -153,7 +153,7 @@ public class UsbReceiver extends BroadcastReceiver {
 		if(mSerial.isConnected())
 			mSerial.write(strWrite.getBytes(), strWrite.length());
 		else {
-//			Toast.makeText(mContext, "Usb is disconnection", Toast.LENGTH_LONG).show();
+			Toast.makeText(mContext, "USB is disconnected", Toast.LENGTH_LONG).show();
 			Log.e(TAG, "No connection!!!");
 		}
 	}
@@ -216,9 +216,9 @@ public class UsbReceiver extends BroadcastReceiver {
 			
 			for (;;) {// this is the main loop for transferring
 				len = mSerial.read(rbuf);
-				rbuf[len] = 0;
 
 				if (len > 0) {
+					rbuf[len] = 0;
 					if(bMsgCnt == 0) {
 						mText = new StringBuilder();
 					}
