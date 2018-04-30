@@ -9,6 +9,8 @@ import android.hardware.usb.UsbManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
@@ -250,12 +252,22 @@ public class PersonCheckupActivity extends AppCompatActivity {
 //        Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
 //        tv.startAnimation(startAnimation);
 
+        // hkpark, for debugging
         // 3초후 자동 이동 소스 참조
+
 //        Handler handler = new Handler() {
 //            public void handleMessage(Message msg) {
+//                name="hkpark";
+//                age="28";
+//                gender="남";
+//                weight="72.4";
+//                height="176.0";
+//
 //                super.handleMessage(msg);
-//                startActivity(new Intent(PersonCheckupActivity.this, PersonTabActivity.class));
-//                finish();
+//                //0735.7, 56.8, 15.6, 32.3, 41.7, 38.3, 46.8, 11.3, 10.3, 12.6, 03.86, 03.57, 04.36, -05.3, 01.1 end
+//                bodyFatreceived("0735.7", "56.8", "15.6", "32.3", "41.7", "38.3", "46.8", "11.3", "10.3", "12.6", "03.86", "03.57", "04.36", "-05.3", "01.1");
+////                startActivity(new Intent(PersonCheckupActivity.this, PersonTabActivity.class));
+////                finish();
 //            }
 //        };
 //        handler.sendEmptyMessageDelayed(0, 3000);
@@ -264,6 +276,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
     }
 
     public void bodyFatreceived(String data1,String data2,String data3,String data4,String data5,String data6,String data7,String data8,String data9,String data10,String data11,String data12,String data13,String data14,String data15) {  //체지방 측정 정보 받았으면 PersonTabActivity 으로 이동하자
+        //Log.i(TAG_ACTIVITY, "hk: " + data1 + ", " + data2 + ", " + data3 + ", " + data4 + ", " + data5 + ", " + data6 + ", " + data7 + ", " + data8 + ", " + data9 + ", " + data10 + ", " + data11 + ", " + data12 + ", " + data13 + ", " + data14 + ", " + data15 + " end");
         impedance = data1;
         ffm = data2;
         bodyfat = data3;
@@ -298,6 +311,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("weight", weight);
         i.putExtra("height", height);
 
+        Log.i(TAG_ACTIVITY, "hk:weight: "+weight);
+
         i.putExtra("impedance",impedance);
         i.putExtra("ffm", ffm);
 //        i.putExtra("bodyfat", bodyfat);  //체지방량
@@ -318,6 +333,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("strweightIndex", strweightIndex);
         i.putExtra("strjudgmentValue", strjudgmentValue);
         i.putExtra("strweighttargetControl", strweighttargetControl);  //체중 조절목표
+        Log.i(TAG_ACTIVITY, "hk:strweighttargetControl: "+strweighttargetControl);
         i.putExtra("strweighttargetExercise", strweighttargetExercise);  //체중 근육목표
         //체지방률 운동목표=체지방량-체지방 조절 목표
 //        i.putExtra("strbodyFatPervalue", strbodyFatPervalue);  //체지방률
@@ -332,11 +348,16 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("strfBMI", strfBMI);  //BMI
         i.putExtra("strstandardBMI", strstandardBMI);  //BMI 운동목표
         i.putExtra("strBMItargetControl", strBMItargetControl);  //BMI 조절목표
+        Log.i(TAG_ACTIVITY, "hk:strBMItargetControl: "+strBMItargetControl);
         //1일 권장 칼로리
         i.putExtra("strbasemeta", strbasemeta);
         i.putExtra("stractivitymeta", stractivitymeta);
         i.putExtra("strdigestmeta", strdigestmeta);
         i.putExtra("strkcal", strkcal);
+
+        Log.i(TAG_ACTIVITY, "hk:strbasemeta: "+strbasemeta);
+        Log.i(TAG_ACTIVITY, "hk:strkcal: "+strkcal);
+
         //체지방 표준 범위 최대 최소
         if (gender.equals("1")) {
             i.putExtra("strmanMin", strmanMin);
@@ -426,6 +447,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         judgmentValue = judgmentTable(weightIndex);
         strjudgmentValue = intToString(judgmentValue);
         weighttargetControl = strTofloat(bodyfat_control) + strTofloat(muscle_control);  //조절목표
+        Log.i(TAG_ACTIVITY, "hk:weighttargetControl: "+weighttargetControl);
         strweighttargetControl = String.format(Locale.US, "%.1f", weighttargetControl);
 
         weighttargetExercise = strTofloat(weight) + weighttargetControl;  //운동목표
@@ -532,6 +554,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         strstandardBMI = String.format(Locale.US, "%.1f", standardBMI); //BMI 운동 목표
         BMItargetControl = standardBMI - fBMI;  //BMI 조절 목표
         strBMItargetControl = String.format(Locale.US, "%.1f", BMItargetControl);
+        Log.i(TAG_ACTIVITY, "hk:strBMItargetControl: "+strBMItargetControl);
         Log.d(TAG_ACTIVITY, String.format(Locale.US, "strstandardBMI: %s, strBMItargetControl: %s.", strstandardBMI, strBMItargetControl));
     }
 
@@ -539,10 +562,16 @@ public class PersonCheckupActivity extends AppCompatActivity {
         float basemeta, activitymeta, digestmeta, kcal;
         basemeta = strTofloat(ffm) * (float) 21.5 + 370;   //기초대사량
         strbasemeta = String.format(Locale.US, "%.1f", basemeta);
+        Log.i(TAG_ACTIVITY, "hk:strbasemeta: "+strbasemeta);
+        strbasemeta = String.format(Locale.US, "%d", (int)basemeta);
         activitymeta = basemeta * (float) 0.375;  //활동대사량 (0.375는 활동상수로 원래는 서버에서 내려오는 값이나 현재 안내려 와서 0.375로 박아둔다)
         stractivitymeta = String.format(Locale.US, "%.1f", activitymeta);
+        Log.i(TAG_ACTIVITY, "hk:stractivitymeta: "+stractivitymeta);
+        stractivitymeta = String.format(Locale.US, "%d", (int)activitymeta);
         digestmeta = (basemeta + activitymeta) / (float) 0.9 * (float) 0.1;  //소화 대사량
         strdigestmeta = String.format(Locale.US, "%.1f", digestmeta);
+        Log.i(TAG_ACTIVITY, "hk:strdigestmeta: "+strdigestmeta);
+        strdigestmeta = String.format(Locale.US, "%d", (int)digestmeta);
         kcal = basemeta + activitymeta + digestmeta;
 
         strkcal = intToString(Math.round(kcal));  //반올림 해준다

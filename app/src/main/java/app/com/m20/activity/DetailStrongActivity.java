@@ -580,6 +580,12 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
         }
 
         btnStartText.setBackground(this.getResources().getDrawable(R.drawable.start_btn_on, this.getTheme()));
+        btnStartText.setEnabled(false);
+
+        TextView btnStopText = findViewById(R.id.btn_stop);
+        btnStopText.setBackground(this.getResources().getDrawable(R.drawable.auto_stop_btn_off, this.getTheme()));
+        btnStopText.setEnabled(true);
+
 //        Log.i(TAG_ACTIVITY, "J.Y.T btn_stop 누른 후 start_btn_on ");
 
         animationStart();
@@ -841,17 +847,32 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
                 if (!startButtonpush)  //강도 설정에서 시작 누르기 전에 멈춤부터 누르면 오류 방지를 위해
                     return;
                 btnStartText.setBackground(this.getResources().getDrawable(R.drawable.start_btn_off, this.getTheme()));
+                btnStartText.setEnabled(true);
+
+                TextView btnStopText = findViewById(R.id.btn_stop);
+                btnStopText.setBackground(this.getResources().getDrawable(R.drawable.auto_stop_btn_on, this.getTheme()));
+                btnStopText.setEnabled(false);
+
                 //Log.i(TAG_ACTIVITY, "J.Y.T btn_stop 누른 후 start_btn_off ");
                 startNumber++;
                 //Log.i(TAG_ACTIVITY, "J.Y.T btn_stop startNumber: "+startNumber);
                 // 2초후 다시 시작 버튼 클릭.
-                try {
-                    Thread.sleep(2000);
-                    //Log.i(TAG_ACTIVITY, "J.Y.T btn_stop 2초 후 ");
-                    defaultStrongSet(startNumber);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(2000);
+//                    //Log.i(TAG_ACTIVITY, "J.Y.T btn_stop 2초 후 ");
+//                    defaultStrongSet(startNumber);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+
+                Handler handler = new Handler() {
+                    public void handleMessage(Message msg) {
+                        super.handleMessage(msg);
+                        defaultStrongSet(startNumber);
+                    }
+                };
+                handler.sendEmptyMessageDelayed(0, 2000);
+
                 break;
 
             case R.id.btn_start: // 시작

@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import app.com.m20.R;
 import app.com.m20.db.DbManagement;
 import app.com.m20.driver.serial.FTDriver;
@@ -92,10 +94,25 @@ public class IntroActivity extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.introTitle);
         imageView.setOnClickListener((v) -> {  //부팅시에 logo를 클릭하여 예약 번호 입력 화면으로 진입
-            Log.i(TAG_ACTIVITY, "Send S67;N.");
-            mUsbReceiver.writeDataToSerial("S67;N"); // Connect Check 요청
+            boolean isConnected = false;
+            if(!mSerial.isConnected()) {
+                if (mSerial.begin(mBaudrate)) {
+                    mUsbReceiver.loadDefaultSettingValues();
+                    mUsbReceiver.mainloop();
+                    isConnected = true;
+                } else {
+                    Toast.makeText(this, "Failed to try connecting, Check USB cable", Toast.LENGTH_LONG).show();
+                    Log.i(TAG_ACTIVITY, "Failed to try connecting, Check USB cable");
+                }
+            } else {
+                isConnected = true;
+            }
+            if(isConnected) {
+                Log.i(TAG_ACTIVITY, "Send S67;N.");
+                mUsbReceiver.writeDataToSerial("S67;N"); // Connect Check 요청
+            }
 
-            Log.i(TAG_ACTIVITY, "Start RegActivity.");
+            //Log.i(TAG_ACTIVITY, "Start RegActivity.");
             //startActivity(new Intent(IntroActivity.this, RegActivity.class));
             //startActivity(new Intent(IntroActivity.this, PersonCheckupActivity.class));
             //finish();
@@ -193,7 +210,7 @@ public class IntroActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        if (str.equals("0") || str.equals("1")) {  //정상이면 입력 화면으로 이동
+        if (str.equals("0") /* || str.equals("1") */) {  //정상이면 입력 화면으로 이동
             startActivity(new Intent(IntroActivity.this, RegActivity.class));
             finish();
         }

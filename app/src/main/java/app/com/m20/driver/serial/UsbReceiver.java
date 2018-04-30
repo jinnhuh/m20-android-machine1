@@ -9,6 +9,9 @@ import android.hardware.usb.UsbManager;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -153,7 +156,7 @@ public class UsbReceiver extends BroadcastReceiver {
 		if(mSerial.isConnected())
 			mSerial.write(strWrite.getBytes(), strWrite.length());
 		else {
-			Toast.makeText(mContext, "USB is disconnected", Toast.LENGTH_LONG).show();
+			//Toast.makeText(mContext, "USB is disconnected", Toast.LENGTH_LONG).show();
 			Log.e(TAG, "No connection!!!");
 		}
 	}
@@ -569,35 +572,40 @@ public class UsbReceiver extends BroadcastReceiver {
 									// 1: 정상, 2: 사용중, 3: 대기중, 4: 리눅스통신 Error, 5: AVR 통신 Error
 									// 6: 슈트 이상, 7: Channel 이상, 8: Connector: 이상, 9~00: Reserved
 									String errorCode = array[1];
+									Toast toast;
 									switch (errorCode) {
                                         case "01":
-                                            Toast.makeText(mContext, "정상", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "정상", Toast.LENGTH_SHORT);
                                             break;
                                         case "02":
-    										Toast.makeText(mContext, "사용중", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "사용중", Toast.LENGTH_SHORT);
                                             break;
                                         case "03":
-    										Toast.makeText(mContext, "대기중", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "대기중", Toast.LENGTH_SHORT);
                                             break;
                                         case "04":
-    										Toast.makeText(mContext, "리눅스 통신 Error", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "리눅스 통신 Error", Toast.LENGTH_SHORT);
                                             break;
                                         case "05":
-    										Toast.makeText(mContext, "AVR 통신 Error", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "AVR 통신 Error", Toast.LENGTH_SHORT);
                                             break;
                                         case "06":
-    										Toast.makeText(mContext, "슈트 이상", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "슈트 이상", Toast.LENGTH_SHORT);
                                             break;
                                         case "07":
-    										Toast.makeText(mContext, "Channel 이상", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "Channel 이상", Toast.LENGTH_SHORT);
                                             break;
                                         case "08":
-	    									Toast.makeText(mContext, "Connect 이상", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "Connect 이상", Toast.LENGTH_SHORT);
                                             break;
                                         default:
-    										Toast.makeText(mContext, "Reserverd", Toast.LENGTH_SHORT).show();
+                                            toast = Toast.makeText(mContext, "Reserverd", Toast.LENGTH_SHORT);
                                             break;
 									}
+                                    ViewGroup group = (ViewGroup) toast.getView();
+                                    TextView messageTextView = (TextView) group.getChildAt(0);
+                                    messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
+                                    toast.show();
 
 								}
 							}
@@ -651,6 +659,7 @@ public class UsbReceiver extends BroadcastReceiver {
         int mBaudrate;
 
         if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+            boolean beginStatus = false;
 			if (SHOW_DEBUG) {
 				Log.d(TAG, "Device attached");
 				Toast.makeText(mContext, "Device attached", Toast.LENGTH_SHORT).show();
@@ -661,10 +670,13 @@ public class UsbReceiver extends BroadcastReceiver {
 					Toast.makeText(mContext, "Device attached begin", Toast.LENGTH_SHORT).show();
 				}
 				mBaudrate = loadDefaultBaudrate();
-				mSerial.begin(mBaudrate);
+                beginStatus = mSerial.begin(mBaudrate);
 				loadDefaultSettingValues();
-			}
-			if (!mRunningMainLoop) {
+			}else {
+			    beginStatus = true;
+            }
+
+			if (beginStatus && !mRunningMainLoop) {
 				if (SHOW_DEBUG) {
 					Log.d(TAG, "Device attached mainloop");
 					Toast.makeText(mContext, "Device attached mainloop", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import app.com.m20.R;
 import app.com.m20.driver.serial.FTDriver;
 import app.com.m20.driver.serial.UsbReceiver;
@@ -91,7 +94,16 @@ public class WeightDisplayActivity extends AppCompatActivity {
             weight = intent.getStringExtra("weight");
             height = intent.getStringExtra("height");
         }
-        String text = String.format(res.getString(R.string.weight_display), weight);
+        Log.i(TAG_ACTIVITY, "hk weight : " + weight );
+
+        Matcher mat;
+        Pattern script = Pattern.compile("(^0+)", Pattern.DOTALL);
+        mat = script.matcher(weight);
+        String tmpStr = mat.replaceAll("");
+        Log.i(TAG_ACTIVITY, "hk tmpStr : " + tmpStr );
+
+        String text = String.format(res.getString(R.string.weight_display), tmpStr);
+
         TextView tv = findViewById(R.id.mainTitleKG);
         tv.setText(text);
 

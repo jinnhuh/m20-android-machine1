@@ -258,6 +258,8 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         btn_brust_1 = findViewById(R.id.btn_brust_41);
         btn_brust_2 = findViewById(R.id.btn_brust_42);
         mEllapse = findViewById(R.id.txtEllapse);
+        secToHHMMSS(seperatetime*60);
+        mEllapse.setText(timerBuffer);
 
         findViewById(R.id.btn_back).setOnClickListener(this);
         findViewById(R.id.btn_play).setOnClickListener(this);

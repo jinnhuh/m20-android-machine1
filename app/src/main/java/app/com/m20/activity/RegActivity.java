@@ -986,7 +986,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 editor.putInt("my_program_id_2_strength_8",my_program_id_2_strength_8 );
             }
         }
-        if (my_program_id_2 != 0 && j == 2) {
+        if (my_program_id_3 != 0 && j == 2) {
             if ( k == 0) {
                 my_program_id_3_strength_1 = strength;
                 editor.putInt("my_program_id_3_strength_1",my_program_id_3_strength_1 );
@@ -1020,7 +1020,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 editor.putInt("my_program_id_3_strength_8",my_program_id_3_strength_8 );
             }
         }
-        if (my_program_id_2 != 0 && j == 3) {
+        if (my_program_id_4 != 0 && j == 3) {
             if ( k == 0) {
                 my_program_id_4_strength_1 = strength;
                 editor.putInt("my_program_id_4_strength_1",my_program_id_4_strength_1 );
@@ -1054,7 +1054,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                 editor.putInt("my_program_id_4_strength_8",my_program_id_4_strength_8 );
             }
         }
-        if (my_program_id_2 != 0 && j == 4) {
+        if (my_program_id_5 != 0 && j == 4) {
             if ( k == 0) {
                 my_program_id_5_strength_1 = strength;
                 editor.putInt("my_program_id_5_strength_1",my_program_id_5_strength_1 );

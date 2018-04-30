@@ -552,10 +552,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("brust", my_program_id_1_strength_1); //각 운동의 운동 세기  burst 1 흉부
                     intent.putExtra("abdomen", my_program_id_1_strength_2);  //abdomen 2 복부
                     intent.putExtra("arm", my_program_id_1_strength_3);  //arm 3 팔
-                    intent.putExtra("sideflank", my_program_id_1_strength_4);  //sideflank 4 옆구리
+                    intent.putExtra("bein", my_program_id_1_strength_4);  //sideflank 4 옆구리
                     intent.putExtra("latt", my_program_id_1_strength_5);  //latt 5 어깨
                     intent.putExtra("waist", my_program_id_1_strength_6);  //waist  6  허리
-                    intent.putExtra("bein", my_program_id_1_strength_7);   //bein  7  허벅다리
+                    intent.putExtra("sideflank", my_program_id_1_strength_7);   //bein  7  허벅다리
                     intent.putExtra("arsch", my_program_id_1_strength_8);  //arsch   8 둔부
                 }
                 if (my_program_id_1 != 0) {
@@ -638,10 +638,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("brust", my_program_id_2_strength_1); //각 운동의 운동 세기  burst 1 흉부
                     intent.putExtra("abdomen", my_program_id_2_strength_2);  //abdomen 2 복부
                     intent.putExtra("arm", my_program_id_2_strength_3);  //arm 3 팔
-                    intent.putExtra("sideflank", my_program_id_2_strength_4);  //sideflank 4 옆구리
+                    intent.putExtra("bein", my_program_id_2_strength_4);  //sideflank 4 옆구리
                     intent.putExtra("latt", my_program_id_2_strength_5);  //latt 5 어깨
                     intent.putExtra("waist", my_program_id_2_strength_6);  //waist  6  허리
-                    intent.putExtra("bein", my_program_id_2_strength_7);   //bein  7  허벅다리
+                    intent.putExtra("sideflank", my_program_id_2_strength_7);   //bein  7  허벅다리
                     intent.putExtra("arsch", my_program_id_2_strength_8);  //arsch   8 둔부
                 }
                 if (my_program_id_1 != 0) {
@@ -724,10 +724,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("brust", my_program_id_3_strength_1); //각 운동의 운동 세기  burst 1 흉부
                     intent.putExtra("abdomen", my_program_id_3_strength_2);  //abdomen 2 복부
                     intent.putExtra("arm", my_program_id_3_strength_3);  //arm 3 팔
-                    intent.putExtra("sideflank", my_program_id_3_strength_4);  //sideflank 4 옆구리
+                    intent.putExtra("bein", my_program_id_3_strength_4);  //sideflank 4 옆구리
                     intent.putExtra("latt", my_program_id_3_strength_5);  //latt 5 어깨
                     intent.putExtra("waist", my_program_id_3_strength_6);  //waist  6  허리
-                    intent.putExtra("bein", my_program_id_3_strength_7);   //bein  7  허벅다리
+                    intent.putExtra("sideflank", my_program_id_3_strength_7);   //bein  7  허벅다리
                     intent.putExtra("arsch", my_program_id_3_strength_8);  //arsch   8 둔부
                 }
                 if (my_program_id_1 != 0) {
@@ -810,10 +810,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("brust", my_program_id_4_strength_1); //각 운동의 운동 세기  burst 1 흉부
                     intent.putExtra("abdomen", my_program_id_4_strength_2);  //abdomen 2 복부
                     intent.putExtra("arm", my_program_id_4_strength_3);  //arm 3 팔
-                    intent.putExtra("sideflank", my_program_id_4_strength_4);  //sideflank 4 옆구리
+                    intent.putExtra("bein", my_program_id_4_strength_4);  //sideflank 4 옆구리
                     intent.putExtra("latt", my_program_id_4_strength_5);  //latt 5 어깨
                     intent.putExtra("waist", my_program_id_4_strength_6);  //waist  6  허리
-                    intent.putExtra("bein", my_program_id_4_strength_7);   //bein  7  허벅다리
+                    intent.putExtra("sideflank", my_program_id_4_strength_7);   //bein  7  허벅다리
                     intent.putExtra("arsch", my_program_id_4_strength_8);  //arsch   8 둔부
                 }
                 if (my_program_id_1 != 0) {
@@ -896,10 +896,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     intent.putExtra("brust", my_program_id_5_strength_1); //각 운동의 운동 세기  burst 1 흉부
                     intent.putExtra("abdomen", my_program_id_5_strength_2);  //abdomen 2 복부
                     intent.putExtra("arm", my_program_id_5_strength_3);  //arm 3 팔
-                    intent.putExtra("sideflank", my_program_id_5_strength_4);  //sideflank 4 옆구리
+                    intent.putExtra("bein", my_program_id_5_strength_4);  //sideflank 4 옆구리
                     intent.putExtra("latt", my_program_id_5_strength_5);  //latt 5 어깨
                     intent.putExtra("waist", my_program_id_5_strength_6);  //waist  6  허리
-                    intent.putExtra("bein", my_program_id_5_strength_7);   //bein  7  허벅다리
+                    intent.putExtra("sideflank", my_program_id_5_strength_7);   //bein  7  허벅다리
                     intent.putExtra("arsch", my_program_id_5_strength_8);  //arsch   8 둔부
                 }
                 if (my_program_id_1 != 0) {

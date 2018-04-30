@@ -43,6 +43,18 @@
         <activity android:name=".activity.RegActivity" android:screenOrientation="landscape" />
         <activity android:name=".activity.MainActivity" android:screenOrientation="landscape" />
         <activity android:name=".activity.PersonCheckupActivity" android:screenOrientation="landscape" />
+        <!---
+        <activity
+            android:name=".activity.PersonCheckupActivity"
+            android:screenOrientation="landscape" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MENU" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        //-->
         <activity android:name=".activity.PersonTabActivity" android:screenOrientation="landscape" />
         <activity android:name=".activity.MenuActivity" android:screenOrientation="landscape" />
         <activity android:name=".activity.WelcomeActivity" android:screenOrientation="landscape"></activity>
