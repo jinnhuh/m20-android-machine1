@@ -111,9 +111,11 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         readAgedDataSaved();
         readBookingIDDataSaved();
         readHeightDataSaved();
-        if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
-            sendReservationInform();
-        }
+        // 18-05-02, M20 Request for changing call sendReservationInform() always when program end.
+        //if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
+        Log.i(TAG_ACTIVITY, "sendReservationInform() is called");
+        sendReservationInform();
+        //}
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
 //         mediaPlayer = new MediaPlayer();
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.end);

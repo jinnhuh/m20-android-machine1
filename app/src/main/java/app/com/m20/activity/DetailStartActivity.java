@@ -102,14 +102,14 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     TextView textViewPercent4;
 
     final static int TOTAL = 0;
-    final static int BRUST = 1;
-    final static int ABDOMEN = 2;
-    final static int ARM = 3;
-    final static int BEIN = 4;
-    final static int LATT = 5;
-    final static int WAIST = 6;
-    final static int FLANK = 7;
-    final static int ARSCH = 8;
+    final static int BRUST = 0x01;
+    final static int ABDOMEN = 0x02;   //2;
+    final static int ARM = 0x04;       //3;
+    final static int BEIN = 0x08;      //4;
+    final static int LATT = 0x10;      //5;
+    final static int WAIST = 0x20;     //6;
+    final static int FLANK = 0x40;     //7;
+    final static int ARSCH = 0x80;     //8;
     int mSelect = TOTAL;
 
     @Override
@@ -1260,6 +1260,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         int progress;
+        boolean bChanged = false;
 
         switch (v.getId()) {
             //case R.id.btn_back:  //운동시작 후에는 back은 없다
@@ -1612,83 +1613,252 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_latt_41:
             case R.id.btn_latt_42:
                 Log.d(TAG_ACTIVITY, "Latt.");
-                mSelect = LATT;
-                progress = latt_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != LATT) {
+                    mSelect = LATT;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, latt_value, bChanged);
                 break;
             case R.id.btn_waist_41:
             case R.id.btn_waist_42:
                 Log.d(TAG_ACTIVITY, "Waist.");
-                mSelect = WAIST;
-                progress = waist_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != WAIST) {
+                    mSelect = WAIST;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, waist_value, bChanged);
                 break;
             case R.id.btn_sideflank_41:
             case R.id.btn_sideflank_42:
                 Log.d(TAG_ACTIVITY, "Flank.");
-                mSelect = FLANK;
-                progress = sideflank_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != FLANK) {
+                    mSelect = FLANK;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, sideflank_value, bChanged);
                 break;
             case R.id.btn_arsch_41:
             case R.id.btn_arsch_42:
                 Log.d(TAG_ACTIVITY, "Arsch.");
-                mSelect = ARSCH;
-                progress = arsch_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != ARSCH) {
+                    mSelect = ARSCH;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, arsch_value, bChanged);
                 break;
             case R.id.btn_brust_41:
             case R.id.btn_brust_42:
                 Log.d(TAG_ACTIVITY, "Brust.");
-                mSelect = BRUST;
-                progress = brust_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != BRUST) {
+                    mSelect = BRUST;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, brust_value, bChanged);
                 break;
             case R.id.btn_arm_41:
             case R.id.btn_arm_42:
                 Log.d(TAG_ACTIVITY, "Arm.");
-                mSelect = ARM;
-                progress = arm_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != ARM) {
+                    mSelect = ARM;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, arm_value, bChanged);
                 break;
             case R.id.btn_abdomen_41:
             case R.id.btn_abdomen_42:
                 Log.d(TAG_ACTIVITY, "Abdomen.");
-                mSelect = ABDOMEN;
-                progress = abdomen_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != ABDOMEN) {
+                    mSelect = ABDOMEN;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, abdomen_value, bChanged);
                 break;
             case R.id.btn_bein_41:
             case R.id.btn_bein_42:
                 Log.d(TAG_ACTIVITY, "Bein.");
-                mSelect = BEIN;
-                progress = bein_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+                if (mSelect != BEIN) {
+                    mSelect = BEIN;
+                    bChanged = true;
+                } else {
+                    bChanged = false;
+                }
+                handleBodyPartSelected(mSelect, bein_value, bChanged);
                 break;
             case R.id.txtPersent4:
                 Log.d(TAG_ACTIVITY, "Percent.");
-                mSelect = TOTAL;
-                progress = all_value;
-                mSeekBar.setProgress(progress);
-                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-                mHoloCircularProgressBar.setProgress(progress * 0.01f);
+//                if (mSelect != TOTAL) {
+//                    mSelect = TOTAL;
+//                    bChanged = true;
+//                } else {
+//                    bChanged = false;
+//                }
+//                handleBodyPartSelected(mSelect, all_value, bChanged);
+
+//                progress = all_value;
+//                mSeekBar.setProgress(progress);
+//                textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
+//                mHoloCircularProgressBar.setProgress(progress * 0.01f);
                 break;
+        }
+    }
+
+    private void handleBodyPartSelected(int selId, int progress, boolean bChanged) {
+
+        mSeekBar.setProgress(progress);
+        textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
+        mHoloCircularProgressBar.setProgress(progress * 0.01f);
+
+        if( bChanged ) {
+            animationStop();
+            animationPartialStart(selId);
+        }else {
+            mSelect = TOTAL;
+            progress = all_value;
+            mSeekBar.setProgress(all_value);
+            textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
+            mHoloCircularProgressBar.setProgress(progress * 0.01f);
+            animationPartialStop(selId);
+            animationStart();
+        }
+    }
+
+    //hk 0430
+    private void animationPartialStop(int bodyPartId) {
+        Log.d(TAG_ACTIVITY, "animationPartialStop(" + bodyPartId + ")");
+        switch(bodyPartId) {
+            case BRUST:
+            //if ((bodyPartId & 0x01) == 0)
+            {
+                btn_brust_1.clearAnimation();
+                btn_brust_2.clearAnimation();
+                break;
+            }
+            case ABDOMEN:
+            //if ((bodyPartId & 0x02) == 0)
+            {
+                btn_abdomen_1.clearAnimation();
+                btn_abdomen_2.clearAnimation();
+                break;
+            }
+            case ARM:
+            //if ((bodyPartId & 0x04) == 0)
+            {
+                btn_arm_1.clearAnimation();
+                btn_arm_2.clearAnimation();
+                break;
+            }
+            case BEIN:
+            //if ((bodyPartId & 0x08) == 0)
+            {
+                btn_bein_1.clearAnimation();
+                btn_bein_2.clearAnimation();
+                break;
+            }
+            case LATT:
+            //if ((bodyPartId & 0x10) == 0)
+            {
+                btn_latt_1.clearAnimation();
+                btn_latt_2.clearAnimation();
+                break;
+            }
+            case WAIST:
+            //if ((bodyPartId & 0x20) == 0)
+            {
+                btn_waist_1.clearAnimation();
+                btn_waist_2.clearAnimation();
+                break;
+            }
+            case FLANK:
+            //if ((bodyPartId & 0x40) == 0)
+            {
+                btn_sideflank_1.clearAnimation();
+                btn_sideflank_2.clearAnimation();
+                break;
+            }
+            case ARSCH:
+            //if ((bodyPartId & 0x80) == 0)
+            {
+                btn_arsch_1.clearAnimation();
+                btn_arsch_2.clearAnimation();
+                break;
+            }
+        }
+    }
+
+    private void animationPartialStart(int bodyPartId) {
+        Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
+        Log.d(TAG_ACTIVITY, "animationPartialStart(" + bodyPartId + ")");
+        switch(bodyPartId) {
+            case BRUST:
+            //if ((bodyPartId & 0x01) == 0)
+            {
+                btn_brust_1.startAnimation(startAnimation);
+                btn_brust_2.startAnimation(startAnimation);
+                break;
+            }
+            case ABDOMEN:
+            //if ((bodyPartId & 0x02) == 0)
+            {
+                btn_abdomen_1.startAnimation(startAnimation);
+                btn_abdomen_2.startAnimation(startAnimation);
+                break;
+            }
+            case ARM:
+            //if ((bodyPartId & 0x04) == 0)
+            {
+                btn_arm_1.startAnimation(startAnimation);
+                btn_arm_2.startAnimation(startAnimation);
+                break;
+            }
+            case BEIN:
+            //if ((bodyPartId & 0x08) == 0)
+            {
+                btn_bein_1.startAnimation(startAnimation);
+                btn_bein_2.startAnimation(startAnimation);
+                break;
+            }
+            case LATT:
+            //if ((bodyPartId & 0x10) == 0)
+            {
+                btn_latt_1.startAnimation(startAnimation);
+                btn_latt_2.startAnimation(startAnimation);
+                break;
+            }
+            case WAIST:
+            //if ((bodyPartId & 0x20) == 0)
+            {
+                btn_waist_1.startAnimation(startAnimation);
+                btn_waist_2.startAnimation(startAnimation);
+                break;
+            }
+            case FLANK:
+            //if ((bodyPartId & 0x40) == 0)
+            {
+                btn_sideflank_1.startAnimation(startAnimation);
+                btn_sideflank_2.startAnimation(startAnimation);
+                break;
+            }
+            case ARSCH:
+            //if ((bodyPartId & 0x80) == 0)
+            {
+                btn_arsch_1.startAnimation(startAnimation);
+                btn_arsch_2.startAnimation(startAnimation);
+                break;
+            }
         }
     }
 
