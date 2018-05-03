@@ -314,13 +314,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         TextView textView = findViewById(R.id.txtTitle);
         SharedPreferences setting ;
         setting = getSharedPreferences("setting", 0);
+        Log.d(TAG_ACTIVITY, "main_title = " + setting.getString("main_title", ""));
         textView.setText(setting.getString("main_title", ""));
         //어떤 운동인지 체크한다
         String title = setting.getString("main_title", "");
+        Log.d(TAG_ACTIVITY, "title = " + title);
         switch (title) {
             case "근육강화":
-            playID = "근육강화";
-        break;
+                playID = "근육강화";
+                break;
             case "근력강화":
                 playID = "근력강화";
                 break;

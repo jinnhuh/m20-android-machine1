@@ -163,6 +163,11 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             all_value = intent.getIntExtra("all", 5);
             playID = intent.getStringExtra("menu");  //어떤 운동인지 받자
         }
+        if(playID==null)
+        {
+            Log.e(TAG_ACTIVITY, "playId is null");
+            playID = "Unknown";
+        }
         if (playID.equals("위축된 근육 컨디션 조절") || playID.equals("위축된 근력 컨디션 조절")) //두 개의 운동은 시간이 15분임
             seperatetime = 15;
         else // 그외는 20분임

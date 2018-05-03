@@ -657,21 +657,31 @@ public class PersonCheckupActivity extends AppCompatActivity {
     private String exerciseRecommend(int judgmentValue, int judgmentbodyFatvalue, int judgmentmusclevalue) {  //추천 운동 판정
         String result = null;
 
-        if ((judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 0) ||(judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0) || (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0))
+        if ((judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 0) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0))
             result = "근육강화";
-        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) || (judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
-                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1) || (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) ||
-                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2) || (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
-                (judgmentValue == 2 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) || (judgmentValue == 2 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2))
+        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2))
             result = "근력강화";
-        else if ((judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1) || (judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
-                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 2) || (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
-                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0))
+        else if ((judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1))
             result = "체지방";
         else if ((judgmentValue == 0 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0))
             result ="마른체형 근육";
         else if ((judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1))
-            result ="마른체형 근련";
+            result ="마른체형 근력";
+
+        Log.d(TAG_ACTIVITY, "exerciseRecommend " + result);
 
         return result;
     }

@@ -589,6 +589,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void usedCount(int used_count, String name, String age, String gender, String weight, String height) {  //total_machine_used_count 의 횟수에 따라 MenuActivity로 갈지 아님 WelcomeActivity로 갈지 분기
+        //if (used_count > 0) {
         if ((used_count == 1) || ((used_count % 5) == 0)) {
             Intent intent = new Intent(this, WelcomeActivity.class);  //횟수가 1 이거나 5의 배수 이면 체중 측정 (WelcomeActivity)
             intent.putExtra("name",name);

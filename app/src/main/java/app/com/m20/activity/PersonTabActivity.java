@@ -452,6 +452,7 @@ public class PersonTabActivity extends AppCompatActivity {
                         editor = setting.edit();
                         editor.clear();
                         editor.putString("main_title", resultexerciseRecommend);
+                        Log.d(TAG_ACTIVITY, "title = " + resultexerciseRecommend);
                         editor.apply();
                         Log.i(TAG_ACTIVITY, "J.Y.T PersonTabActivity resultexerciseRecommend:"+resultexerciseRecommend);
 //                        Log.i("M20", "J.Y.T PersonTabActivity setting.getString():"+setting.getString("main_title", ""));
@@ -582,6 +583,7 @@ public class PersonTabActivity extends AppCompatActivity {
             resultMineral = intent.getIntExtra("resultMineral", 0);
             resultBodyfat = intent.getIntExtra("resultBodyfat", 0);
             resultexerciseRecommend = intent.getStringExtra("resultexerciseRecommend");
+            Log.d(TAG_ACTIVITY, "title = " + resultexerciseRecommend);
             strgraphmuscleIndex = intent.getStringExtra("strgraphmuscleIndex");
             strgraphbodyFatPervalue = intent.getStringExtra("strgraphbodyFatPervalue");
             strgrapfBMI = intent.getStringExtra("strgrapfBMI");
