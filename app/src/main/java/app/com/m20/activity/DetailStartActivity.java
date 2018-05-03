@@ -102,14 +102,14 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     TextView textViewPercent4;
 
     final static int TOTAL = 0;
-    final static int BRUST = 0x01;
-    final static int ABDOMEN = 0x02;   //2;
-    final static int ARM = 0x04;       //3;
-    final static int BEIN = 0x08;      //4;
-    final static int LATT = 0x10;      //5;
-    final static int WAIST = 0x20;     //6;
-    final static int FLANK = 0x40;     //7;
-    final static int ARSCH = 0x80;     //8;
+    final static int BRUST = 1;
+    final static int ABDOMEN = 2;
+    final static int ARM = 3;
+    final static int BEIN = 4;
+    final static int LATT = 5;
+    final static int WAIST = 6;
+    final static int FLANK = 7;
+    final static int ARSCH = 8;
     int mSelect = TOTAL;
 
     @Override
