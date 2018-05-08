@@ -370,6 +370,7 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&minMusMass=" + minMusMass );
                 params.append("&maxMusMass=" + maxMusMass );
                 params.append("&strgraphmuscleIndex=" + strgraphmuscleIndex); // 근육량 그래프 그리기 위한 index
+                Log.i(TAG_ACTIVITY, "hk:strgraphmuscleIndex = " + strgraphmuscleIndex);
 
                 params.append("&bmi=" + bmi); // BMI
                 params.append("&strfBMI=" + strfBMI); // BMI

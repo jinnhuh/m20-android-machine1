@@ -82,7 +82,8 @@ $(function () {
 
 	document.getElementById("weight").innerHTML = weight + "kg";
 	document.getElementById("bodyFatPer").innerHTML = bodyFatPer + "%(" +bodyFatPer2 + "kg)" ;
-	document.getElementById("musMass").innerHTML = strgraphmuscleIndex + "(" + musMass + "kg)";
+	//document.getElementById("musMass").innerHTML = strgraphmuscleIndex + "(" + musMass + "kg)";
+	document.getElementById("musMass").innerHTML = musMass + "kg";
 	document.getElementById("bmi").innerHTML = bmi + "kg/m2";
 
     document.getElementById("excerGoalWeight").innerHTML = excerGoalWeight +"kg";

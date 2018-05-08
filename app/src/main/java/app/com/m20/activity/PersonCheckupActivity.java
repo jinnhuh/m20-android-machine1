@@ -329,26 +329,32 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("bodyfat_control", bodyfat_control);
         float fmuscle_control = strTofloat(muscle_control);
         String strmuscle_control = String.format(Locale.US, "%.1f", fmuscle_control);
-        i.putExtra("muscle_control", strmuscle_control);
+        i.putExtra("muscle_control", strmuscle_control);        // 근육량 조절 목표
+        Log.i(TAG_ACTIVITY, "hk:muscle_control: "+muscle_control);
         i.putExtra("strweightIndex", strweightIndex);
         i.putExtra("strjudgmentValue", strjudgmentValue);
         i.putExtra("strweighttargetControl", strweighttargetControl);  //체중 조절목표
         Log.i(TAG_ACTIVITY, "hk:strweighttargetControl: "+strweighttargetControl);
         i.putExtra("strweighttargetExercise", strweighttargetExercise);  //체중 근육목표
+
         //체지방률 운동목표=체지방량-체지방 조절 목표
 //        i.putExtra("strbodyFatPervalue", strbodyFatPervalue);  //체지방률
         float bodyFatPertargetExercise = strTofloat(bodyfat) + strTofloat(bodyfat_control);
         strbodyFatPertargetExercise = String.format(Locale.US, "%.1f", bodyFatPertargetExercise);
         i.putExtra("strbodyFatPertargetExercise", strbodyFatPertargetExercise);  //운동목표=체지방량+체지방
+
         //근육량 = muscle, 운동목표 = 근육량(muscle) - 근육 조절 목표(muscle_control)
         float muscletargetExercise = strTofloat(muscle) + strTofloat(muscle_control);
         strmuscletargetExercise = String.format(Locale.US, "%.1f", muscletargetExercise);
         i.putExtra("strmuscletargetExercise", strmuscletargetExercise);  //근육 운동목표
+        Log.i(TAG_ACTIVITY, "hk:strmuscletargetExercise: "+strmuscletargetExercise);
+
         //BMI
         i.putExtra("strfBMI", strfBMI);  //BMI
         i.putExtra("strstandardBMI", strstandardBMI);  //BMI 운동목표
         i.putExtra("strBMItargetControl", strBMItargetControl);  //BMI 조절목표
         Log.i(TAG_ACTIVITY, "hk:strBMItargetControl: "+strBMItargetControl);
+
         //1일 권장 칼로리
         i.putExtra("strbasemeta", strbasemeta);
         i.putExtra("stractivitymeta", stractivitymeta);
@@ -374,6 +380,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         resultexerciseRecommend =  exerciseRecommend(judgmentValue, judgmentbodyFatvalue, judgmentmusclevalue);
         i.putExtra("resultexerciseRecommend", resultexerciseRecommend);
         i.putExtra("strgraphmuscleIndex", strgraphmuscleIndex);
+        Log.i(TAG_ACTIVITY, "hk:strgraphmuscleIndex: "+strgraphmuscleIndex);
         i.putExtra("strgraphbodyFatPervalue", strgraphbodyFatPervalue);
         i.putExtra("strgrapfBMI", strgrapfBMI);
 
@@ -512,6 +519,10 @@ public class PersonCheckupActivity extends AppCompatActivity {
         else
             standardMuscle = standardWeight * (float) 0.77 * (float) 0.549;
         muscleindex = (strTofloat(muscle) / standardMuscle) * 100;  //근육 index
+
+        Log.i(TAG_ACTIVITY, "hk:standardMuscle: "+standardMuscle);
+        Log.i(TAG_ACTIVITY, "hk:muscleindex: "+muscleindex);
+
         //근육그래프 그리는 공식
         if (muscleindex <= 70)
             graphmuscleIndex = 0;
@@ -521,6 +532,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
             graphmuscleIndex = 100;
         strgraphmuscleIndex = String.format(Locale.US, "%.1f", graphmuscleIndex);
         //근육그래프 그리는 공식
+
+        Log.i(TAG_ACTIVITY, "hk:strgraphmuscleIndex: "+strgraphmuscleIndex);
 
         if (muscleindex <= 89.9)  //판정 table
             result = 0;
