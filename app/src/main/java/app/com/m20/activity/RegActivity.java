@@ -89,6 +89,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
     String user_weight;  //사용자 몸무게
     String user_height;  //사용자 키
 
+    // 2018-05-08, M20 request handling activity_constant into RI00003
+    String activity_constant;  //활동상수 : 1(비활동적), 2(약간활동적), 3(적당히 활동적), 4(아주 활동적)
+
     int my_program_id_1_strength_1 = 0;
     int my_program_id_1_strength_2 = 0;
     int my_program_id_1_strength_3 = 0;
@@ -643,6 +646,14 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         editor.apply();
     }
 
+    // 2018-05-08, M20 request handling activity_constant into RI00003
+    private void activitydataSaved() {  //activity_constant
+        SharedPreferences count =getSharedPreferences("activity_constant", MODE_PRIVATE);
+        SharedPreferences.Editor editor = count.edit();
+        editor.putString("Data_activity_constant",activity_constant);
+        editor.apply();
+    }
+
     @Override
     public void onDestroy() {
         Log.i(TAG_ACTIVITY, "onDestroy()");
@@ -719,6 +730,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                     stringBuilder.append(regnumber);
                     //stringBuilder.append("&unique_identifier=" + "B8:27:EB:50:E6:1E");
                     String sendData = stringBuilder.toString();
+                    Log.i(TAG_ACTIVITY, String.format(Locale.US, "sendData: %s.", sendData));
 
                     OutputStream outputStream = httpsURLConnection.getOutputStream();
                     BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
@@ -799,6 +811,11 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                             user_weight = user_data_Datajobject.getAsJsonObject().get("weight").getAsString();
                             user_height = user_data_Datajobject.getAsJsonObject().get("height").getAsString();
                             heightdataSaved();
+
+                            // 2018-05-08, M20 request handling activity_constant into RI00003
+                            activity_constant = user_data_Datajobject.getAsJsonObject().get("activity_constant").getAsString();
+                            activitydataSaved();
+                            Log.i(TAG_ACTIVITY, "activity_constant :" + activity_constant);
                         }
 
                         // machine_program_list

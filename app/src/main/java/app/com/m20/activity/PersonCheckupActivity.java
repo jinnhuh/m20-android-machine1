@@ -94,10 +94,14 @@ public class PersonCheckupActivity extends AppCompatActivity {
     int judgmentmusclevalue;  //근육량 Table 저장 변수
     String resultexerciseRecommend;
     String strgraphmuscleIndex;
+    String strMuscleIndex;
     String strgraphbodyFatPervalue;
     String strgrapfBMI;
     String strstandardWeight;
     String resultweightIndex;
+
+    // 2018-05-08, M20 request handling activity_constant into RI00003
+    String activity_constant;  //활동상수 : 1(비활동적), 2(약간활동적), 3(적당히 활동적), 4(아주 활동적)
 
     @Override
     public void onDestroy() {
@@ -173,6 +177,11 @@ public class PersonCheckupActivity extends AppCompatActivity {
             weight = intent.getStringExtra("weight");
             height = intent.getStringExtra("height");
         }
+
+        // 2018-05-08, M20 request handling activity_constant into RI00003, Start
+        SharedPreferences prefs =getSharedPreferences("activity_constant", MODE_PRIVATE);
+        activity_constant = prefs.getString("Data_activity_constant", "0");
+        // 2018-05-08, M20 request handling activity_constant into RI00003, End
 
         //////////////////////////////////
         // Serial
@@ -386,6 +395,35 @@ public class PersonCheckupActivity extends AppCompatActivity {
 
         SharedPreferences endsaved =getSharedPreferences("end_data", MODE_PRIVATE);
         SharedPreferences.Editor editor = endsaved.edit();
+
+        // 2018-05-08, M20 request adding some items into RI00004. Start
+        editor.putString("Data_weight_index",strweightIndex );
+        editor.putString("Data_weight_goal_target",strweighttargetExercise );
+        editor.putString("Data_weight_control_target",strweighttargetControl );
+        editor.putString("Data_muscle_index",strMuscleIndex );
+        editor.putString("Data_muscle_goal_target",strmuscletargetExercise );
+        editor.putString("Data_muscle_control_target",muscle_control );
+        editor.putString("Data_muscle_control",muscle_control );
+        editor.putString("Data_body_fat_goal_target",strbodyFatPertargetExercise );
+        // handle "-0.0" value from generator
+        float temp = Float.parseFloat(bodyfat_control);
+        bodyfat_control = String.format(Locale.US, "%.1f", temp);
+        editor.putString("Data_body_fat_control_target",bodyfat_control );
+        editor.putString("Data_body_fat_control",bodyfat_control );
+        editor.putString("Data_body_mass_goal_target",strstandardBMI );
+        editor.putString("Data_body_mass_control_target",strBMItargetControl );
+        editor.putString("Data_recommended_calories_per_day",strkcal );
+        editor.putString("Data_basic_metabolism",strbasemeta );
+        editor.putString("Data_activity_metabolism",stractivitymeta );
+        editor.putString("Data_digestive_metabolism",strdigestmeta );
+        editor.putString("Data_body_impedance",impedance );
+        editor.putString("Data_fat_free_mass", ffm);
+        editor.putString("Data_body_fat_status",Integer.toString(resultBodyfat) );
+        editor.putString("Data_body_water_status", Integer.toString(resultBodywater));
+        editor.putString("Data_protein_status", Integer.toString(resultProtein));
+        editor.putString("Data_minerals_status", Integer.toString(resultMineral));
+        // 2018-05-08, M20 request adding some items into RI00004. End
+
         editor.putString("Data_height",height ); //키
         editor.putString("Data_weight",weight ); //체중
         editor.putString("Data_strstandardWeight",strstandardWeight ); //체중(min) = 표준체중
@@ -450,7 +488,9 @@ public class PersonCheckupActivity extends AppCompatActivity {
         else if (weightIndex > 130)
             graphweightIndex = 100;
         //체중그래프 그리는 공식
-        strweightIndex = floatToString(graphweightIndex);
+        // 2018-05-08, M20 request adding some items into RI00004.
+        //strweightIndex = floatToString(graphweightIndex);
+        strweightIndex = String.format(Locale.US, "%.1f", graphweightIndex);
         judgmentValue = judgmentTable(weightIndex);
         strjudgmentValue = intToString(judgmentValue);
         weighttargetControl = strTofloat(bodyfat_control) + strTofloat(muscle_control);  //조절목표
@@ -519,6 +559,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         else
             standardMuscle = standardWeight * (float) 0.77 * (float) 0.549;
         muscleindex = (strTofloat(muscle) / standardMuscle) * 100;  //근육 index
+        strMuscleIndex = String.format(Locale.US, "%.1f", muscleindex);
 
         Log.i(TAG_ACTIVITY, "hk:standardMuscle: "+standardMuscle);
         Log.i(TAG_ACTIVITY, "hk:muscleindex: "+muscleindex);
@@ -577,7 +618,13 @@ public class PersonCheckupActivity extends AppCompatActivity {
         strbasemeta = String.format(Locale.US, "%.1f", basemeta);
         Log.i(TAG_ACTIVITY, "hk:strbasemeta: "+strbasemeta);
         strbasemeta = String.format(Locale.US, "%d", (int)basemeta);
-        activitymeta = basemeta * (float) 0.375;  //활동대사량 (0.375는 활동상수로 원래는 서버에서 내려오는 값이나 현재 안내려 와서 0.375로 박아둔다)
+        // 2018-05-08, M20 request handling activity_constant into RI00003, Start
+        // activitymeta = basemeta * activity_constant;
+        float ac = (float)getActivityConstant();
+        Log.i(TAG_ACTIVITY, "hk:activity_constant : " + activity_constant + " float ac = " + ac);
+        activitymeta = basemeta * ac;
+        //activitymeta = basemeta * (float) 0.375;  //활동대사량 (0.375는 활동상수로 원래는 서버에서 내려오는 값이나 현재 안내려 와서 0.375로 박아둔다)
+        // 2018-05-08, M20 request handling activity_constant into RI00003, End
         stractivitymeta = String.format(Locale.US, "%.1f", activitymeta);
         Log.i(TAG_ACTIVITY, "hk:stractivitymeta: "+stractivitymeta);
         stractivitymeta = String.format(Locale.US, "%d", (int)activitymeta);
@@ -588,6 +635,30 @@ public class PersonCheckupActivity extends AppCompatActivity {
         kcal = basemeta + activitymeta + digestmeta;
 
         strkcal = intToString(Math.round(kcal));  //반올림 해준다
+    }
+
+    // 2018-05-08, M20 request handling activity_constant into RI00003
+    private double getActivityConstant(){
+    /*--------------------------------------
+    활동상수 : 1(비활동적), 2(약간활동적), 3(적당히 활동적), 4(아주 활동적)
+        비활동적	    운동 거의 안 함	0.200
+        약간 활동적	주 1~2일 운동	    0.375
+        적당히 활동적	주 3~5일 운동	    0.555
+        아주 활동적	주 5~7일 운동	    0.725
+    ----------------------------------------
+        <활동 상수 Table>  */
+        switch(activity_constant){
+            case "1":
+                return 0.200;
+            case "2":
+                return 0.375;
+            case "3":
+                return 0.555;
+            case "4":
+                return 0.725;
+            default:
+                return 0.375;
+        }
     }
 
     private void bodyFatStandardCal() {  //표준 체지방 검사하는 함수

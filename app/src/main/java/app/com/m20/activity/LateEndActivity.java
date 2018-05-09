@@ -55,6 +55,31 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
     int abdomen_value = 0;
     int bein_value = 0;
 
+    // 2018-05-08, M20 request adding some items into RI00004. Start
+    String weight_index = null;
+    String weight_goal_target = null;
+    String weight_control_target = null;
+    String muscle_index = null;
+    String muscle_goal_target = null;
+    String muscle_control_target = null;
+    String muscle_control = null;
+    String body_fat_goal_target = null;
+    String body_fat_control_target = null;
+    String body_fat_control = null;
+    String body_mass_goal_target = null;
+    String body_mass_control_target = null;
+    String recommended_calories_per_day = null;
+    String basic_metabolism = null;
+    String activity_metabolism = null;
+    String digestive_metabolism = null;
+    String body_impedance = null;
+    String fat_free_mass = null;
+    String body_fat_status = null;
+    String body_water_status = null;
+    String protein_status = null;
+    String minerals_status = null;
+    // 2018-05-08, M20 request adding some items into RI00004. End
+
     String height = null;
     String weight_imsi = null;
     String strstandardWeight = null;
@@ -180,6 +205,32 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
 
     private void readEndDataSaved() {  //운동 종료 할 때 저장하는 함수
         SharedPreferences prefs =getSharedPreferences("end_data", MODE_PRIVATE);
+
+        // 2018-05-08, M20 request adding some items into RI00004. Start
+        weight_index = prefs.getString("Data_weight_index", "0");
+        weight_goal_target = prefs.getString("Data_weight_goal_target", "0");
+        weight_control_target = prefs.getString("Data_weight_control_target", "0");
+        muscle_index = prefs.getString("Data_muscle_index", "0");
+        muscle_goal_target = prefs.getString("Data_muscle_goal_target", "0");
+        muscle_control_target = prefs.getString("Data_muscle_control_target", "0");
+        muscle_control = prefs.getString("Data_muscle_control", "0");
+        body_fat_goal_target = prefs.getString("Data_body_fat_goal_target", "0");
+        body_fat_control_target = prefs.getString("Data_body_fat_control_target", "0");
+        body_fat_control = prefs.getString("Data_body_fat_control", "0");
+        body_mass_goal_target = prefs.getString("Data_body_mass_goal_target", "0");
+        body_mass_control_target = prefs.getString("Data_body_mass_control_target", "0");
+        recommended_calories_per_day = prefs.getString("Data_recommended_calories_per_day", "0");
+        basic_metabolism = prefs.getString("Data_basic_metabolism", "0");
+        activity_metabolism = prefs.getString("Data_activity_metabolism", "0");
+        digestive_metabolism = prefs.getString("Data_digestive_metabolism", "0");
+        body_impedance = prefs.getString("Data_body_impedance", "0");
+        fat_free_mass = prefs.getString("Data_fat_free_mass", "0");
+        body_fat_status = prefs.getString("Data_body_fat_status", "0");
+        body_water_status = prefs.getString("Data_body_water_status", "0");
+        protein_status = prefs.getString("Data_protein_status", "0");
+        minerals_status = prefs.getString("Data_minerals_status", "0");
+        // 2018-05-08, M20 request adding some items into RI00004. End
+
         height = prefs.getString("Data_height", "0");
         weight_imsi = prefs.getString("Data_weight", "0");
         strstandardWeight = prefs.getString("Data_strstandardWeight", "0");
@@ -368,6 +419,30 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
 
         Gson gson = new Gson();
         JsonObject object = new JsonObject();
+        // 2018-05-08, M20 request adding some items into RI00004. Start
+        object.addProperty("weight_index", Double.valueOf(weight_index));
+        object.addProperty("weight_goal_target", Double.valueOf(weight_goal_target));
+        object.addProperty("weight_control_target", Double.valueOf(weight_control_target));
+        object.addProperty("muscle_index", Double.valueOf(muscle_index));
+        object.addProperty("muscle_goal_target", Double.valueOf(muscle_goal_target));
+        object.addProperty("muscle_control_target", Double.valueOf(muscle_control_target));
+        object.addProperty("muscle_control", Double.valueOf(muscle_control));
+        object.addProperty("body_fat_goal_target", Double.valueOf(body_fat_goal_target));
+        object.addProperty("body_fat_control_target", Double.valueOf(body_fat_control_target));
+        object.addProperty("body_fat_control", Double.valueOf(body_fat_control));
+        object.addProperty("body_mass_goal_target", Double.valueOf(body_mass_goal_target));
+        object.addProperty("body_mass_control_target", Double.valueOf(body_mass_control_target));
+        object.addProperty("recommended_calories_per_day", Integer.parseInt(recommended_calories_per_day));
+        object.addProperty("basic_metabolism", Integer.parseInt(basic_metabolism));
+        object.addProperty("activity_metabolism", Integer.parseInt(activity_metabolism));
+        object.addProperty("digestive_metabolism", Integer.parseInt(digestive_metabolism));
+        object.addProperty("body_impedance", Double.valueOf(body_impedance));
+        object.addProperty("fat_free_mass", Double.valueOf(fat_free_mass));
+        object.addProperty("body_fat_status", Integer.parseInt(body_fat_status));
+        object.addProperty("body_water_status", Integer.parseInt(body_water_status));
+        object.addProperty("protein_status", Integer.parseInt(protein_status));
+        object.addProperty("minerals_status", Integer.parseInt(minerals_status));
+        // 2018-05-08, M20 request adding some items into RI00004. End
         int send_age = 0;
         if (age != null) {
             send_age = Integer.parseInt(age);
