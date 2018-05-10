@@ -422,6 +422,7 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
             startNumber++;
 
             try {
+                Log.i(TAG_ACTIVITY, "hk: before sleep (progress >= 100)");
                 Thread.sleep(2000);
                 defaultStrongSet(startNumber);
             } catch (InterruptedException e) {
@@ -536,6 +537,7 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
         if(number > 9) {
             // 강도설정 화면으로 이동.
             try {
+                Log.i(TAG_ACTIVITY, "hk: before sleep (defaultStrongSet)");
                 Thread.sleep(2000);
 
                 mUsbReceiver.writeDataToSerial("S22;N");            // Stop.
@@ -871,7 +873,8 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
                         defaultStrongSet(startNumber);
                     }
                 };
-                handler.sendEmptyMessageDelayed(0, 2000);
+                //handler.sendEmptyMessageDelayed(0, 2000);
+                handler.sendEmptyMessageDelayed(0, 1000);
 
                 break;
 

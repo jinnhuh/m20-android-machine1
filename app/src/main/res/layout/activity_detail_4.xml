@@ -70,7 +70,7 @@
                     android:id="@+id/btn_latt_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_latt_left"
+                    android:background="@drawable/pad_latt_left_off"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:paddingLeft="24dp"
@@ -83,7 +83,7 @@
                     android:id="@+id/btn_latt_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_latt_right"
+                    android:background="@drawable/pad_latt_right_off"
                     android:gravity="center"
                     android:paddingRight="24dp"
                     android:textSize="12pt"
@@ -99,9 +99,10 @@
                 android:layout_marginTop="110dp">
 
                 <TextView
+                    android:id="@+id/btn_latt_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_latt_left_off"
+                    android:background="@drawable/pad_latt_left"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
                     android:paddingLeft="24dp"
@@ -111,9 +112,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_latt_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_latt_right_off"
+                    android:background="@drawable/pad_latt_right"
                     android:gravity="center"
                     android:paddingRight="24dp"
                     android:textSize="12pt"
@@ -134,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="-10dp"
-                    android:background="@drawable/pad_waist_left"
+                    android:background="@drawable/pad_waist_left_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -145,7 +147,7 @@
                     android:id="@+id/btn_waist_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_waist_right"
+                    android:background="@drawable/pad_waist_right_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -160,10 +162,11 @@
                 android:layout_marginTop="260dp">
 
                 <TextView
+                    android:id="@+id/btn_waist_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="-10dp"
-                    android:background="@drawable/pad_waist_left_off"
+                    android:background="@drawable/pad_waist_left"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -171,9 +174,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_waist_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_waist_right_off"
+                    android:background="@drawable/pad_waist_right"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -193,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="60dp"
-                    android:background="@drawable/pad_sideflank_left"
+                    android:background="@drawable/pad_sideflank_left_off"
                     android:gravity="center"
                     android:paddingRight="20dp"
                     android:textSize="12pt"
@@ -205,7 +209,7 @@
                     android:id="@+id/btn_sideflank_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_sideflank_right"
+                    android:background="@drawable/pad_sideflank_right_off"
                     android:gravity="center"
                     android:paddingLeft="20dp"
                     android:textSize="12pt"
@@ -221,10 +225,11 @@
                 android:layout_marginTop="240dp">
 
                 <TextView
+                    android:id="@+id/btn_sideflank_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="60dp"
-                    android:background="@drawable/pad_sideflank_left_off"
+                    android:background="@drawable/pad_sideflank_left"
                     android:gravity="center"
                     android:paddingRight="20dp"
                     android:textSize="12pt"
@@ -233,9 +238,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_sideflank_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_sideflank_right_off"
+                    android:background="@drawable/pad_sideflank_right"
                     android:gravity="center"
                     android:paddingLeft="20dp"
                     android:textSize="12pt"
@@ -257,7 +263,7 @@
                     android:id="@+id/btn_arsch_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_arsch_left"
+                    android:background="@drawable/pad_arsch_left_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -268,7 +274,7 @@
                     android:id="@+id/btn_arsch_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_arsch_right"
+                    android:background="@drawable/pad_arsch_right_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -284,9 +290,10 @@
                 android:layout_marginLeft="85dp">
 
                 <TextView
+                    android:id="@+id/btn_arsch_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_arsch_left_off"
+                    android:background="@drawable/pad_arsch_left"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -294,9 +301,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_arsch_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_arsch_right_off"
+                    android:background="@drawable/pad_arsch_right"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -325,7 +333,7 @@
                     android:id="@+id/btn_brust_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_brust_left"
+                    android:background="@drawable/pad_brust_left_off"
                     android:layout_marginRight="-10dp"
                     android:gravity="center"
                     android:textSize="12pt"
@@ -337,7 +345,7 @@
                     android:id="@+id/btn_brust_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_brust_right"
+                    android:background="@drawable/pad_brust_right_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -353,9 +361,10 @@
                 android:layout_marginTop="160dp">
 
                 <TextView
+                    android:id="@+id/btn_brust_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_brust_left_off"
+                    android:background="@drawable/pad_brust_left"
                     android:layout_marginRight="-10dp"
                     android:gravity="center"
                     android:textSize="12pt"
@@ -364,9 +373,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_brust_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_brust_right_off"
+                    android:background="@drawable/pad_brust_right"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -386,7 +396,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="106dp"
-                    android:background="@drawable/pad_arm_left"
+                    android:background="@drawable/pad_arm_left_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -397,7 +407,7 @@
                     android:id="@+id/btn_arm_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_arm_right"
+                    android:background="@drawable/pad_arm_right_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -412,10 +422,11 @@
                 android:layout_marginTop="198dp">
 
                 <TextView
+                    android:id="@+id/btn_arm_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="106dp"
-                    android:background="@drawable/pad_arm_left_off"
+                    android:background="@drawable/pad_arm_left"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -423,9 +434,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_arm_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_arm_right_off"
+                    android:background="@drawable/pad_arm_right"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -444,7 +456,7 @@
                     android:id="@+id/btn_abdomen_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_abdomen_left"
+                    android:background="@drawable/pad_abdomen_left_off"
                     android:layout_marginRight="-10dp"
                     android:gravity="center"
                     android:textSize="12pt"
@@ -456,7 +468,7 @@
                     android:id="@+id/btn_abdomen_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_abdomen_right"
+                    android:background="@drawable/pad_abdomen_right_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -471,9 +483,10 @@
                 android:layout_marginTop="285dp">
 
                 <TextView
+                    android:id="@+id/btn_abdomen_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_abdomen_left_off"
+                    android:background="@drawable/pad_abdomen_left"
                     android:layout_marginRight="-10dp"
                     android:gravity="center"
                     android:textSize="12pt"
@@ -482,9 +495,10 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_abdomen_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_abdomen_right_off"
+                    android:background="@drawable/pad_abdomen_right"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -504,7 +518,7 @@
                     android:id="@+id/btn_bein_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_bein_left"
+                    android:background="@drawable/pad_bein_left_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -516,7 +530,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-18dp"
-                    android:background="@drawable/pad_bein_right"
+                    android:background="@drawable/pad_bein_right_off"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -532,9 +546,10 @@
                 android:layout_marginTop="420dp">
 
                 <TextView
+                    android:id="@+id/btn_bein_bright_41"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/pad_bein_left_off"
+                    android:background="@drawable/pad_bein_left"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"
@@ -542,10 +557,11 @@
                      />
 
                 <TextView
+                    android:id="@+id/btn_bein_bright_42"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-18dp"
-                    android:background="@drawable/pad_bein_right_off"
+                    android:background="@drawable/pad_bein_right"
                     android:gravity="center"
                     android:textSize="12pt"
                     android:textStyle="bold"

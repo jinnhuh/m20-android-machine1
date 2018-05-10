@@ -36,6 +36,9 @@ import app.com.m20.driver.serial.FTDriver;
 import app.com.m20.driver.serial.UsbReceiver;
 import app.com.m20.utils.Utils;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
+
 /**
  * Created by kimyongyeon on 2017-11-20.
  */
@@ -100,6 +103,26 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     TextView btn_bein_1; // 허벅지1
     TextView btn_bein_2; // 허벅지2
     TextView textViewPercent4;
+
+    // 2018-05-10
+    TextView btn_latt_bright_1; // 어깨1
+    TextView btn_latt_bright_2; // 어깨2
+    TextView btn_waist_bright_1; // 허리1
+    TextView btn_waist_bright_2; // 허리2
+    TextView btn_sideflank_bright_1; // 옆구리1
+    TextView btn_sideflank_bright_2; // 옆구리2
+    TextView btn_arsch_bright_1; // 둔부1
+    TextView btn_arsch_bright_2; // 둔부2
+    TextView btn_brust_bright_1; // 가슴1
+    TextView btn_brust_bright_2; // 가슴2
+    TextView btn_arm_bright_1; // 팔1
+    TextView btn_arm_bright_2; // 팔2
+    TextView btn_abdomen_bright_1; // 배1
+    TextView btn_abdomen_bright_2; // 배2
+    TextView btn_bein_bright_1; // 허벅지1
+    TextView btn_bein_bright_2; // 허벅지2
+
+    boolean mAnimationPartialStart = false;
 
     final static int TOTAL = 0;
     final static int BRUST = 1;
@@ -262,6 +285,9 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         btn_bein_2 = findViewById(R.id.btn_bein_42);
         btn_brust_1 = findViewById(R.id.btn_brust_41);
         btn_brust_2 = findViewById(R.id.btn_brust_42);
+
+        setBrightPadVisibilityHide();
+
         mEllapse = findViewById(R.id.txtEllapse);
         secToHHMMSS(seperatetime*60);
         mEllapse.setText(timerBuffer);
@@ -303,6 +329,44 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 //        imageButton.callOnClick();
 
         valueTextDisplay(); // 받은 값 display
+    }
+
+    private void setBrightPadVisibilityHide(){
+        // 후면 bright pad
+        btn_arsch_bright_1 = findViewById(R.id.btn_arsch_bright_41);
+        btn_arsch_bright_1.setVisibility(INVISIBLE);
+        btn_arsch_bright_2 = findViewById(R.id.btn_arsch_bright_42);
+        btn_arsch_bright_2.setVisibility(INVISIBLE);
+        btn_latt_bright_1 = findViewById(R.id.btn_latt_bright_41);
+        btn_latt_bright_1.setVisibility(INVISIBLE);
+        btn_latt_bright_2 = findViewById(R.id.btn_latt_bright_42);
+        btn_latt_bright_2.setVisibility(INVISIBLE);
+        btn_waist_bright_1 = findViewById(R.id.btn_waist_bright_41);
+        btn_waist_bright_1.setVisibility(INVISIBLE);
+        btn_waist_bright_2 = findViewById(R.id.btn_waist_bright_42);
+        btn_waist_bright_2.setVisibility(INVISIBLE);
+        btn_sideflank_bright_1 = findViewById(R.id.btn_sideflank_bright_41);
+        btn_sideflank_bright_1.setVisibility(INVISIBLE);
+        btn_sideflank_bright_2 = findViewById(R.id.btn_sideflank_bright_42);
+        btn_sideflank_bright_2.setVisibility(INVISIBLE);
+
+        // 전면 bright pad
+        btn_abdomen_bright_1 = findViewById(R.id.btn_abdomen_bright_41);
+        btn_abdomen_bright_1.setVisibility(INVISIBLE);
+        btn_abdomen_bright_2 = findViewById(R.id.btn_abdomen_bright_42);
+        btn_abdomen_bright_2.setVisibility(INVISIBLE);
+        btn_arm_bright_1 = findViewById(R.id.btn_arm_bright_41);
+        btn_arm_bright_1.setVisibility(INVISIBLE);
+        btn_arm_bright_2 = findViewById(R.id.btn_arm_bright_42);
+        btn_arm_bright_2.setVisibility(INVISIBLE);
+        btn_bein_bright_1 = findViewById(R.id.btn_bein_bright_41);
+        btn_bein_bright_1.setVisibility(INVISIBLE);
+        btn_bein_bright_2 = findViewById(R.id.btn_bein_bright_42);
+        btn_bein_bright_2.setVisibility(INVISIBLE);
+        btn_brust_bright_1 = findViewById(R.id.btn_brust_bright_41);
+        btn_brust_bright_1.setVisibility(INVISIBLE);
+        btn_brust_bright_2 = findViewById(R.id.btn_brust_bright_42);
+        btn_brust_bright_2.setVisibility(INVISIBLE);
     }
 
     private void startTimedataSaved() {  //시작 시간 저장
@@ -992,6 +1056,12 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     public void animationStart() {
         Log.d(TAG_ACTIVITY, "animationStart()");
 
+        if(mStatus == PAUSE){
+            Log.d(TAG_ACTIVITY, "current status is pause, ignore to start animation");
+            return;
+        }
+        animationPartialAllStop();
+
         Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
 
         btn_arsch_1.startAnimation(startAnimation);
@@ -1024,106 +1094,106 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
         if (arsch_value != 0) {
             btn_arsch_1.setText(String.format(Locale.US, "%d", arsch_value));
-            btn_arsch_1.setTextColor(Color.BLACK);  //activity_detail_4.xml 에서 android:text="20" 해주니 항상 20 이 display 되어진다 그래서 지웠더니 제대로 나오나 흐리게 나와서 색깔주는 꽁수 신공
+            //btn_arsch_1.setTextColor(Color.BLACK);  //activity_detail_4.xml 에서 android:text="20" 해주니 항상 20 이 display 되어진다 그래서 지웠더니 제대로 나오나 흐리게 나와서 색깔주는 꽁수 신공
             btn_arsch_2.setText(String.format(Locale.US, "%d", arsch_value));
-            btn_arsch_2.setTextColor(Color.BLACK);
+            //btn_arsch_2.setTextColor(Color.BLACK);
         }
         else {
             btn_arsch_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_arsch_1.setTextColor(Color.BLACK);
+            //btn_arsch_1.setTextColor(Color.BLACK);
             btn_arsch_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_arsch_2.setTextColor(Color.BLACK);
+            //btn_arsch_2.setTextColor(Color.BLACK);
         }
 
         if (latt_value != 0) {
             btn_latt_1.setText(String.format(Locale.US, "%d", latt_value));
-            btn_latt_1.setTextColor(Color.BLACK);
+            //btn_latt_1.setTextColor(Color.BLACK);
             btn_latt_2.setText(String.format(Locale.US, "%d", latt_value));
-            btn_latt_2.setTextColor(Color.BLACK);
+            //btn_latt_2.setTextColor(Color.BLACK);
         }
         else {
             btn_latt_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_latt_1.setTextColor(Color.BLACK);
+            //btn_latt_1.setTextColor(Color.BLACK);
             btn_latt_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_latt_2.setTextColor(Color.BLACK);
+            //btn_latt_2.setTextColor(Color.BLACK);
         }
 
         if (waist_value != 0) {
             btn_waist_1.setText(String.format(Locale.US, "%d", waist_value));
-            btn_waist_1.setTextColor(Color.BLACK);
+            //btn_waist_1.setTextColor(Color.BLACK);
             btn_waist_2.setText(String.format(Locale.US, "%d", waist_value));
-            btn_waist_2.setTextColor(Color.BLACK);
+            //btn_waist_2.setTextColor(Color.BLACK);
         }
         else {
             btn_waist_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_waist_1.setTextColor(Color.BLACK);
+            //btn_waist_1.setTextColor(Color.BLACK);
             btn_waist_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_waist_2.setTextColor(Color.BLACK);
+            //btn_waist_2.setTextColor(Color.BLACK);
         }
 
         if (sideflank_value != 0) {
             btn_sideflank_1.setText(String.format(Locale.US, "%d", sideflank_value));
-            btn_sideflank_1.setTextColor(Color.BLACK);
+            //btn_sideflank_1.setTextColor(Color.BLACK);
             btn_sideflank_2.setText(String.format(Locale.US, "%d", sideflank_value));
-            btn_sideflank_2.setTextColor(Color.BLACK);
+            //btn_sideflank_2.setTextColor(Color.BLACK);
         }
         else {
             btn_sideflank_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_sideflank_1.setTextColor(Color.BLACK);
+            //btn_sideflank_1.setTextColor(Color.BLACK);
             btn_sideflank_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_sideflank_2.setTextColor(Color.BLACK);
+            //btn_sideflank_2.setTextColor(Color.BLACK);
         }
 
         if (abdomen_value != 0) {
             btn_abdomen_1.setText(String.format(Locale.US, "%d", abdomen_value));
-            btn_abdomen_1.setTextColor(Color.BLACK);
+            //btn_abdomen_1.setTextColor(Color.BLACK);
             btn_abdomen_2.setText(String.format(Locale.US, "%d", abdomen_value));
-            btn_abdomen_2.setTextColor(Color.BLACK);
+            //btn_abdomen_2.setTextColor(Color.BLACK);
         }
         else {
             btn_abdomen_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_abdomen_1.setTextColor(Color.BLACK);
+            //btn_abdomen_1.setTextColor(Color.BLACK);
             btn_abdomen_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_abdomen_2.setTextColor(Color.BLACK);
+            //btn_abdomen_2.setTextColor(Color.BLACK);
         }
 
         if (arm_value != 0) {
             btn_arm_1.setText(String.format(Locale.US, "%d", arm_value));
-            btn_arm_1.setTextColor(Color.BLACK);
+            //btn_arm_1.setTextColor(Color.BLACK);
             btn_arm_2.setText(String.format(Locale.US, "%d", arm_value));
-            btn_arm_2.setTextColor(Color.BLACK);
+            //btn_arm_2.setTextColor(Color.BLACK);
         }
         else {
             btn_arm_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_arm_1.setTextColor(Color.BLACK);
+            //btn_arm_1.setTextColor(Color.BLACK);
             btn_arm_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_arm_2.setTextColor(Color.BLACK);
+            //btn_arm_2.setTextColor(Color.BLACK);
         }
 
         if (bein_value != 0) {
             btn_bein_1.setText(String.format(Locale.US, "%d", bein_value));
-            btn_bein_1.setTextColor(Color.BLACK);
+            //btn_bein_1.setTextColor(Color.BLACK);
             btn_bein_2.setText(String.format(Locale.US, "%d", bein_value));
-            btn_bein_2.setTextColor(Color.BLACK);
+            //btn_bein_2.setTextColor(Color.BLACK);
         }
         else {
             btn_bein_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_bein_1.setTextColor(Color.BLACK);
+            //btn_bein_1.setTextColor(Color.BLACK);
             btn_bein_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_bein_2.setTextColor(Color.BLACK);
+            //btn_bein_2.setTextColor(Color.BLACK);
         }
 
         if (brust_value != 0) {
             btn_brust_1.setText(String.format(Locale.US, "%d", brust_value));
-            btn_brust_1.setTextColor(Color.BLACK);
+            //btn_brust_1.setTextColor(Color.BLACK);
             btn_brust_2.setText(String.format(Locale.US, "%d", brust_value));
-            btn_brust_2.setTextColor(Color.BLACK);
+            //btn_brust_2.setTextColor(Color.BLACK);
         }
         else {
             btn_brust_1.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_brust_1.setTextColor(Color.BLACK);
+            //btn_brust_1.setTextColor(Color.BLACK);
             btn_brust_2.setText(String.format(Locale.US, "%d", defaultValue));
-            btn_brust_2.setTextColor(Color.BLACK);
+            //btn_brust_2.setTextColor(Color.BLACK);
         }
     }
 
@@ -1287,6 +1357,8 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                 imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_off, this.getTheme()));
                 imageButton3.setEnabled(true);
 
+                displayAllStrengthValue();
+
                 //////////////////////////////////
                 // Serial
                 //////////////////////////////////
@@ -1335,11 +1407,11 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     //멈춤이면
                     case PAUSE:
 //                        Log.d("M20", "J.Y.T DetailStartActivity PAUSE: ");
-                        animationStart();  //깜빡이게 하기 위해서
                         mUsbReceiver.writeDataToSerial("S26;N");  //멈추었다가 다시 시작 S26
 //                        //현재값 가져옴
                         Log.d(TAG_ACTIVITY, "R.id.btn_play: PAUSE: mStatus: RUNNING");
                         mStatus = RUNNING;
+                        animationStart();  //깜빡이게 하기 위해서
                         int ellapseTime = secToMillies(timerBuffer) + 1000;
                         mCountDown = new CountDownTimer(ellapseTime, 1000) {
                             public void onTick(long millisUntilFinished) {
@@ -1377,6 +1449,8 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                 imageButton3 = findViewById(R.id.btn_stop);
                 imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_off, this.getTheme()));
                 imageButton3.setEnabled(true);
+
+                displayAllStrengthValue();
 
                 //////////////////////////////////
                 // Serial
@@ -1740,131 +1814,152 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             animationStart();
         }
     }
-
+    private void displayAllStrengthValue(){
+        int progress = 0;
+        mSelect = TOTAL;
+        progress = all_value;
+        mSeekBar.setProgress(all_value);
+        textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
+        mHoloCircularProgressBar.setProgress(progress * 0.01f);
+    }
     //hk 0430
     private void animationPartialStop(int bodyPartId) {
         Log.d(TAG_ACTIVITY, "animationPartialStop(" + bodyPartId + ")");
+        TextView tv_body_part_1 = null;
+        TextView tv_body_part_2 = null;
         switch(bodyPartId) {
             case BRUST:
-            //if ((bodyPartId & 0x01) == 0)
             {
-                btn_brust_1.clearAnimation();
-                btn_brust_2.clearAnimation();
+                tv_body_part_1 = btn_brust_bright_1;
+                tv_body_part_2 = btn_brust_bright_2;
                 break;
             }
             case ABDOMEN:
-            //if ((bodyPartId & 0x02) == 0)
             {
-                btn_abdomen_1.clearAnimation();
-                btn_abdomen_2.clearAnimation();
+                tv_body_part_1 = btn_abdomen_bright_1;
+                tv_body_part_2 = btn_abdomen_bright_2;
                 break;
             }
             case ARM:
-            //if ((bodyPartId & 0x04) == 0)
             {
-                btn_arm_1.clearAnimation();
-                btn_arm_2.clearAnimation();
+                tv_body_part_1 = btn_arm_bright_1;
+                tv_body_part_2 = btn_arm_bright_2;
                 break;
             }
             case BEIN:
-            //if ((bodyPartId & 0x08) == 0)
             {
-                btn_bein_1.clearAnimation();
-                btn_bein_2.clearAnimation();
+                tv_body_part_1 = btn_bein_bright_1;
+                tv_body_part_2 = btn_bein_bright_2;
                 break;
             }
             case LATT:
-            //if ((bodyPartId & 0x10) == 0)
             {
-                btn_latt_1.clearAnimation();
-                btn_latt_2.clearAnimation();
+                tv_body_part_1 = btn_latt_bright_1;
+                tv_body_part_2 = btn_latt_bright_2;
                 break;
             }
             case WAIST:
-            //if ((bodyPartId & 0x20) == 0)
             {
-                btn_waist_1.clearAnimation();
-                btn_waist_2.clearAnimation();
+                tv_body_part_1 = btn_waist_bright_1;
+                tv_body_part_2 = btn_waist_bright_2;
                 break;
             }
             case FLANK:
-            //if ((bodyPartId & 0x40) == 0)
             {
-                btn_sideflank_1.clearAnimation();
-                btn_sideflank_2.clearAnimation();
+                tv_body_part_1 = btn_sideflank_bright_1;
+                tv_body_part_2 = btn_sideflank_bright_2;
                 break;
             }
             case ARSCH:
-            //if ((bodyPartId & 0x80) == 0)
             {
-                btn_arsch_1.clearAnimation();
-                btn_arsch_2.clearAnimation();
+                tv_body_part_1 = btn_arsch_bright_1;
+                tv_body_part_2 = btn_arsch_bright_2;
                 break;
             }
         }
+        if(tv_body_part_1 == null || tv_body_part_2 == null ) {
+            Log.e(TAG_ACTIVITY, "tv_body_part_x is null");
+            return;
+        }
+        tv_body_part_1.clearAnimation();
+        tv_body_part_2.clearAnimation();
+
+        tv_body_part_1.setVisibility(INVISIBLE);
+        tv_body_part_2.setVisibility(INVISIBLE);
+
+        mAnimationPartialStart = false;
     }
 
     private void animationPartialStart(int bodyPartId) {
         Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
         Log.d(TAG_ACTIVITY, "animationPartialStart(" + bodyPartId + ")");
+//        if(mStatus == PAUSE){
+//            Log.d(TAG_ACTIVITY, "current status is pause, ignore to start animation");
+//            return;
+//        }
+        TextView tv_body_part_1 = null;
+        TextView tv_body_part_2 = null;
         switch(bodyPartId) {
             case BRUST:
-            //if ((bodyPartId & 0x01) == 0)
             {
-                btn_brust_1.startAnimation(startAnimation);
-                btn_brust_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_brust_bright_1;
+                tv_body_part_2 = btn_brust_bright_2;
                 break;
             }
             case ABDOMEN:
-            //if ((bodyPartId & 0x02) == 0)
             {
-                btn_abdomen_1.startAnimation(startAnimation);
-                btn_abdomen_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_abdomen_bright_1;
+                tv_body_part_2 = btn_abdomen_bright_2;
                 break;
             }
             case ARM:
-            //if ((bodyPartId & 0x04) == 0)
             {
-                btn_arm_1.startAnimation(startAnimation);
-                btn_arm_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_arm_bright_1;
+                tv_body_part_2 = btn_arm_bright_2;
                 break;
             }
             case BEIN:
-            //if ((bodyPartId & 0x08) == 0)
             {
-                btn_bein_1.startAnimation(startAnimation);
-                btn_bein_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_bein_bright_1;
+                tv_body_part_2 = btn_bein_bright_2;
                 break;
             }
             case LATT:
-            //if ((bodyPartId & 0x10) == 0)
             {
-                btn_latt_1.startAnimation(startAnimation);
-                btn_latt_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_latt_bright_1;
+                tv_body_part_2 = btn_latt_bright_2;
                 break;
             }
             case WAIST:
-            //if ((bodyPartId & 0x20) == 0)
             {
-                btn_waist_1.startAnimation(startAnimation);
-                btn_waist_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_waist_bright_1;
+                tv_body_part_2 = btn_waist_bright_2;
                 break;
             }
             case FLANK:
-            //if ((bodyPartId & 0x40) == 0)
             {
-                btn_sideflank_1.startAnimation(startAnimation);
-                btn_sideflank_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_sideflank_bright_1;
+                tv_body_part_2 = btn_sideflank_bright_2;
                 break;
             }
             case ARSCH:
-            //if ((bodyPartId & 0x80) == 0)
             {
-                btn_arsch_1.startAnimation(startAnimation);
-                btn_arsch_2.startAnimation(startAnimation);
+                tv_body_part_1 = btn_arsch_bright_1;
+                tv_body_part_2 = btn_arsch_bright_2;
                 break;
             }
         }
+        if(tv_body_part_1 == null || tv_body_part_2 == null ) {
+            Log.e(TAG_ACTIVITY, "tv_body_part_x is null");
+            return;
+        }
+
+        tv_body_part_1.setVisibility(VISIBLE);
+        tv_body_part_2.setVisibility(VISIBLE);
+
+        tv_body_part_1.startAnimation(startAnimation);
+        tv_body_part_2.startAnimation(startAnimation);
+        mAnimationPartialStart = true;
     }
 
     private void animationStop() {
@@ -1891,6 +1986,60 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
         btn_latt_1.clearAnimation();
         btn_latt_2.clearAnimation();
+
+        animationPartialAllStop();
+    }
+
+    private void animationPartialAllStop() {
+        btn_arsch_bright_1.clearAnimation();
+        btn_arsch_bright_2.clearAnimation();
+
+        btn_waist_bright_1.clearAnimation();
+        btn_waist_bright_2.clearAnimation();
+
+        btn_brust_bright_1.clearAnimation();
+        btn_brust_bright_2.clearAnimation();
+
+        btn_bein_bright_1.clearAnimation();
+        btn_bein_bright_2.clearAnimation();
+
+        btn_arm_bright_1.clearAnimation();
+        btn_arm_bright_2.clearAnimation();
+
+        btn_sideflank_bright_1.clearAnimation();
+        btn_sideflank_bright_2.clearAnimation();
+
+        btn_abdomen_bright_1.clearAnimation();
+        btn_abdomen_bright_2.clearAnimation();
+
+        btn_latt_bright_1.clearAnimation();
+        btn_latt_bright_2.clearAnimation();
+
+        btn_arsch_bright_1.setVisibility(INVISIBLE);
+        btn_arsch_bright_2.setVisibility(INVISIBLE);
+
+        btn_waist_bright_1.setVisibility(INVISIBLE);
+        btn_waist_bright_2.setVisibility(INVISIBLE);
+
+        btn_brust_bright_1.setVisibility(INVISIBLE);
+        btn_brust_bright_2.setVisibility(INVISIBLE);
+
+        btn_bein_bright_1.setVisibility(INVISIBLE);
+        btn_bein_bright_2.setVisibility(INVISIBLE);
+
+        btn_arm_bright_1.setVisibility(INVISIBLE);
+        btn_arm_bright_2.setVisibility(INVISIBLE);
+
+        btn_sideflank_bright_1.setVisibility(INVISIBLE);
+        btn_sideflank_bright_2.setVisibility(INVISIBLE);
+
+        btn_abdomen_bright_1.setVisibility(INVISIBLE);
+        btn_abdomen_bright_2.setVisibility(INVISIBLE);
+
+        btn_latt_bright_1.setVisibility(INVISIBLE);
+        btn_latt_bright_2.setVisibility(INVISIBLE);
+
+        mAnimationPartialStart = false;
     }
 
     private View.OnClickListener leftListener = new View.OnClickListener() {
@@ -1925,6 +2074,8 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         ImageButton imageButton3 = findViewById(R.id.btn_stop);
         imageButton3.setBackground(this.getResources().getDrawable(R.drawable.stop_btn_off, this.getTheme()));
         imageButton3.setEnabled(true);
+
+        displayAllStrengthValue();
 
         if(mCountDown != null)
             mCountDown.cancel();
@@ -1988,6 +2139,14 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         int progress = Integer.parseInt(str);  //String을 int로
 //        not_send_remote = true;
 //        onProgressChanged(mSeekBar, all_value,true);
+
+        displayAllStrengthValue();
+        if(mAnimationPartialStart == true) {
+            animationPartialAllStop();
+            if( mStatus == IDLE || mStatus == RUNNING ){
+                animationStart();
+            }
+        }
 
         //seekBar 도 설정대로 나타나게 한다
         mSeekBar.setProgress(progress);
