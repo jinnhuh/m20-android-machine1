@@ -141,6 +141,8 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         Log.i(TAG_ACTIVITY, "sendReservationInform() is called");
         sendReservationInform();
         //}
+        clearEndData();
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
 //         mediaPlayer = new MediaPlayer();
         MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.end);
@@ -171,6 +173,13 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.btn_back:
                 break;
         }
+    }
+
+    private void clearEndData(){
+        // 2018-05-11, clear end_data, for preventing to send dummy data
+        SharedPreferences prefs =getSharedPreferences("end_data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear().commit();
     }
 
     private void readDate() {

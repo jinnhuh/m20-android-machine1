@@ -19,7 +19,7 @@
 
 #wrap .tab_con{position:relative;width:100%;overflow:hidden;}
 #wrap .tab_con .tab_content{width:1040px;margin:0 auto;}
-#wrap .tab_con .tab_content .result_table{width:100%;}
+#wrap .tab_con .tab_content .result_table{width:100%; border: 1px solid #444444;}
 #wrap .tab_con .tab_content .result_table tbody td{position:relative;height:74px;text-align:center;font-size:23px;border:1px solid rgba(255,255,255,0.2);vertical-align:middle;}
 
 #wrap .tab_con .tab_content .result_table tbody td .tit_icon{position:absolute;left:0;bottom:10px;width:100%;line-height:20px;font-size:16px;}

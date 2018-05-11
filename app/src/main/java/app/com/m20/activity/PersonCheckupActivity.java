@@ -275,6 +275,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
 //                super.handleMessage(msg);
 //                //0735.7, 56.8, 15.6, 32.3, 41.7, 38.3, 46.8, 11.3, 10.3, 12.6, 03.86, 03.57, 04.36, -05.3, 01.1 end
 //                bodyFatreceived("0735.7", "56.8", "15.6", "32.3", "41.7", "38.3", "46.8", "11.3", "10.3", "12.6", "03.86", "03.57", "04.36", "-05.3", "01.1");
+//                //0484.3;62.1;10.8;35.3;45.5;38.3;46.8;12.3;10.3;12.6;04.22;03.57;04.36;-00.0;00.0;N
+//                //bodyFatreceived("0484.3", "62.1", "10.8", "35.3", "45.5", "38.3", "46.8", "12.3", "10.3", "12.6", "04.22", "03.57", "04.36", "-00.0", "00.0");
 ////                startActivity(new Intent(PersonCheckupActivity.this, PersonTabActivity.class));
 ////                finish();
 //            }
@@ -282,6 +284,32 @@ public class PersonCheckupActivity extends AppCompatActivity {
 //        handler.sendEmptyMessageDelayed(0, 3000);
 
 
+    }
+    // handle -00.0 or -05.3 etc..., to the nearest tenth
+    private String verifyDataDp1( String datax ){
+        Log.i(TAG_ACTIVITY, "verifyDataDp1(" + datax +" )");
+        String strTemp;
+        float temp = Float.parseFloat(datax);
+        if(temp==0)
+            strTemp = "0.0"; // delete '-', ex. -0.0 ==> 0.0
+        else
+            strTemp = String.format(Locale.US, "%.1f", temp);
+
+        Log.i(TAG_ACTIVITY, "strTemp = " + strTemp);
+        return strTemp;
+    }
+    // handle -00.00 or +03.57 etc... to the nearest hundredth
+    private String verifyDataDp2( String datax ){
+        Log.i(TAG_ACTIVITY, "verifyDataDp2(" + datax +" )");
+        String strTemp;
+        float temp = Float.parseFloat(datax);
+        if(temp==0)
+            strTemp = "0.0"; // delete '-', ex. -0.0 ==> 0.0
+        else
+            strTemp = String.format(Locale.US, "%.2f", temp);
+
+        Log.i(TAG_ACTIVITY, "strTemp = " + strTemp);
+        return strTemp;
     }
 
     public void bodyFatreceived(String data1,String data2,String data3,String data4,String data5,String data6,String data7,String data8,String data9,String data10,String data11,String data12,String data13,String data14,String data15) {  //체지방 측정 정보 받았으면 PersonTabActivity 으로 이동하자
@@ -296,11 +324,12 @@ public class PersonCheckupActivity extends AppCompatActivity {
         protein = data8;
         protein_min = data9;
         protein_max = data10;
-        mineral = data11;
-        mineral_min = data12;
-        mineral_max = data13;
-        bodyfat_control = data14;
-        muscle_control = data15;
+        mineral = verifyDataDp2(data11);
+        mineral_min = verifyDataDp2(data12);
+        mineral_max = verifyDataDp2(data13);
+        // handle "-00.0" value from generator
+        bodyfat_control = verifyDataDp1(data14);
+        muscle_control = verifyDataDp1(data15);
         weightCal();
         bodyFatPerCal();
         BMICal();
@@ -336,10 +365,9 @@ public class PersonCheckupActivity extends AppCompatActivity {
 //        i.putExtra("mineral_min", mineral_min);
 //        i.putExtra("mineral_max", mineral_max);
         i.putExtra("bodyfat_control", bodyfat_control);
-        float fmuscle_control = strTofloat(muscle_control);
-        String strmuscle_control = String.format(Locale.US, "%.1f", fmuscle_control);
-        i.putExtra("muscle_control", strmuscle_control);        // 근육량 조절 목표
-        Log.i(TAG_ACTIVITY, "hk:muscle_control: "+muscle_control);
+        //float fmuscle_control = strTofloat(muscle_control);
+        //String strmuscle_control = String.format(Locale.US, "%.1f", fmuscle_control);
+        i.putExtra("muscle_control", muscle_control);        // 근육량 조절 목표
         i.putExtra("strweightIndex", strweightIndex);
         i.putExtra("strjudgmentValue", strjudgmentValue);
         i.putExtra("strweighttargetControl", strweighttargetControl);  //체중 조절목표
@@ -405,9 +433,6 @@ public class PersonCheckupActivity extends AppCompatActivity {
         editor.putString("Data_muscle_control_target",muscle_control );
         editor.putString("Data_muscle_control",muscle_control );
         editor.putString("Data_body_fat_goal_target",strbodyFatPertargetExercise );
-        // handle "-0.0" value from generator
-        float temp = Float.parseFloat(bodyfat_control);
-        bodyfat_control = String.format(Locale.US, "%.1f", temp);
         editor.putString("Data_body_fat_control_target",bodyfat_control );
         editor.putString("Data_body_fat_control",bodyfat_control );
         editor.putString("Data_body_mass_goal_target",strstandardBMI );
