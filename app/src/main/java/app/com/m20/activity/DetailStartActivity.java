@@ -331,6 +331,24 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         valueTextDisplay(); // 받은 값 display
     }
 
+    private void setPadEnable(boolean enable){
+        btn_latt_1.setEnabled(enable);
+        btn_latt_2.setEnabled(enable);
+        btn_waist_1.setEnabled(enable);
+        btn_waist_2.setEnabled(enable);
+        btn_sideflank_1.setEnabled(enable);
+        btn_sideflank_2.setEnabled(enable);
+        btn_arsch_1.setEnabled(enable);
+        btn_arsch_2.setEnabled(enable);
+        btn_brust_1.setEnabled(enable);
+        btn_brust_2.setEnabled(enable);
+        btn_arm_1.setEnabled(enable);
+        btn_arm_2.setEnabled(enable);
+        btn_abdomen_1.setEnabled(enable);
+        btn_abdomen_2.setEnabled(enable);
+        btn_bein_1.setEnabled(enable);
+        btn_bein_2.setEnabled(enable);
+    }
     private void setBrightPadVisibilityHide(){
         // 후면 bright pad
         btn_arsch_bright_1 = findViewById(R.id.btn_arsch_bright_41);
@@ -390,6 +408,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void allValueSendTimer() {  //Pause 후 resume 하면 또 어이없이 전체 강도 1부터 보내 달란다
+        setPadEnable(false);
         mAllSender = new CountDownTimer((all_value + 1) * 500, 500) {
             public void onTick(long millisUntilFinished) {
                 iAlltimer ++;
@@ -398,25 +417,34 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     mUsbReceiver.writeDataToSerial("A20;" + intTostring(brust_value) + ";" + intTostring(abdomen_value) + ";" + intTostring(arm_value) + ";" + intTostring(bein_value) + ";" + intTostring(latt_value) + ";" + intTostring(waist_value) + ";" + intTostring(sideflank_value) + ";" + intTostring(arsch_value) + ";N");
                 }
                 mUsbReceiver.writeDataToSerial("S23;" + intTostring(iAlltimer) + ";N");
+                mSeekBar.setProgress(iAlltimer);
                 //Log.d(TAG_ACTIVITY, "J.Y.T iAlltimer: "+iAlltimer);
             }
             public void onFinish() {
                 Log.d(TAG_ACTIVITY, String.format(Locale.US, "AllTimer is finished (%d).", iAlltimer));
                 iAlltimer = 0;
+
+                mAllSender = null;
+                setPadEnable(true);
             }
         }.start();
     }
 
     private void startAllValueSendTimer() {  //운동시작용 전체 강도 1부터 보내 달란다
+        setPadEnable(false);
         mFirstAllSender = new CountDownTimer((all_value + 1) * 500, 500) {
             public void onTick(long millisUntilFinished) {
                 iFirstAlltimer ++;
                 mUsbReceiver.writeDataToSerial("S23;" + intTostring(iFirstAlltimer) + ";N");
+                mSeekBar.setProgress(iFirstAlltimer);
                 //Log.d(TAG_ACTIVITY, "J.Y.T iFirstAlltimer: "+iFirstAlltimer);
             }
             public void onFinish() {
                 Log.d(TAG_ACTIVITY, String.format(Locale.US, "FirstAllTimer is finished (%d).", iFirstAlltimer));
-                 iFirstAlltimer = 0;
+                iFirstAlltimer = 0;
+
+                mFirstAllSender = null;
+                setPadEnable(true);
             }
         }.start();
     }
@@ -1275,6 +1303,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             mCountDown.cancel();
             mCountDown = null;
         }
+        setPadEnable(true);
         if (mBR != null) {
             unregisterReceiver(mBR);
         }
@@ -1330,6 +1359,23 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         editor.putInt("Data_abdomen",abdomen_value );
         editor.putInt("Data_bein",bein_value );
         editor.apply();
+    }
+
+    private void stopAllStrengthTimer(){
+        if( mFirstAllSender != null){
+            mFirstAllSender.cancel();
+            all_value = iFirstAlltimer;
+            iFirstAlltimer = 0;
+            mFirstAllSender = null;
+        }
+
+        if(mAllSender != null ){
+            mAllSender.cancel();
+            all_value = iAlltimer;
+            iAlltimer = 0;
+            mAllSender = null;
+        }
+        setPadEnable(true);
     }
 
     @Override
@@ -1471,6 +1517,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     mFirstAllSender.cancel();
                     iFirstAlltimer = 0;
                 }
+                setPadEnable(true);
                 Log.d(TAG_ACTIVITY, "R.id.btn_pause: mStatus: PAUSE");
                 mStatus = PAUSE;//상태를 멈춤으로 표시
                 break;
@@ -1503,6 +1550,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     mFirstAllSender.cancel();
                     iFirstAlltimer = 0;
                 }
+                setPadEnable(true);
                 Log.d(TAG_ACTIVITY, "R.id.btn_stop: mStatus: PAUSE");
                 mStatus = PAUSE;//상태를 멈춤으로 표시 일시정지와 동일하게 구현 해주라고 함.
                 popupDialog = new PopupDialog(this,
@@ -1585,8 +1633,11 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                         btn_arsch_2.setText(String.format(Locale.US, "%d", arsch_value));
                         break;
                     default:
+                        stopAllStrengthTimer();
+
                         if (all_value > 0)
                             all_value --;
+
                         progress = all_value;
                         mUsbReceiver.writeDataToSerial("S23;" + intTostring(progress) + ";N");
 //                        Log.d(TAG_ACTIVITY, "S23;" + intTostring(progress) + ";N");
@@ -1673,8 +1724,11 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                         btn_arsch_2.setText(String.format(Locale.US, "%d", arsch_value));
                         break;
                     default:
+                        stopAllStrengthTimer();
+
                         if (all_value < 99)
                             all_value ++;
+
                         progress = all_value;
                         mUsbReceiver.writeDataToSerial("S23;" + intTostring(progress) + ";N");
 //                        Log.d(TAG_ACTIVITY, "S23;" + intTostring(progress) + ";N");
@@ -2087,6 +2141,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             mFirstAllSender.cancel();
             iFirstAlltimer = 0;
         }
+        setPadEnable(true);
         Log.d(TAG_ACTIVITY, "setRemotePause() mStatus: PAUSE");
         mStatus = PAUSE;//상태를 멈춤으로 표시
     }
@@ -2139,7 +2194,11 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         int progress = Integer.parseInt(str);  //String을 int로
 //        not_send_remote = true;
 //        onProgressChanged(mSeekBar, all_value,true);
+        all_value = progress;
 
+        Log.i(TAG_ACTIVITY, "setallValueChange(" + str + ") is called UsbReciever");
+
+        stopAllStrengthTimer();
         displayAllStrengthValue();
         if(mAnimationPartialStart == true) {
             animationPartialAllStop();
@@ -2149,13 +2208,13 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         }
 
         //seekBar 도 설정대로 나타나게 한다
-        mSeekBar.setProgress(progress);
-
-        textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
-
-        mHoloCircularProgressBar.setProgress(progress * 0.01f);
-
-        all_value = progress;
+//        mSeekBar.setProgress(progress);
+//
+//        textViewPercent4.setText(String.format(Locale.US, "%d%%", progress));
+//
+//        mHoloCircularProgressBar.setProgress(progress * 0.01f);
+//
+//        all_value = progress;
     }
 
     private void startWaveformResume () {  //Pause 했다가 resume 할 때 어떤 Waveform 인지 구별하여 보낸다
