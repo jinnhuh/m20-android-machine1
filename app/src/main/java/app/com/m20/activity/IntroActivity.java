@@ -210,7 +210,8 @@ public class IntroActivity extends AppCompatActivity {
             alertDialog.show();
         }
 
-        if (str.equals("0") /* || str.equals("1")*/ ) {  //정상이면 입력 화면으로 이동
+        //if (str.equals("0") || str.equals("1") ) {  //정상이면 입력 화면으로 이동
+        if (str.equals("0")) {  //정상이면 입력 화면으로 이동
             startActivity(new Intent(IntroActivity.this, RegActivity.class));
             finish();
         }

@@ -26,6 +26,7 @@ import io.realm.Realm;
 
 
 public class UsbReceiver extends BroadcastReceiver {
+	//private Boolean SHOW_DEBUG = true;
 	private Boolean SHOW_DEBUG = false;
 	private String TAG = "M20_UsbReceiver";
 

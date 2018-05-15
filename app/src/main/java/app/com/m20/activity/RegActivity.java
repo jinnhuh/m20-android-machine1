@@ -442,27 +442,27 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                     finish();
 
                 }
-                else if (et.getText().toString().equals("000000")) {
-//                    bookingendTimeSaved("1000000");     // SCHYUN, Add for just TEST.
-
-                    //Intent i = new Intent(RegActivity.this, DetailActivity.class);  //테스트
-                    Intent i = new Intent(RegActivity.this, MenuActivity.class); //정상
-                    //테스트
-//                    user_name = "전용태";
-//                    user_age = "45";
-//                    user_gender = "1";
-//                    user_weight = "76.9";
-//                    user_height = "176.5";
-//                    //Intent i = new Intent(this, WelcomeActivity.class);
-//                    i.putExtra("name",user_name);
-//                    i.putExtra("age", user_age);
-//                    i.putExtra("gender", user_gender);
-//                    i.putExtra("weight", user_weight);
-//                    i.putExtra("height", user_height);
-//                    i.putExtra("detailTo", "1");
-                    startActivity(i);
-                    finish();
-                }
+//                else if (et.getText().toString().equals("000000")) {
+////                    bookingendTimeSaved("1000000");     // SCHYUN, Add for just TEST.
+//
+//                    //Intent i = new Intent(RegActivity.this, DetailActivity.class);  //테스트
+//                    Intent i = new Intent(RegActivity.this, MenuActivity.class); //정상
+//                    //테스트
+////                    user_name = "전용태";
+////                    user_age = "45";
+////                    user_gender = "1";
+////                    user_weight = "76.9";
+////                    user_height = "176.5";
+////                    //Intent i = new Intent(this, WelcomeActivity.class);
+////                    i.putExtra("name",user_name);
+////                    i.putExtra("age", user_age);
+////                    i.putExtra("gender", user_gender);
+////                    i.putExtra("weight", user_weight);
+////                    i.putExtra("height", user_height);
+////                    i.putExtra("detailTo", "1");
+//                    startActivity(i);
+//                    finish();
+//                }
                 else {
 /*
                     if (mSerial.begin(mBaudrate)) {
