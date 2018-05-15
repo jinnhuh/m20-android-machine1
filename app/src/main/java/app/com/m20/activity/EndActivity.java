@@ -141,7 +141,7 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         Log.i(TAG_ACTIVITY, "sendReservationInform() is called");
         sendReservationInform();
         //}
-        clearEndData();
+        //clearEndData();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
 //         mediaPlayer = new MediaPlayer();
