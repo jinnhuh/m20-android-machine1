@@ -3,6 +3,8 @@ package app.com.m20.activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -39,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
         RelativeLayout relativeLayout = findViewById(R.id.mainIdRl);
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.connect);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.start();
 
         tv1 = findViewById(R.id.mainTitle1);
         tv2 = findViewById(R.id.mainTitle2);

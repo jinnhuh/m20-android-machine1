@@ -642,9 +642,11 @@ public class UsbReceiver extends BroadcastReceiver {
 //		TextView messageTextView = (TextView) group.getChildAt(0);
 //		messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
 //		toast.show();
-		Intent i = new Intent(mActivity, MainActivity.class);
-		i.putExtra("error", errMsg);
-		mActivity.startActivity(i);
+		if(mActivity!=null) {
+			Intent i = new Intent(mActivity, MainActivity.class);
+			i.putExtra("error", errMsg);
+			mActivity.startActivity(i);
+		}
 	}
 
 	private void OnReadMessage(byte[] rbuf, int len)
