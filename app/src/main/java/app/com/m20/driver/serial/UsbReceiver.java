@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import app.com.m20.activity.DetailStartActivity;
 import app.com.m20.activity.IntroActivity;
+import app.com.m20.activity.MainActivity;
 import app.com.m20.activity.PersonCheckupActivity;
 import app.com.m20.activity.RegActivity;
 import app.com.m20.activity.WeighWanningActivity;
@@ -573,41 +574,8 @@ public class UsbReceiver extends BroadcastReceiver {
 									// 1: 정상, 2: 사용중, 3: 대기중, 4: 리눅스통신 Error, 5: AVR 통신 Error
 									// 6: 슈트 이상, 7: Channel 이상, 8: Connector: 이상, 9~00: Reserved
 									String errorCode = array[1];
-									Toast toast;
-									switch (errorCode) {
-                                        case "01":
-                                            toast = Toast.makeText(mContext, "정상", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "02":
-                                            toast = Toast.makeText(mContext, "사용중", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "03":
-                                            toast = Toast.makeText(mContext, "대기중", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "04":
-                                            toast = Toast.makeText(mContext, "리눅스 통신 Error", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "05":
-                                            toast = Toast.makeText(mContext, "AVR 통신 Error", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "06":
-                                            toast = Toast.makeText(mContext, "슈트 이상", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "07":
-                                            toast = Toast.makeText(mContext, "Channel 이상", Toast.LENGTH_SHORT);
-                                            break;
-                                        case "08":
-                                            toast = Toast.makeText(mContext, "Connect 이상", Toast.LENGTH_SHORT);
-                                            break;
-                                        default:
-                                            toast = Toast.makeText(mContext, "Reserverd", Toast.LENGTH_SHORT);
-                                            break;
-									}
-                                    ViewGroup group = (ViewGroup) toast.getView();
-                                    TextView messageTextView = (TextView) group.getChildAt(0);
-                                    messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
-                                    toast.show();
-
+									showErrorMsg(errorCode);
+									//showErrorMsg("01");
 								}
 							}
 						});
@@ -627,7 +595,57 @@ public class UsbReceiver extends BroadcastReceiver {
 			}
 		}
 	};
-
+	private void showErrorMsg(String errorCode){
+		// 1: 정상, 2: 사용중, 3: 대기중, 4: 리눅스통신 Error, 5: AVR 통신 Error
+		// 6: 슈트 이상, 7: Channel 이상, 8: Connector: 이상, 9~00: Reserved
+		//Toast toast;
+		String errMsg=null;
+		switch (errorCode) {
+			case "01":
+				//toast = Toast.makeText(mContext, "정상", Toast.LENGTH_SHORT);
+				errMsg = "정상";
+				break;
+			case "02":
+				//toast = Toast.makeText(mContext, "사용중", Toast.LENGTH_SHORT);
+				errMsg = "사용중";
+				break;
+			case "03":
+				//toast = Toast.makeText(mContext, "대기중", Toast.LENGTH_SHORT);
+				errMsg = "대기중";
+				break;
+			case "04":
+				//toast = Toast.makeText(mContext, "리눅스 통신 Error", Toast.LENGTH_SHORT);
+				errMsg = "리눅스 통신 Error";
+				break;
+			case "05":
+				//toast = Toast.makeText(mContext, "AVR 통신 Error", Toast.LENGTH_SHORT);
+				errMsg = "AVR 통신 Error";
+				break;
+			case "06":
+				//toast = Toast.makeText(mContext, "슈트 이상", Toast.LENGTH_SHORT);
+				errMsg = "슈트 이상";
+				break;
+			case "07":
+				//toast = Toast.makeText(mContext, "Channel 이상", Toast.LENGTH_SHORT);
+				errMsg = "Channel 이상";
+				break;
+			case "08":
+				//toast = Toast.makeText(mContext, "Connect 이상", Toast.LENGTH_SHORT);
+				errMsg = "Connect 이상";
+				break;
+			default:
+				//toast = Toast.makeText(mContext, "Reserverd", Toast.LENGTH_SHORT);
+				errMsg = "Reserverd";
+				break;
+		}
+//		ViewGroup group = (ViewGroup) toast.getView();
+//		TextView messageTextView = (TextView) group.getChildAt(0);
+//		messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
+//		toast.show();
+		Intent i = new Intent(mActivity, MainActivity.class);
+		i.putExtra("error", errMsg);
+		mActivity.startActivity(i);
+	}
 
 	private void OnReadMessage(byte[] rbuf, int len)
 	{

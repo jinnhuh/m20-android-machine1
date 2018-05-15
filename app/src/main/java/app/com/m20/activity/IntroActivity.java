@@ -198,16 +198,21 @@ public class IntroActivity extends AppCompatActivity {
                 break;
         }
         if (msg != null) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage(Html.fromHtml(("<H6><big><big><big><big><font color=green>" + msg + "</font></big></big></big></big></H6> <br>")));
-            alertDialogBuilder.setNegativeButton("확인",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
+//            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+//            alertDialogBuilder.setMessage(Html.fromHtml(("<H6><big><big><big><big><font color=green>" + msg + "</font></big></big></big></big></H6> <br>")));
+//            alertDialogBuilder.setNegativeButton("확인",
+//                    new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//            AlertDialog alertDialog = alertDialogBuilder.create();
+//            alertDialog.show();
+
+            Intent i = new Intent(IntroActivity.this, MainActivity.class);
+            i.putExtra("error", msg);
+            startActivity(i);
+            //finish();
         }
 
         //if (str.equals("0") || str.equals("1") ) {  //정상이면 입력 화면으로 이동

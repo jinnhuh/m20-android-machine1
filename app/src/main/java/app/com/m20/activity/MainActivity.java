@@ -11,6 +11,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -21,11 +22,12 @@ import java.util.Locale;
 import app.com.m20.R;
 import app.com.m20.utils.Utils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     String TAG_ACTIVITY = "M20_Main";
 
     TextView tv1;
     TextView tv2;
+    TextView tv3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         tv1 = findViewById(R.id.mainTitle1);
         tv2 = findViewById(R.id.mainTitle2);
+        tv3 = findViewById(R.id.mainErrorMsg);
 
         tv1.setText("");
         tv2.setText("");
+        tv3.setText("");
 
         Resources resources = getResources();
         String str = resources.getString(R.string.state1);
@@ -52,26 +56,36 @@ public class MainActivity extends AppCompatActivity {
         tv1.append(builder);
 
         resources = getResources();
-        str = resources.getString(R.string.state1);
+        str = resources.getString(R.string.state2);
         builder = new SpannableStringBuilder(str);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#fff200")), 9, 16, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv2.append(builder);
 
-        Display dis = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int densityDPI = displayMetrics.densityDpi;
-        int heightPixels = displayMetrics.heightPixels;
-        int widthPixels = displayMetrics.widthPixels;
-        int wh = dis.getWidth() * dis.getHeight() / widthPixels * heightPixels;
-        TextView textView = new TextView(this);
-        textView.setText(String.format(Locale.US, "dpi : %d, height : %d, width : %d, 해상도 : %d", densityDPI, heightPixels, widthPixels, wh));
+        Intent i= getIntent();
+        if (i != null) {
+            String errMsg = i.getStringExtra("error");
+            if(errMsg!=null ) {
+                tv3.setTextColor(Color.YELLOW);
+                tv3.setText(errMsg);
+            }
+        }
 
-        relativeLayout.addView(textView);
+//        Display dis = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+//        int densityDPI = displayMetrics.densityDpi;
+//        int heightPixels = displayMetrics.heightPixels;
+//        int widthPixels = displayMetrics.widthPixels;
+//        int wh = dis.getWidth() * dis.getHeight() / widthPixels * heightPixels;
+//        TextView textView = new TextView(this);
+//        textView.setText(String.format(Locale.US, "dpi : %d, height : %d, width : %d, 해상도 : %d", densityDPI, heightPixels, widthPixels, wh));
+//
+//        relativeLayout.addView(textView);
         relativeLayout.setOnClickListener((v) -> {
-            startActivity(new Intent(MainActivity.this, WelcomeActivity.class));
             finish();
         });
+
+        findViewById(R.id.btn_back).setOnClickListener(this);
 
     }
 
@@ -80,4 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if( v.getId() == R.id.btn_back ){
+            finish();
+        }
+    }
 }

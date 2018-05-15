@@ -10,6 +10,13 @@
         android:layout_height="match_parent"
         android:background="@drawable/run_bg"
          />
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_back"
+        android:layout_marginTop="15dp"
+        android:gravity="center" />
 
     <TextView
         android:lineSpacingExtra="15dp"
@@ -32,5 +39,16 @@
         android:gravity="left"
         android:textSize="15pt"
         android:text="@string/state2" />
+
+    <TextView
+        android:lineSpacingExtra="15dp"
+        android:id="@+id/mainErrorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="550dp"
+        android:layout_marginLeft="103dp"
+        android:gravity="left"
+        android:textSize="15pt"
+        android:text="" />
 
 </RelativeLayout>
