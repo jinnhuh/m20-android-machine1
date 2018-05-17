@@ -208,8 +208,9 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         if (bool) {
             Log.e(TAG_ACTIVITY, String.format(Locale.US, "Error code = %d.", code));
 
+            String strErr = getErrorMsg(code);
             Resources resources = getResources();
-            txtResult.setText(String.format(resources.getString(R.string.regnumberwrong), code));
+            txtResult.setText(String.format(resources.getString(R.string.regnumberwrong), strErr));
 
             linearLayout.setAnimation(aniInSet);
             linearLayout.setVisibility(View.VISIBLE);
@@ -217,6 +218,45 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
             linearLayout.setAnimation(aniOutSet);
             linearLayout.setVisibility(View.GONE);
         }
+    }
+
+    private String getErrorMsg(int code){
+        /*
+        -101 : [DB 오류] 예약 인증번호와 일치하는 예약 정보가 없음  예약 번호를 확인하세요 (Error code : 101)
+        -102 : [DB 오류] 예약 인증번호는 일치하나 API 파라미터 기계번호(machine_unit_id)와 DB 예약 기계번호(machine_unit_id)가 일치하지 않음  장비 번호를 확인하세요 (Error code : 102)
+        -103 : [DB 오류] 예약 상태가 '예약 완료'가 아님 (예약 상태가 '예약 완료'일 경우만 기계를 사용할 수 있음)  관리자에게 문의하세요. (Error code : 103)
+        -104 : [DB 오류] 기계UNIT 상태가 '활성화'가 아님 관리자에게 문의하세요. (Error code :104)
+        -105 : [DB 오류] 기계 상태가 '활성화'가 아님   관리자에게 문의하세요. (Error code :105)
+        -106 : [DB 오류] 시설 상태가 '활성화'가 아님  관리자에게 문의하세요. (Error code :106)
+        -107 : [DB 오류] 예약 사용자 상태가 '활동'이 아님   예약 번호를 확인하세요. (Error code :107)
+        -108 : [DB 오류] 현재 시간이 예약한 운동 시간 초과   예약시간을 확인하세요. (Error code :108)
+        -109 : [DB 오류] 예약 수정 실패(예약 상태를 '기계 사용 중'으로 수정)  관리자에게 문의하세요. (Error code :109)
+         */
+        Resources resources = getResources();
+        String errMsg = null;
+        switch(code){
+            case -101:
+            case -107:
+                errMsg = resources.getString(R.string.regnumberwrong_101);
+                break;
+            case -102:
+                errMsg = resources.getString(R.string.regnumberwrong_102);
+                break;
+            case -103:
+            case -104:
+            case -105:
+            case -106:
+            case -109:
+                errMsg = resources.getString(R.string.regnumberwrong_103);
+                break;
+            case -108:
+                errMsg = resources.getString(R.string.regnumberwrong_108);
+                break;
+            default :
+                errMsg = "Unknown";
+                break;
+        }
+        return String.format("%d: %s", code, errMsg);
     }
 
     @Override
@@ -632,6 +672,13 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
         editor.apply();
     }
 
+    private void weightdataSaved() {  //키 저장
+        SharedPreferences height =getSharedPreferences("end_data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = height.edit();
+        editor.putString("Data_weight",user_weight);
+        editor.apply();
+    }
+
     private void heightdataSaved() {  //키 저장
         SharedPreferences height =getSharedPreferences("height_data", MODE_PRIVATE);
         SharedPreferences.Editor editor = height.edit();
@@ -809,6 +856,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                                 user_gender = "2";
                             genderdataSaved();
                             user_weight = user_data_Datajobject.getAsJsonObject().get("weight").getAsString();
+                            weightdataSaved();
                             user_height = user_data_Datajobject.getAsJsonObject().get("height").getAsString();
                             heightdataSaved();
 

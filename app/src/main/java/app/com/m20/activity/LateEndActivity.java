@@ -153,7 +153,7 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         Log.i(TAG_ACTIVITY, "sendReservationInform()");
         sendReservationInform();
         //}
-        //clearEndData();
+        clearEndData();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
 //         mediaPlayer = new MediaPlayer();

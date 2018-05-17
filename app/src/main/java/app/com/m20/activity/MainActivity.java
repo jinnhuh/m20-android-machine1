@@ -62,18 +62,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#fff200")), 9, 16, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv1.append(builder);
 
+        /* 2018-05-17 Deletion request from m20
         resources = getResources();
         str = resources.getString(R.string.state2);
         builder = new SpannableStringBuilder(str);
         builder.setSpan(new ForegroundColorSpan(Color.parseColor("#fff200")), 9, 16, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv2.append(builder);
+        */
 
         Intent i= getIntent();
         if (i != null) {
             String errMsg = i.getStringExtra("error");
             if(errMsg!=null ) {
-                tv3.setTextColor(Color.YELLOW);
-                tv3.setText(errMsg);
+                tv2.setTextColor(Color.YELLOW);
+                tv2.setText(errMsg);
             }
         }
 

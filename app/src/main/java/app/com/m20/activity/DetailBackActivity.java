@@ -35,6 +35,7 @@ public class DetailBackActivity extends AppCompatActivity implements View.OnClic
 
     SeekBar mSeekBar;
     private HoloCircularProgressBar mHoloCircularProgressBar;
+    private int STRONG_BP_VALUE_DEFAULT = 30; // body part Strong value
 
     private UsbReceiver mUsbReceiver;
     private static final String ACTION_USB_PERMISSION = "kr.co.andante.mobiledgs.USB_PERMISSION";
@@ -72,15 +73,15 @@ public class DetailBackActivity extends AppCompatActivity implements View.OnClic
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
         Intent intent = getIntent();  //강도 설정한 값 받자
         if(intent!=null) {
-            latt_value = intent.getIntExtra("latt", 20);
-            sideflank_value = intent.getIntExtra("sideflank", 20);
-            waist_value = intent.getIntExtra("waist", 20);
-            arsch_value = intent.getIntExtra("arsch", 20);
+            latt_value = intent.getIntExtra("latt", STRONG_BP_VALUE_DEFAULT);
+            sideflank_value = intent.getIntExtra("sideflank", STRONG_BP_VALUE_DEFAULT);
+            waist_value = intent.getIntExtra("waist", STRONG_BP_VALUE_DEFAULT);
+            arsch_value = intent.getIntExtra("arsch", STRONG_BP_VALUE_DEFAULT);
 
-            brust_value = intent.getIntExtra("brust", 20);
-            abdomen_value = intent.getIntExtra("abdomen", 20);
-            arm_value = intent.getIntExtra("arm", 20);
-            bein_value = intent.getIntExtra("bein", 20);
+            brust_value = intent.getIntExtra("brust", STRONG_BP_VALUE_DEFAULT);
+            abdomen_value = intent.getIntExtra("abdomen", STRONG_BP_VALUE_DEFAULT);
+            arm_value = intent.getIntExtra("arm", STRONG_BP_VALUE_DEFAULT);
+            bein_value = intent.getIntExtra("bein", STRONG_BP_VALUE_DEFAULT);
             all_value = intent.getIntExtra("all", 5);
             playID = intent.getStringExtra("playID");
         }

@@ -263,13 +263,14 @@ public class PersonCheckupActivity extends AppCompatActivity {
 
         // hkpark, for debugging
         // 3초후 자동 이동 소스 참조
-
+//
 //        Handler handler = new Handler() {
 //            public void handleMessage(Message msg) {
 //                name="hkpark";
 //                age="28";
 //                gender="남";
-//                weight="72.4";
+//                weight="72.3";   // 빨강 없음
+//                //weight="72.4"; // 빨강
 //                height="176.0";
 //
 //                super.handleMessage(msg);

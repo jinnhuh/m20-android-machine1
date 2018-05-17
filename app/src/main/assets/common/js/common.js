@@ -109,6 +109,10 @@ $(function () {
 	document.getElementById("bodyFatPer_prog").style.width = strgraphbodyFatPervalue + "%";
 	document.getElementById("musmass_prog").style.width = strgraphmuscleIndex + "%";
 	document.getElementById("BMI_prog").style.width = strgrapfBMI + "%";
+//	document.getElementById("base_meta_prog").style.width = "50" + "%";
+//	document.getElementById("digest_meta_prog").style.width = "50" + "%";
+//	document.getElementById("activity_meta_prog").style.width = "50" + "%";
+
 
     if (bodyWaterEval == 0 )
         bodyWaterEval = "표준이하"

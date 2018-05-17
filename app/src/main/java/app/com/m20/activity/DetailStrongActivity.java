@@ -39,20 +39,21 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
     private HoloCircularProgressBar mHoloCircularProgressBar;
 
     private int startNumber = 1;
+    private int STRONG_BP_VALUE_DEFAULT = 30; // body part Strong value
 
     private UsbReceiver mUsbReceiver;
     private static final String ACTION_USB_PERMISSION = "kr.co.andante.mobiledgs.USB_PERMISSION";
     private int blinkNumber = 0;  //강도 설정하는 부위만 깜빡이게 하기 위해
     private boolean startButtonpush = false;  //시작 버튼 누른거 알기 위해
     private boolean AllstrongdefaultValue_onetime = false; //디폴트 값 한번만 전송하기 위한 값
-    private int strongValue_brust = 20;  //현재 강도 설정한 값 부위별로 저장
-    private int strongValue_abdomen = 20;
-    private int strongValue_arm = 20;
-    private int strongValue_bein = 20;
-    private int strongValue_latt = 20;
-    private int strongValue_sideflank = 20;
-    private int strongValue_waist = 20;
-    private int strongValue_arsch = 20;
+    private int strongValue_brust = STRONG_BP_VALUE_DEFAULT;  //현재 강도 설정한 값 부위별로 저장
+    private int strongValue_abdomen = STRONG_BP_VALUE_DEFAULT;
+    private int strongValue_arm = STRONG_BP_VALUE_DEFAULT;
+    private int strongValue_bein = STRONG_BP_VALUE_DEFAULT;
+    private int strongValue_latt = STRONG_BP_VALUE_DEFAULT;
+    private int strongValue_sideflank = STRONG_BP_VALUE_DEFAULT;
+    private int strongValue_waist = STRONG_BP_VALUE_DEFAULT;
+    private int strongValue_arsch = STRONG_BP_VALUE_DEFAULT;
     private int strongValue_all = 5;
     String playID = null;  //어떤 운동인지 저장
 
@@ -191,14 +192,14 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
 //        });
         Intent intent = getIntent();  //강도 설정한 값 받자
         if(intent!=null) {
-            strongValue_brust = intent.getIntExtra("brust", 20);
-            strongValue_abdomen = intent.getIntExtra("abdomen", 20);
-            strongValue_arm = intent.getIntExtra("arm", 20);
-            strongValue_bein = intent.getIntExtra("bein", 20);
-            strongValue_latt = intent.getIntExtra("latt", 20);
-            strongValue_sideflank = intent.getIntExtra("sideflank", 20);
-            strongValue_waist = intent.getIntExtra("waist", 20);
-            strongValue_arsch = intent.getIntExtra("arsch", 20);
+            strongValue_brust = intent.getIntExtra("brust", STRONG_BP_VALUE_DEFAULT);
+            strongValue_abdomen = intent.getIntExtra("abdomen", STRONG_BP_VALUE_DEFAULT);
+            strongValue_arm = intent.getIntExtra("arm", STRONG_BP_VALUE_DEFAULT);
+            strongValue_bein = intent.getIntExtra("bein", STRONG_BP_VALUE_DEFAULT);
+            strongValue_latt = intent.getIntExtra("latt", STRONG_BP_VALUE_DEFAULT);
+            strongValue_sideflank = intent.getIntExtra("sideflank", STRONG_BP_VALUE_DEFAULT);
+            strongValue_waist = intent.getIntExtra("waist", STRONG_BP_VALUE_DEFAULT);
+            strongValue_arsch = intent.getIntExtra("arsch", STRONG_BP_VALUE_DEFAULT);
             strongValue_all = intent.getIntExtra("all", 5);
             playID = intent.getStringExtra("playID");
 //            Log.i(TAG_ACTIVITY, "J.Y.T DetailStrongActivity strongValue_all: "+strongValue_all);
@@ -547,28 +548,28 @@ public class DetailStrongActivity extends AppCompatActivity implements View.OnCl
                 i.putExtra("detailTo", "2");
                 //부분 강도 설정 안했으면 20으로 보내자 그 외에는 저장 된 값 보냄
                 if (strongValue_brust == 0)
-                    strongValue_brust = 20;
+                    strongValue_brust = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("brust",strongValue_brust);
                 if (strongValue_abdomen == 0)
-                    strongValue_abdomen = 20;
+                    strongValue_abdomen = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("abdomen",strongValue_abdomen);
                 if (strongValue_arm == 0)
-                    strongValue_arm = 20;
+                    strongValue_arm = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("arm",strongValue_arm);
                 if (strongValue_bein == 0)
-                    strongValue_bein = 20;
+                    strongValue_bein = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("bein",strongValue_bein);
                 if (strongValue_latt == 0)
-                    strongValue_latt = 20;
+                    strongValue_latt = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("latt",strongValue_latt);
                 if (strongValue_sideflank == 0)
-                    strongValue_sideflank = 20;
+                    strongValue_sideflank = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("sideflank",strongValue_sideflank);
                 if (strongValue_waist == 0)
-                    strongValue_waist = 20;
+                    strongValue_waist = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("waist",strongValue_waist);
                 if (strongValue_arsch == 0)
-                    strongValue_arsch = 20;
+                    strongValue_arsch = STRONG_BP_VALUE_DEFAULT;
                 i.putExtra("arsch",strongValue_arsch);
                 if (strongValue_all == 0)
                     strongValue_all = 5;
