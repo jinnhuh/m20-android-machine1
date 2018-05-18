@@ -50,6 +50,10 @@ $(function () {
     var digeMeta = getParameters("digeMeta"); // 소화대사량
     var activiMeta = getParameters("activiMeta"); // 활동대사량
 
+    var strGraphBasicMeta = getParameters("strGraphBasicMeta"); // 기초대사량
+    var strGraphDigestMeta = getParameters("strGraphDigestMeta"); // 소화대사량
+    var strGraphActiviyMeta = getParameters("strGraphActiviyMeta"); // 활동대사량
+
     var bodyWater = getParameters("bodyWater"); // 체수분
     var minBodyWater = getParameters("minBodyWater"); // 체수분 하한
     var maxBodyWater = getParameters("maxBodyWater"); // 체수분 상한
@@ -109,9 +113,9 @@ $(function () {
 	document.getElementById("bodyFatPer_prog").style.width = strgraphbodyFatPervalue + "%";
 	document.getElementById("musmass_prog").style.width = strgraphmuscleIndex + "%";
 	document.getElementById("BMI_prog").style.width = strgrapfBMI + "%";
-//	document.getElementById("base_meta_prog").style.width = "50" + "%";
-//	document.getElementById("digest_meta_prog").style.width = "50" + "%";
-//	document.getElementById("activity_meta_prog").style.width = "50" + "%";
+	document.getElementById("base_meta_prog").style.width = strGraphBasicMeta + "%";
+	document.getElementById("digest_meta_prog").style.width = strGraphDigestMeta + "%";
+	document.getElementById("activity_meta_prog").style.width = strGraphActiviyMeta + "%";
 
 
     if (bodyWaterEval == 0 )

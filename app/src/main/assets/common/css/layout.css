@@ -89,9 +89,9 @@
 #wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .tit_text{position:absolute;left:0;top:10px;text-align:left;font-size:14px;}
 #wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_text{position:absolute;right:0;top:10px;text-align:right;font-size:14px;}
 #wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar{position:absolute;left:0;bottom:10px;width:100%;height:8px;background:#3d4854;border-radius:5px;}
-#wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar .kcal_prog_blue{position:absolute;left:0;top:0;width:90%;height:8px;background:#0b9cf2;border-radius:5px;}
-#wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar .kcal_prog_skyblue{position:absolute;left:0;top:0;width:30%;height:8px;background:#03d8d9;border-radius:5px;}
-#wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar .kcal_prog_yellow{position:absolute;left:0;top:0;width:70%;height:8px;background:#ffb100;border-radius:5px;}
+#wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar .kcal_prog_blue{position:absolute;left:0;top:0;width:83%;height:8px;background:#0b9cf2;border-radius:5px;}
+#wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar .kcal_prog_skyblue{position:absolute;left:0;top:0;width:15%;height:8px;background:#03d8d9;border-radius:5px;}
+#wrap .tab_con .tab_content .result_table tbody td .date_total_kcal .dtk_ul > li .kcal_prog_bar .kcal_prog_yellow{position:absolute;left:0;top:0;width:37%;height:8px;background:#ffb100;border-radius:5px;}
 #wrap .tab_con .tab_content .result_table tbody td .unit{display:inline-block;font-size:18px;vertical-align:middle;}
 
 #wrap .program_confirm{position:relative;width:1040px;height:130px;margin:20px auto 0;text-align:center;}

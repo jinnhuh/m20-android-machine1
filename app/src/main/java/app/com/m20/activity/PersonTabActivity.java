@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import app.com.m20.R;
 import app.com.m20.db.DbManagement;
@@ -96,6 +97,11 @@ public class PersonTabActivity extends AppCompatActivity {
     private int activiMeta = 0; // 활동대사량
     private int oneKcal = 0; // 1일 권장 칼로리
     private String strOneKcal; // 1일 권장 칼로리
+
+    private String strGraphBasicMeta;  // 기초대사량 graph
+    private String strGraphDigestMeta;   // 소화대사량 graph
+    private String strGraphActiviyMeta; // 활동대사량 graph
+
     //여기까지 receiveData4
     //받는 데이타 정의
 
@@ -390,6 +396,11 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&digeMeta=" + digeMeta);   // 소화대사량
                 params.append("&activiMeta=" + activiMeta);  // 활동대사량
 
+                getXMetaGraph();
+                params.append("&strGraphBasicMeta=" + strGraphBasicMeta);  // 기초대사량
+                params.append("&strGraphDigestMeta=" + strGraphDigestMeta);   // 소화대사량
+                params.append("&strGraphActiviyMeta=" + strGraphActiviyMeta);  // 활동대사량
+
                 params.append("&bodyWater=" + bodyWater); // 체수분
                 params.append("&minBodyWater=" + minBodyWater );
                 params.append("&maxBodyWater=" + maxBodyWater );
@@ -425,6 +436,22 @@ public class PersonTabActivity extends AppCompatActivity {
 //                relativeLayout.addView(WebView01);
             }
         //}
+    }
+    /*
+    그래프의 총길이는 1518*1.2= 1821
+    기초대사량 1518 길이,  1821대비 0.8
+    소화 대사량 202길이,  202/1518 = 0.13
+    활동대사량 303길이 ,  303/1518 = 0.19
+    */
+    private void getXMetaGraph(){
+        float graphMax = basicMeta * (float)1.2;
+        float graphBasicMeta = ((float)basicMeta / graphMax) *100;
+        float graphDigestMeta = ((float)digeMeta / (float)basicMeta)*100;
+        float graphActivityMeta = ((float)activiMeta / (float)basicMeta)*100;
+        strGraphBasicMeta = String.format(Locale.US, "%.0f", graphBasicMeta);
+        strGraphDigestMeta = String.format(Locale.US, "%.0f", graphDigestMeta);
+        strGraphActiviyMeta = String.format(Locale.US, "%.0f", graphActivityMeta);
+        Log.i(TAG_ACTIVITY, "strGraphBasicMeta = " + strGraphBasicMeta + "strGraphDigestMeta = " + strGraphDigestMeta + "strGraphActiviyMeta = " + strGraphActiviyMeta );
     }
 
     @Override
