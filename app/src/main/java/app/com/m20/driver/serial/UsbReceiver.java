@@ -645,6 +645,7 @@ public class UsbReceiver extends BroadcastReceiver {
 		if(mActivity!=null) {
 			Intent i = new Intent(mActivity, MainActivity.class);
 			i.putExtra("error", errMsg);
+			i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 			mActivity.startActivity(i);
 		}
 	}

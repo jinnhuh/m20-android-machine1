@@ -42,11 +42,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
         RelativeLayout relativeLayout = findViewById(R.id.mainIdRl);
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.connect);
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.setLooping(false);
-        mediaPlayer.start();
-
         tv1 = findViewById(R.id.mainTitle1);
         tv2 = findViewById(R.id.mainTitle2);
         tv3 = findViewById(R.id.mainErrorMsg);
@@ -73,11 +68,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent i= getIntent();
         if (i != null) {
             String errMsg = i.getStringExtra("error");
+            if(errMsg.compareTo("정상") == 0)
+            {
+                Log.i("MainActivity", "finish after receiving OK");
+                finish();
+                return;
+            }
             if(errMsg!=null ) {
                 tv2.setTextColor(Color.YELLOW);
                 tv2.setText(errMsg);
             }
         }
+
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.connect);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.start();
 
 //        Display dis = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 //        DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -112,6 +118,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if( v.getId() == R.id.btn_back ){
             finish();
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent != null) {
+            String errMsg = intent.getStringExtra("error");
+            if(errMsg.compareTo("정상") == 0)
+            {
+                Log.i("MainActivity", "finish after receiving OK");
+                finish();
+            }
+            if(errMsg!=null && tv2!=null) {
+                tv2.setTextColor(Color.YELLOW);
+                tv2.setText(errMsg);
+            }
         }
     }
 }
