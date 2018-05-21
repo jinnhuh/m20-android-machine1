@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv2;
     TextView tv3;
 
+    MediaPlayer m_mediaPlayer = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.connect);
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.setLooping(false);
-        mediaPlayer.start();
+        m_mediaPlayer = MediaPlayer.create(this, R.raw.connect);
+        m_mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        m_mediaPlayer.setLooping(false);
+        m_mediaPlayer.start();
 
 //        Display dis = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
 //        DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -97,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //        relativeLayout.addView(textView);
         relativeLayout.setOnClickListener((v) -> {
+            if(m_mediaPlayer!=null){
+                m_mediaPlayer.stop();
+            }
             finish();
         });
 
@@ -117,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if( v.getId() == R.id.btn_back ){
+            if(m_mediaPlayer!=null){
+                m_mediaPlayer.stop();
+            }
             finish();
         }
     }
@@ -130,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(errMsg.compareTo("정상") == 0)
             {
                 Log.i("MainActivity", "finish after receiving OK");
+                if(m_mediaPlayer!=null){
+                    m_mediaPlayer.stop();
+                }
                 finish();
             }
             if(errMsg!=null && tv2!=null) {
