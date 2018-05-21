@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="format-detection" content="telephone=no, address=no, email=no" />
+
+<title>M20 PRO</title>
+<link rel="stylesheet" href="file:///android_asset/common/css/common.css" />
+<link rel="stylesheet" href="file:///android_asset/common/css/layout_f.css" />
+<script src="file:///android_asset/common/js/jquery-1.8.3.js"></script>
+<script src="file:///android_asset/common/js/common.js"></script>
+</head>
+<body>
+
+<div id="wrap">
+
+	<!-- #header -->
+	<div class="header">
+		<div class="title">체지방 측정 결과</div>
+		<div class="user_info">
+			<dl class="ui_dl">
+				<dt>이름:</dt>
+				<dd id="name">홍길동</dd>
+				
+				<dt>나이:</dt>
+				<dd id="age">40세</dd>
+				
+				<dt>성별:</dt>
+				<dd id="sex">남</dd>
+				
+				<dt>키:</dt>
+				<dd id="height">180cm</dd>
+				
+				<dt>검사일시:</dt>
+				<dd id="checkDate">17.11.07 &nbsp; 14:25</dd>
+			</dl>
+		</div>
+	</div>
+	<!-- #header -->
+
+	<!-- .tabContainer  상단 텝 메뉴 시작(공통) -->
+	<div class="tabContainer ">
+		<ul class="tabs_nav" id="tab">
+			<li class="on"><a href="#none;" rel="tab1">비만 진단 및 운동 목표</a></li>
+			<li ><a href="#none;" rel="tab2">체성분 분석결과</a></li>
+		</ul>
+	</div>
+	<!-- /.tabContainer  상단 텝 메뉴 끝 -->
+
+
+	<!-- .tab_con -->
+	<div class="tab_con">
+
+		<div class="tab_content" id="tab1">
+			<table class="result_table">
+				<colgroup><col width="208px"><col width="300px"><col width="100px"><col width="100px"><col width="332px"></colgroup>
+				<tbody>
+					<tr>
+						<td class="h100 tableLogo">
+							<span class="t_tit01">분석항목</span>
+							<span class="t_tit02">측정항목</span>
+						</td>
+						<td class="bg_black04">
+							<dl class="diagnosis_head">
+								<dt>진단결과</dt>
+								<dd>표준이하</dd>
+								<dd>표준</dd>
+								<dd>표준이상</dd>
+							</dl>
+						</td>
+						<td class="h100 table_icon01"><span class="tit_icon">운동목표</span></td>
+						<td class="h100 table_icon02"><span class="tit_icon">조절목표</span></td>
+						<td rowspan="5" class="bg_purple">
+							<div class="date_total_kcal">
+								<p class="tit">1일 권장 칼로리</p>
+								<p class="kcal_data">
+									<span class="kcal_num" id="oneKcal">2.023</span>
+									<span class="kcal_txt">kcal</span>
+								</p>
+								<ul class="dtk_ul">
+									<li>
+										<span class="tit_text">기초 대사량</span>
+										<span class="kcal_text" id="kcal1">1,518 kcal</span>
+										<p class="kcal_prog_bar">
+											<span class="kcal_prog_blue" id="base_meta_prog"></span>
+										</p>
+									</li>
+									<li>
+										<span class="tit_text">소화 대사량</span>
+										<span class="kcal_text" id="kcal2">202 kcal</span>
+										<p class="kcal_prog_bar">
+											<span class="kcal_prog_skyblue" id="digest_meta_prog"></span>
+										</p>
+									</li>
+									<li>
+										<span class="tit_text">활동 대사량</span>
+										<span class="kcal_text" id="kcal3">303 kcal</span>
+										<p class="kcal_prog_bar">
+											<span class="kcal_prog_yellow" id="activity_meta_prog"></span>
+										</p>
+									</li>
+								</ul>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="bg_black02">체중</td>
+						<td rowspan="4">
+							<ul class="diagnosis_body">
+								<li>
+									<p class="prog_bar01" id="weight_prog">
+										<span class="prog_data_txt" id="weight">120kg</span>
+									</p>
+									<div class="prog_num01">
+										<span class="prog_data01"></span>
+										<span class="prog_data02"></span>
+										<span class="prog_data03"></span>
+										<span class="prog_data04"></span>
+										<span class="prog_data05"></span>
+										<span class="prog_data06"></span>
+										<span class="prog_data07"></span>
+									</div>
+								</li>
+								<li>
+									<p class="prog_bar02" id="bodyFatPer_prog">
+										<span class="prog_data_txt" id="bodyFatPer">19.1%</span>
+									</p>
+									<div class="prog_num02">
+										<span class="prog_data01"></span>
+										<span class="prog_data02"></span>
+										<span class="prog_data03"></span>
+										<span class="prog_data04"></span>
+										<span class="prog_data05"></span>
+										<span class="prog_data06"></span>
+										<span class="prog_data07"></span>
+									</div>
+								</li>
+								<li>
+									<p class="prog_bar03" id="musmass_prog">
+										<span class="prog_data_txt" id="musMass">95(65.0kg)</span>
+									</p>
+									<div class="prog_num03">
+										<span class="prog_data01"></span>
+										<span class="prog_data02"></span>
+										<span class="prog_data03"></span>
+										<span class="prog_data04"></span>
+										<span class="prog_data05"></span>
+										<span class="prog_data06"></span>
+										<span class="prog_data07"></span>
+									</div>
+								</li>
+								<li>									
+									<p class="prog_bar04" id="BMI_prog">
+										<span class="prog_data_txt" id="bmi">21.0kg/m<sup>2</sup></span>
+									</p>
+									<div class="prog_num04">
+										<span class="prog_data01"></span>
+										<span class="prog_data02"></span>
+										<span class="prog_data03"></span>
+										<span class="prog_data04"></span>
+										<span class="prog_data05"></span>
+										<span class="prog_data06"></span>
+										<span class="prog_data07"></span>
+									</div>
+								</li>
+							</ul>
+						</td>
+						<td class="bg_green" id="excerGoalWeight">68.2kg</td>
+						<td class="bg_green" id="adjGoalWeight">+3.2kg</td>
+					</tr>
+					<tr>
+						<td class="bg_black02">체지방률</td>
+						<td class="bg_green" id="excerGoalBodyFat">19%</td>
+						<td class="bg_green" id="adjGoalBodyFat">+1kg</td>
+					</tr>
+					<tr>
+						<td class="bg_black02">근육량(골격근)</td>
+						<td class="bg_green" id="excerGoalMusMass">32.5%</td>
+						<td class="bg_green" id="adjGoalMusMass">+2.5kg</td>
+					</tr>
+					<tr>
+						<td class="bg_black02">BMI(체질량지수)</td>
+						<td class="bg_green" id="excerGoalBmi">22%</td>
+						<td class="bg_green" id="adjGoalBmi">+1</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="recordsControl_win tab_content" id="tab2">
+			<table class="result_table">
+				<colgroup><col width="208px"><col width="208px"><col width="208px"><col width="208px"><col width="208px"></colgroup>
+				<tbody>
+					<tr>
+						<td class="h101 tableLogo">
+							<span class="t_tit01">분석항목</span>
+							<span class="t_tit02">측정항목</span>
+						</td>
+						<td class="h101 bg_black04">체수분</td>
+						<td class="h101 bg_black04">단백질</td>
+						<td class="h101 bg_black04">무기질</td>
+						<td class="h101 bg_black04">체지방</td>
+					</tr>
+					<tr>
+						<td class="h100 bg_black02">측정량</td>
+						<td class="h100 tc_blue" style="font-size:35px;" id="bodyWater">39.1</td>
+						<td class="h100 tc_blue" style="font-size:35px;" id="protein">10.6</td>
+						<td class="h100 tc_blue" style="font-size:35px;" id="minerals">3.63</td>
+						<td class="h100 tc_blue" style="font-size:35px;" id="bodyFatPer2">11.6</td>
+					</tr>
+					<tr>
+						<td class="h100 bg_black02">표준범위</td>
+						<td class="h100" style="font-size:35px;" id="bodyWaterMinMax">37.0~45.2</td>
+						<td class="h100" style="font-size:35px;" id="proteinMinMax">10.0~12.2</td>
+						<td class="h100" style="font-size:35px;" id="mineralsMinMax">3.45~4.21</td>
+						<td class="h100" style="font-size:35px;" id="bodyFatPer2MinMax">9.8~14.9</td>
+					</tr>
+					<tr>
+						<td class="h100 bg_black02">평가</td>
+						<td class="h100"  id="bodyWaterEval">비표준</td>
+						<td class="h100" id="proteinEval">표준</td>
+						<td class="h100" id="mineralsEval">표준이상</td>
+						<td class="h100" id="bodyFatPer2Eval">표준</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- /.tab_con -->
+
+	<!-- .program_confirm -->
+	<div class="program_confirm bg_black02">
+		<p class="pc_tit">추천 프로그램이로 이동 하시겠습니까?</P>
+		<a href="#" class="btn_ok" onclick="HybridApp.setMessage('y')">예</a>
+		<a href="#" class="btn_cancel" onclick="HybridApp.setMessage('n')">아니요</a>
+	</div>
+	<!-- .program_confirm -->
+
+</div>
+
+</body>
+</html>

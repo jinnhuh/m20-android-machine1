@@ -421,7 +421,12 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&maxBodyFatPer2=" + maxBodyFatPer2 );
                 params.append("&bodyFatPer2Eval=" + bodyFatPer2Eval );
 
-                WebView01.loadUrl("file:///android_asset/result.html" + params.toString());
+                if (gender.equals("남")) {
+                    WebView01.loadUrl("file:///android_asset/result.html" + params.toString());
+                } else {
+                    //WebView01.loadUrl("file:///android_asset/result_f.html" + params.toString());
+                    WebView01.loadUrl("file:///android_asset/result.html" + params.toString());
+                }
 
                 RelativeLayout relativeLayout = findViewById(R.id.tab_result);
                 relativeLayout.addView(WebView01);
