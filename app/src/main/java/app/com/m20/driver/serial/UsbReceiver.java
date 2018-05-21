@@ -560,6 +560,7 @@ public class UsbReceiver extends BroadcastReceiver {
 								else if (key.equals("C60")) {
 									// 운동 시작 후 리모컨으로 전체 강도를 바꿀 수 있다
 									String allValueChange = array[1];
+									//showErrorMsgTest(allValueChange);
 									String now_activity = mActivity.toString();
 									if (now_activity.contains("DetailStartActivity"))
 										((DetailStartActivity) mActivity).setallValueChange(allValueChange);
@@ -642,6 +643,49 @@ public class UsbReceiver extends BroadcastReceiver {
 //		TextView messageTextView = (TextView) group.getChildAt(0);
 //		messageTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50);
 //		toast.show();
+		if(mActivity!=null) {
+			Intent i = new Intent(mActivity, MainActivity.class);
+			i.putExtra("error", errMsg);
+			i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			mActivity.startActivity(i);
+		}
+	}
+
+	private void showErrorMsgTest(String errorCode){
+		// 1: 정상, 2: 사용중, 3: 대기중, 4: 리눅스통신 Error, 5: AVR 통신 Error
+		// 6: 슈트 이상, 7: Channel 이상, 8: Connector: 이상, 9~00: Reserved
+
+		String errMsg=null;
+		switch (errorCode) {
+			case "001":
+				errMsg = "정상";
+				break;
+			case "002":
+				errMsg = "사용중";
+				break;
+			case "003":
+				errMsg = "대기중";
+				break;
+			case "004":
+				errMsg = "리눅스 통신 Error";
+				break;
+			case "005":
+				errMsg = "AVR 통신 Error";
+				break;
+			case "006":
+				errMsg = "슈트 이상";
+				break;
+			case "007":
+				errMsg = "Channel 이상";
+				break;
+			case "008":
+				errMsg = "Connect 이상";
+				break;
+			default:
+				errMsg = "Reserverd";
+				break;
+		}
+
 		if(mActivity!=null) {
 			Intent i = new Intent(mActivity, MainActivity.class);
 			i.putExtra("error", errMsg);
