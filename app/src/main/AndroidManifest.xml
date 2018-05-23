@@ -3,16 +3,12 @@
     package="app.com.m20">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.Manifest.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-
     <uses-feature android:name="android.hardware.usb.host" />
-
-
-
 
     <application
         android:allowBackup="true"
@@ -21,11 +17,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        <receiver android:enabled="true" android:name=".activity.BootUpReceiver"
+        <receiver
+            android:name=".activity.BootUpReceiver"
+            android:enabled="true"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
@@ -35,15 +33,24 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.MENU" />
                 <category android:name="android.intent.category.DEFAULT" />
+                z
             </intent-filter>
         </activity>
-        <activity android:name=".activity.RegActivity" android:screenOrientation="landscape" />
-        <activity android:name=".activity.MainActivity" android:screenOrientation="landscape" />
-        <activity android:name=".activity.PersonCheckupActivity" android:screenOrientation="landscape" />
-        <!---
+        <activity
+            android:name=".activity.RegActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PersonCheckupActivity"
+            android:screenOrientation="landscape" />
+        <!--
+        -
         <activity
             android:name=".activity.PersonCheckupActivity"
             android:screenOrientation="landscape" >
@@ -54,22 +61,66 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        //-->
-        <activity android:name=".activity.PersonTabActivity" android:screenOrientation="landscape" />
-        <activity android:name=".activity.MenuActivity" android:screenOrientation="landscape" />
-        <activity android:name=".activity.WelcomeActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.DetailActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.DetailFrontActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.DetailBackActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.DetailStartActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.EndActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.SettingActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.DetailStrongActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.WeighWanningActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.WeightDisplayActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.BodyFatActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.BodyFactWanningActivity" android:screenOrientation="landscape"></activity>
-        <activity android:name=".activity.LateEndActivity" android:screenOrientation="landscape"></activity>
+        //
+        -->
+        <activity
+            android:name=".activity.PersonTabActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.MenuActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.WelcomeActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DetailActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DetailFrontActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DetailBackActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DetailStartActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.EndActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.DetailStrongActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.WeighWanningActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.WeightDisplayActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.BodyFatActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.BodyFactWanningActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.LateEndActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.UsbEventReceiverActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@style/Theme.Transparent">
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+        </activity>
     </application>
 
 </manifest>
