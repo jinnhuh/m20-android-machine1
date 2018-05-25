@@ -87,6 +87,8 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
     String weight_imsi = null;
     String strstandardWeight = null;
     String resultweightIndex = null;
+    String strstandardWeightMin = null;
+    String strstandardWeightMax = null;
     String muscle = null;
     String muscleMin = null;
     String muscleMax = null;
@@ -229,6 +231,8 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         weight_imsi = prefs.getString("Data_weight", "0");
         strstandardWeight = prefs.getString("Data_strstandardWeight", "0");
         resultweightIndex = prefs.getString("Data_resultweightIndex", "0");
+        strstandardWeightMin = prefs.getString("Data_strstandardWeightMin", "0");
+        strstandardWeightMax = prefs.getString("Data_strstandardWeightMax", "0");
         muscle = prefs.getString("Data_muscle", "0");
         muscleMin = prefs.getString("Data_musclemin", "0");
         muscleMax = prefs.getString("Data_musclemax", "0");
@@ -444,10 +448,10 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         object.addProperty("height", send_height);   //키
         double send_weight = Double.valueOf(weight_imsi);
         object.addProperty("weight", send_weight);    //체중
-        double send_weight_standard_min = Double.valueOf(strstandardWeight);
-        object.addProperty("weight_standard_min", send_weight_standard_min);  //체중 min 이거는 무슨값?
-        double send_weight_standard_max = Double.valueOf(resultweightIndex);
-        object.addProperty("weight_standard_max", send_weight_standard_max);  //체중 max OK  이거는 무슨값?
+        double send_weight_standard_min = Double.valueOf(strstandardWeightMin);
+        object.addProperty("weight_standard_min", send_weight_standard_min);  //체중 min == 표준체중*0.9
+        double send_weight_standard_max = Double.valueOf(strstandardWeightMax);
+        object.addProperty("weight_standard_max", send_weight_standard_max);  //체중 max = == 표준체중*1.1
         double send_muscle = Double.valueOf(muscle);
         object.addProperty("muscle", send_muscle);  //근육량
         double send_muscle_standard_min = Double.valueOf(muscleMin);
@@ -462,9 +466,9 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
             double send_body_fat_percent_standard_max = Double.valueOf(strmanPerMax);
             object.addProperty("body_fat_percent_standard_max", send_body_fat_percent_standard_max);  //체지방률  max
         } else {
-            double send_body_fat_percent_standard_min = 1.0;//Double.valueOf(strwomanPerMin).doubleValue();
+            double send_body_fat_percent_standard_min = Double.valueOf(strwomanPerMin);
             object.addProperty("body_fat_percent_standard_min", send_body_fat_percent_standard_min);  //체지방률  min
-            double send_body_fat_percent_standard_max = 2.0;//Double.valueOf(strwomanPerMax).doubleValue();
+            double send_body_fat_percent_standard_max = Double.valueOf(strwomanPerMax);
             object.addProperty("body_fat_percent_standard_max", send_body_fat_percent_standard_max);
         }
         double send_body_fat = Double.valueOf(bodyfat);
@@ -475,9 +479,9 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
             double body_fat_standard_max = Double.valueOf(strmanMax);
             object.addProperty("body_fat_standard_max", body_fat_standard_max);  //체지방 max
         } else {
-            double send_body_fat_standard_min = 3.0;//Double.valueOf(strwomanMin).doubleValue();
+            double send_body_fat_standard_min = Double.valueOf(strwomanMin);
             object.addProperty("body_fat_standard_min", send_body_fat_standard_min);  //체지방 min
-            double body_fat_standard_max = 4.0;//Double.valueOf(strwomanMax).doubleValue();
+            double body_fat_standard_max = Double.valueOf(strwomanMax);
             object.addProperty("body_fat_standard_max", body_fat_standard_max);  //체지방 max
         }
         double send_body_mass = Double.valueOf(strfBMI);

@@ -99,7 +99,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
     String strgrapfBMI;
     String strstandardWeight;
     String resultweightIndex;
-
+    String strstandardWeightMin;
+    String strstandardWeightMax;
     // 2018-05-08, M20 request handling activity_constant into RI00003
     String activity_constant;  //활동상수 : 1(비활동적), 2(약간활동적), 3(적당히 활동적), 4(아주 활동적)
 
@@ -454,17 +455,19 @@ public class PersonCheckupActivity extends AppCompatActivity {
         editor.putString("Data_weight",weight ); //체중
         editor.putString("Data_strstandardWeight",strstandardWeight ); //체중(min) = 표준체중
         editor.putString("Data_resultweightIndex",resultweightIndex ); //체중(max) = 체중 인덱스
+        editor.putString("Data_strstandardWeightMin",strstandardWeightMin ); //체중(min)
+        editor.putString("Data_strstandardWeightMax",strstandardWeightMax ); //체중(max)
         editor.putString("Data_muscle",muscle ); //근육량
         editor.putString("Data_musclemin",muscle ); //근육량(min) 어떤 값인지 몰라서 일단 근육량
         editor.putString("Data_musclemax",muscle ); //근육량(max) 어떤 값인지 몰라서 일단 근육량
         editor.putString("Data_strbodyFatPervalue",strbodyFatPervalue ); //체지방률
         if (gender.equals("1")) {
-            editor.putString("Data_strmanPerMin",strmanMin );   //체지방률 (min)  어떤 값인지 몰라서 일단 체지방 (min)
-            editor.putString("Data_strmanPerMax",strmanMax );   //체지방률 (max)  어떤 값인지 몰라서 일단 체지방 (max)
+            editor.putString("Data_strmanPerMin","12.0" );   //체지방률 (min)  어떤 값인지 몰라서 일단 체지방 (min)
+            editor.putString("Data_strmanPerMax","20.0" );   //체지방률 (max)  어떤 값인지 몰라서 일단 체지방 (max)
         }
         else {
-            editor.putString("Data_strwomanPerMax",strwomanMin );   //체지방률 (min)  어떤 값인지 몰라서 일단 체지방 (min)
-            editor.putString("Data_strwomanPerMax",strwomanMax );   //체지방률 (max)  어떤 값인지 몰라서 일단 체지방 (max)
+            editor.putString("Data_strwomanPerMin","20.0" );   //체지방률 (min)  어떤 값인지 몰라서 일단 체지방 (min)
+            editor.putString("Data_strwomanPerMax","28.0" );   //체지방률 (max)  어떤 값인지 몰라서 일단 체지방 (max)
         }
         editor.putString("Data_bodyfat",bodyfat ); //체지방
         if (gender.equals("1")) {
@@ -476,8 +479,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
             editor.putString("Data_strwomanMax",strwomanMax );   //체지방 (max)
         }
         editor.putString("Data_strfBMI",strfBMI );  //BMI
-        editor.putString("Data_strfBMImin",strfBMI );  //BMI (min)  어떤 값인지 몰라서 일단 BMI
-        editor.putString("Data_strfBMImax",strfBMI );  //BMI (max) 어떤 값인지 몰라서 일단 BMI
+        editor.putString("Data_strfBMImin","18.5" );  //BMI (min)  어떤 값인지 몰라서 일단 BMI
+        editor.putString("Data_strfBMImax","24.9" );  //BMI (max) 어떤 값인지 몰라서 일단 BMI
         editor.putString("Data_totalbodywater",totalbodywater );  //체수분량
         editor.putString("Data_totalbodywater_min",totalbodywater_min );  //체수분량 (min)
         editor.putString("Data_totalbodywater_max",totalbodywater_max );  //체수분량 (max)
@@ -495,6 +498,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
 
     private void weightCal() {  //체중 tab PersonTabActivity로 넘겨야 할 값   strweightIndex, strjudgmentValue, strweighttargetControl, strweighttargetExercise
         float standardWeight, weightIndex, weighttargetExercise, weighttargetControl, graphweightIndex=0;
+        float standardWeightMin, standardWeightMax =0;
 
         if (gender.equals("1"))  //표준 체중 구하는 공식 (남/여가 다르다)
             standardWeight = strTofloat(height) * strTofloat(height) * 22 / 10000 ;  //남자는 22
@@ -502,6 +506,12 @@ public class PersonCheckupActivity extends AppCompatActivity {
             standardWeight = strTofloat(height) * strTofloat(height) * 21 / 10000 ;  //여자는 21
         strstandardWeight = String.format(Locale.US, "%.1f", standardWeight);
         Log.i(TAG_ACTIVITY, "strstandardWeight: "+strstandardWeight);
+
+        standardWeightMin = Float.valueOf(strstandardWeight) * (float)0.9;
+        standardWeightMax = Float.valueOf(strstandardWeight) * (float)1.1;
+        strstandardWeightMin = String.format(Locale.US, "%.1f", standardWeightMin);
+        strstandardWeightMax = String.format(Locale.US, "%.1f", standardWeightMax);
+
         judgmentmusclevalue = judgmentmuscleTable(standardWeight);
         weightIndex = 100 + ((strTofloat(weight) - standardWeight) / standardWeight * 100);  //체중 index 구하는 공식 그래프용
         resultweightIndex = String.format(Locale.US, "%.1f", weightIndex);  //판정 Table이 소수점 한자리이므로 소수점 한자리까지만 끈어서 넘긴다

@@ -84,6 +84,8 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
     String weight_imsi = null;
     String strstandardWeight = null;
     String resultweightIndex = null;
+    String strstandardWeightMin = null;
+    String strstandardWeightMax = null;
     String muscle = null;
     String muscleMin = null;
     String muscleMax = null;
@@ -150,7 +152,7 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         readHeightDataSaved();
         // 18-05-02, M20 Request for changing call sendReservationInform() always when program end.
         //if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
-        Log.i(TAG_ACTIVITY, "sendReservationInform()");
+        Log.i(TAG_ACTIVITY, "sendReservationInform() is called");
         sendReservationInform();
         //}
         clearEndData();
@@ -244,6 +246,8 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         weight_imsi = prefs.getString("Data_weight", "0");
         strstandardWeight = prefs.getString("Data_strstandardWeight", "0");
         resultweightIndex = prefs.getString("Data_resultweightIndex", "0");
+        strstandardWeightMin = prefs.getString("Data_strstandardWeightMin", "0");
+        strstandardWeightMax = prefs.getString("Data_strstandardWeightMax", "0");
         muscle = prefs.getString("Data_muscle", "0");
         muscleMin = prefs.getString("Data_musclemin", "0");
         muscleMax = prefs.getString("Data_musclemax", "0");
@@ -288,7 +292,7 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
 
     private void readGenderDataSaved() {
         SharedPreferences prefs =getSharedPreferences("gender_data", MODE_PRIVATE);
-        gender = prefs.getString("gender_age", "0");
+        gender = prefs.getString("Data_gender", "0");
     }
 
     private void readHeightDataSaved() {
@@ -461,10 +465,10 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         object.addProperty("height", send_height);   //키
         double send_weight = Double.valueOf(weight_imsi);
         object.addProperty("weight", send_weight);    //체중
-        double send_weight_standard_min = Double.valueOf(strstandardWeight);
-        object.addProperty("weight_standard_min", send_weight_standard_min);  //체중 min 이거는 무슨값?
-        double send_weight_standard_max = Double.valueOf(resultweightIndex);
-        object.addProperty("weight_standard_max", send_weight_standard_max);  //체중 max OK  이거는 무슨값?
+        double send_weight_standard_min = Double.valueOf(strstandardWeightMin);
+        object.addProperty("weight_standard_min", send_weight_standard_min);  //체중 min == 표준체중*0.9
+        double send_weight_standard_max = Double.valueOf(strstandardWeightMax);
+        object.addProperty("weight_standard_max", send_weight_standard_max);  //체중 max = == 표준체중*1.1
         double send_muscle = Double.valueOf(muscle);
         object.addProperty("muscle", send_muscle);  //근육량
         double send_muscle_standard_min = Double.valueOf(muscleMin);
