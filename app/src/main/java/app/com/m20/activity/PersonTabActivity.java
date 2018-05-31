@@ -236,9 +236,9 @@ public class PersonTabActivity extends AppCompatActivity {
         digeMeta = Integer.parseInt(strdigestmeta); // 소화대사량
         activiMeta = Integer.parseInt(stractivitymeta); // 활동대사량
         oneKcal = Integer.parseInt(strkcal); // 1일 권장 칼로리
-        Log.i(TAG_ACTIVITY, "hk oneKcal :"+oneKcal);
+        Log.i(TAG_ACTIVITY, "oneKcal :"+oneKcal);
         strOneKcal = currentpoint(strkcal);
-        Log.i(TAG_ACTIVITY, "hk strOneKcal :"+strOneKcal);
+        Log.i(TAG_ACTIVITY, "strOneKcal :"+strOneKcal);
     }
 
     public String currentpoint(String result){
@@ -338,12 +338,12 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&height=");
                 params.append(height);
 
-                Log.i(TAG_ACTIVITY, "hk weight :"+weight);
+                Log.i(TAG_ACTIVITY, "weight :"+weight);
                 params.append("&weight=" + weight); // 체중
-                Log.i(TAG_ACTIVITY, "hk weight :"+weight);
+                Log.i(TAG_ACTIVITY, "weight :"+weight);
                 params.append("&strweightIndex=" + strweightIndex); // 체중 그래프 그리기 위한 index
                 params.append("&excerGoalWeight=" + excerGoalWeight); // 운동목표
-                Log.i(TAG_ACTIVITY, "hk adjGoalWeight :"+adjGoalWeight);
+                Log.i(TAG_ACTIVITY, "adjGoalWeight :"+adjGoalWeight);
                 if(adjGoalWeight > 0 )
                     params.append("&adjGoalWeight=+" + adjGoalWeight); // 조절목표
                 else
@@ -354,7 +354,7 @@ public class PersonTabActivity extends AppCompatActivity {
 
                 params.append("&bodyFatPer=" + bodyFatPer); // 체지방률
                 params.append("&excerGoalBodyFat=" + excerGoalBodyFat);
-                Log.i(TAG_ACTIVITY, "hk adjGoalBodyFat :"+adjGoalBodyFat);
+                Log.i(TAG_ACTIVITY, "adjGoalBodyFat :"+adjGoalBodyFat);
                 if(adjGoalBodyFat > 0 )
                     params.append("&adjGoalBodyFat=+" + adjGoalBodyFat);
                 else
@@ -367,7 +367,7 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&musMass=" + musMass); // 근육량
                 params.append("&excerGoalMusMass=" + excerGoalMusMass);
 
-                Log.i(TAG_ACTIVITY, "hk adjGoalMusMass :"+adjGoalMusMass);
+                Log.i(TAG_ACTIVITY, "adjGoalMusMass :"+adjGoalMusMass);
                 if(adjGoalMusMass > 0 )
                     params.append("&adjGoalMusMass=+" + adjGoalMusMass);
                 else
@@ -376,13 +376,13 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&minMusMass=" + minMusMass );
                 params.append("&maxMusMass=" + maxMusMass );
                 params.append("&strgraphmuscleIndex=" + strgraphmuscleIndex); // 근육량 그래프 그리기 위한 index
-                Log.i(TAG_ACTIVITY, "hk:strgraphmuscleIndex = " + strgraphmuscleIndex);
+                Log.i(TAG_ACTIVITY, "strgraphmuscleIndex = " + strgraphmuscleIndex);
 
                 params.append("&bmi=" + bmi); // BMI
                 params.append("&strfBMI=" + strfBMI); // BMI
                 params.append("&strgrapfBMI=" + strgrapfBMI); // BMI
                 params.append("&excerGoalBmi=" + excerGoalBmi);
-                Log.i(TAG_ACTIVITY, "hk adjGoalBmi :"+adjGoalBmi);
+                Log.i(TAG_ACTIVITY, "adjGoalBmi :"+adjGoalBmi);
                 if(adjGoalBmi > 0 )
                     params.append("&adjGoalBmi=+" + adjGoalBmi);
                 else
@@ -391,7 +391,7 @@ public class PersonTabActivity extends AppCompatActivity {
                 params.append("&maxBmi=" + maxBmi );
 //
                 params.append("&oneKcal=" + strOneKcal); // 1일 권장
-                //Log.i(TAG_ACTIVITY, "hk oneKcal :"+oneKcal);
+                //Log.i(TAG_ACTIVITY, "oneKcal :"+oneKcal);
                 params.append("&basicMeta=" + basicMeta);  // 기초대사량
                 params.append("&digeMeta=" + digeMeta);   // 소화대사량
                 params.append("&activiMeta=" + activiMeta);  // 활동대사량

@@ -94,13 +94,13 @@ public class WeightDisplayActivity extends AppCompatActivity {
             weight = intent.getStringExtra("weight");
             height = intent.getStringExtra("height");
         }
-        Log.i(TAG_ACTIVITY, "hk weight : " + weight );
+        Log.i(TAG_ACTIVITY, "weight : " + weight );
 
         Matcher mat;
         Pattern script = Pattern.compile("(^0+)", Pattern.DOTALL);
         mat = script.matcher(weight);
         String tmpStr = mat.replaceAll("");
-        Log.i(TAG_ACTIVITY, "hk tmpStr : " + tmpStr );
+        Log.i(TAG_ACTIVITY, "tmpStr : " + tmpStr );
 
         String text = String.format(res.getString(R.string.weight_display), tmpStr);
 
