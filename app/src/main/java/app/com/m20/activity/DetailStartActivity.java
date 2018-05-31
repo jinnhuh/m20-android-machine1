@@ -1094,29 +1094,29 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
         Animation startAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.alpha);
 
-        btn_arsch_1.startAnimation(startAnimation);
-        btn_arsch_2.startAnimation(startAnimation);
+        btn_arsch_bright_1.startAnimation(startAnimation);
+        btn_arsch_bright_2.startAnimation(startAnimation);
 
-        btn_latt_1.startAnimation(startAnimation);
-        btn_latt_2.startAnimation(startAnimation);
+        btn_latt_bright_1.startAnimation(startAnimation);
+        btn_latt_bright_2.startAnimation(startAnimation);
 
-        btn_waist_1.startAnimation(startAnimation);
-        btn_waist_2.startAnimation(startAnimation);
+        btn_waist_bright_1.startAnimation(startAnimation);
+        btn_waist_bright_2.startAnimation(startAnimation);
 
-        btn_sideflank_1.startAnimation(startAnimation);
-        btn_sideflank_2.startAnimation(startAnimation);
+        btn_sideflank_bright_1.startAnimation(startAnimation);
+        btn_sideflank_bright_2.startAnimation(startAnimation);
 
-        btn_abdomen_1.startAnimation(startAnimation);
-        btn_abdomen_2.startAnimation(startAnimation);
+        btn_abdomen_bright_1.startAnimation(startAnimation);
+        btn_abdomen_bright_2.startAnimation(startAnimation);
 
-        btn_arm_1.startAnimation(startAnimation);
-        btn_arm_2.startAnimation(startAnimation);
+        btn_arm_bright_1.startAnimation(startAnimation);
+        btn_arm_bright_2.startAnimation(startAnimation);
 
-        btn_bein_1.startAnimation(startAnimation);
-        btn_bein_2.startAnimation(startAnimation);
+        btn_bein_bright_1.startAnimation(startAnimation);
+        btn_bein_bright_2.startAnimation(startAnimation);
 
-        btn_brust_1.startAnimation(startAnimation);
-        btn_brust_2.startAnimation(startAnimation);
+        btn_brust_bright_1.startAnimation(startAnimation);
+        btn_brust_bright_2.startAnimation(startAnimation);
     }
 
     private void valueTextDisplay() {  //설정값 display 만약 설정 안했으면 default value 20 display
@@ -2022,29 +2022,29 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void animationStop() {
-        btn_arsch_1.clearAnimation();
-        btn_arsch_2.clearAnimation();
+        btn_arsch_bright_1.clearAnimation();
+        btn_arsch_bright_2.clearAnimation();
 
-        btn_waist_1.clearAnimation();
-        btn_waist_2.clearAnimation();
+        btn_waist_bright_1.clearAnimation();
+        btn_waist_bright_2.clearAnimation();
 
-        btn_brust_1.clearAnimation();
-        btn_brust_2.clearAnimation();
+        btn_brust_bright_1.clearAnimation();
+        btn_brust_bright_2.clearAnimation();
 
-        btn_bein_1.clearAnimation();
-        btn_bein_2.clearAnimation();
+        btn_bein_bright_1.clearAnimation();
+        btn_bein_bright_2.clearAnimation();
 
-        btn_arm_1.clearAnimation();
-        btn_arm_2.clearAnimation();
+        btn_arm_bright_1.clearAnimation();
+        btn_arm_bright_2.clearAnimation();
 
-        btn_sideflank_1.clearAnimation();
-        btn_sideflank_2.clearAnimation();
+        btn_sideflank_bright_1.clearAnimation();
+        btn_sideflank_bright_2.clearAnimation();
 
-        btn_abdomen_1.clearAnimation();
-        btn_abdomen_2.clearAnimation();
+        btn_abdomen_bright_1.clearAnimation();
+        btn_abdomen_bright_2.clearAnimation();
 
-        btn_latt_1.clearAnimation();
-        btn_latt_2.clearAnimation();
+        btn_latt_bright_1.clearAnimation();
+        btn_latt_bright_2.clearAnimation();
 
         animationPartialAllStop();
     }

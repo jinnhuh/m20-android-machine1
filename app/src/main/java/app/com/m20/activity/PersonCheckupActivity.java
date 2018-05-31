@@ -269,7 +269,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
 //            public void handleMessage(Message msg) {
 //                name="남궁옥분아";
 //                age="28";
-//                gender="2";
+//                gender="0"; // 남:1, 여: 0
 //                weight="72.3";   // 빨강 없음
 //                //weight="72.4"; // 빨강
 //                height="176.0";
