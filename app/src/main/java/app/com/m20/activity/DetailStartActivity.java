@@ -1555,12 +1555,15 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                 setPadEnable(true);
                 Log.d(TAG_ACTIVITY, "R.id.btn_stop: mStatus: PAUSE");
                 mStatus = PAUSE;//상태를 멈춤으로 표시 일시정지와 동일하게 구현 해주라고 함.
+
                 popupDialog = new PopupDialog(this,
                         "[다이얼로그 제목]", // 제목
                         "다이얼로그 내용 표시하기", // 내용
                         leftListener, // 취소
                         rightListener); // 확인
-                popupDialog.show();
+                //popupDialog.show();
+                popupDialog.showImmersive(this);
+                //new ImmersiveDialogFragment().showImmersive(this);
                 break;
 
             case R.id.btn_minus:
