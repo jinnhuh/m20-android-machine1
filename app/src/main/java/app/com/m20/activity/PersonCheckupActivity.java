@@ -264,12 +264,12 @@ public class PersonCheckupActivity extends AppCompatActivity {
 
         // hkpark, for debugging
         // 3초후 자동 이동 소스 참조
-//
+
 //        Handler handler = new Handler() {
 //            public void handleMessage(Message msg) {
-//                name="hkpark";
+//                name="남궁옥분아";
 //                age="28";
-//                gender="남";
+//                gender="2";
 //                weight="72.3";   // 빨강 없음
 //                //weight="72.4"; // 빨강
 //                height="176.0";
@@ -351,7 +351,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("weight", weight);
         i.putExtra("height", height);
 
-        Log.i(TAG_ACTIVITY, "hk:weight: "+weight);
+        Log.i(TAG_ACTIVITY, "weight: "+weight);
 
         i.putExtra("impedance",impedance);
         i.putExtra("ffm", ffm);
@@ -373,7 +373,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("strweightIndex", strweightIndex);
         i.putExtra("strjudgmentValue", strjudgmentValue);
         i.putExtra("strweighttargetControl", strweighttargetControl);  //체중 조절목표
-        Log.i(TAG_ACTIVITY, "hk:strweighttargetControl: "+strweighttargetControl);
+        Log.i(TAG_ACTIVITY, "strweighttargetControl: "+strweighttargetControl);
         i.putExtra("strweighttargetExercise", strweighttargetExercise);  //체중 근육목표
 
         //체지방률 운동목표=체지방량-체지방 조절 목표
@@ -386,13 +386,13 @@ public class PersonCheckupActivity extends AppCompatActivity {
         float muscletargetExercise = strTofloat(muscle) + strTofloat(muscle_control);
         strmuscletargetExercise = String.format(Locale.US, "%.1f", muscletargetExercise);
         i.putExtra("strmuscletargetExercise", strmuscletargetExercise);  //근육 운동목표
-        Log.i(TAG_ACTIVITY, "hk:strmuscletargetExercise: "+strmuscletargetExercise);
+        Log.i(TAG_ACTIVITY, "strmuscletargetExercise: "+strmuscletargetExercise);
 
         //BMI
         i.putExtra("strfBMI", strfBMI);  //BMI
         i.putExtra("strstandardBMI", strstandardBMI);  //BMI 운동목표
         i.putExtra("strBMItargetControl", strBMItargetControl);  //BMI 조절목표
-        Log.i(TAG_ACTIVITY, "hk:strBMItargetControl: "+strBMItargetControl);
+        Log.i(TAG_ACTIVITY, "strBMItargetControl: "+strBMItargetControl);
 
         //1일 권장 칼로리
         i.putExtra("strbasemeta", strbasemeta);
@@ -400,8 +400,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
         i.putExtra("strdigestmeta", strdigestmeta);
         i.putExtra("strkcal", strkcal);
 
-        Log.i(TAG_ACTIVITY, "hk:strbasemeta: "+strbasemeta);
-        Log.i(TAG_ACTIVITY, "hk:strkcal: "+strkcal);
+        Log.i(TAG_ACTIVITY, "strbasemeta: "+strbasemeta);
+        Log.i(TAG_ACTIVITY, "strkcal: "+strkcal);
 
         //체지방 표준 범위 최대 최소
         if (gender.equals("1")) {
@@ -419,7 +419,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         resultexerciseRecommend =  exerciseRecommend(judgmentValue, judgmentbodyFatvalue, judgmentmusclevalue);
         i.putExtra("resultexerciseRecommend", resultexerciseRecommend);
         i.putExtra("strgraphmuscleIndex", strgraphmuscleIndex);
-        Log.i(TAG_ACTIVITY, "hk:strgraphmuscleIndex: "+strgraphmuscleIndex);
+        Log.i(TAG_ACTIVITY, "strgraphmuscleIndex: "+strgraphmuscleIndex);
         i.putExtra("strgraphbodyFatPervalue", strgraphbodyFatPervalue);
         i.putExtra("strgrapfBMI", strgrapfBMI);
 
@@ -458,8 +458,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
         editor.putString("Data_strstandardWeightMin",strstandardWeightMin ); //체중(min)
         editor.putString("Data_strstandardWeightMax",strstandardWeightMax ); //체중(max)
         editor.putString("Data_muscle",muscle ); //근육량
-        editor.putString("Data_musclemin",muscle ); //근육량(min) 어떤 값인지 몰라서 일단 근육량
-        editor.putString("Data_musclemax",muscle ); //근육량(max) 어떤 값인지 몰라서 일단 근육량
+        editor.putString("Data_musclemin","21.6" ); //근육량(min) 어떤 값인지 몰라서 일단 근육량
+        editor.putString("Data_musclemax","26.4" ); //근육량(max) 어떤 값인지 몰라서 일단 근육량
         editor.putString("Data_strbodyFatPervalue",strbodyFatPervalue ); //체지방률
         if (gender.equals("1")) {
             editor.putString("Data_strmanPerMin","12.0" );   //체지방률 (min)  어떤 값인지 몰라서 일단 체지방 (min)
@@ -475,7 +475,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
             editor.putString("Data_strmanMax",strmanMax );   //체지방 (max)
         }
         else {
-            editor.putString("Data_strwomanMax",strwomanMin );   //체지방 (min)
+            editor.putString("Data_strwomanMin",strwomanMin );   //체지방 (min)
             editor.putString("Data_strwomanMax",strwomanMax );   //체지방 (max)
         }
         editor.putString("Data_strfBMI",strfBMI );  //BMI
@@ -499,6 +499,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
     private void weightCal() {  //체중 tab PersonTabActivity로 넘겨야 할 값   strweightIndex, strjudgmentValue, strweighttargetControl, strweighttargetExercise
         float standardWeight, weightIndex, weighttargetExercise, weighttargetControl, graphweightIndex=0;
         float standardWeightMin, standardWeightMax =0;
+        float minWeightIndex = 90, maxWeightIndex = 110, limitWeightIndex=200;
 
         if (gender.equals("1"))  //표준 체중 구하는 공식 (남/여가 다르다)
             standardWeight = strTofloat(height) * strTofloat(height) * 22 / 10000 ;  //남자는 22
@@ -517,12 +518,23 @@ public class PersonCheckupActivity extends AppCompatActivity {
         resultweightIndex = String.format(Locale.US, "%.1f", weightIndex);  //판정 Table이 소수점 한자리이므로 소수점 한자리까지만 끈어서 넘긴다
         weightIndex = strTofloat(resultweightIndex);  //소수점 1자리까지 자른 string->float 로  그래프 그리는 값
         //체중그래프 그리는 공식
+        /*
         if (weightIndex <= 70)
             graphweightIndex = 0;
         else if (weightIndex <= 130 && weightIndex > 70)
             graphweightIndex = (weightIndex - 70) * (float) 1.6;
         else if (weightIndex > 130)
             graphweightIndex = 100;
+            */
+        if (weightIndex <= minWeightIndex)
+            graphweightIndex = weightIndex/minWeightIndex*(float)33.3 ;
+        else if (weightIndex <= maxWeightIndex && weightIndex > minWeightIndex)
+            graphweightIndex = ((weightIndex - minWeightIndex) / (maxWeightIndex-minWeightIndex))*(float)33.3 + (float) 33.3;
+        else if (weightIndex > maxWeightIndex)
+            graphweightIndex = ((weightIndex-maxWeightIndex) / (limitWeightIndex-maxWeightIndex))*(float)33.3 + (float) 66.6;
+        if(weightIndex> limitWeightIndex)
+            graphweightIndex = 100;
+
         //체중그래프 그리는 공식
         // 2018-05-08, M20 request adding some items into RI00004.
         //strweightIndex = floatToString(graphweightIndex);
@@ -530,7 +542,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         judgmentValue = judgmentTable(weightIndex);
         strjudgmentValue = intToString(judgmentValue);
         weighttargetControl = strTofloat(bodyfat_control) + strTofloat(muscle_control);  //조절목표
-        Log.i(TAG_ACTIVITY, "hk:weighttargetControl: "+weighttargetControl);
+        Log.i(TAG_ACTIVITY, "weighttargetControl: "+weighttargetControl);
         strweighttargetControl = String.format(Locale.US, "%.1f", weighttargetControl);
 
         weighttargetExercise = strTofloat(weight) + weighttargetControl;  //운동목표
@@ -548,69 +560,83 @@ public class PersonCheckupActivity extends AppCompatActivity {
     private int judgmentbodyFatTable (float bodyFatPervalue) {  //체지방 판정 Table
         int result = 0;
         float graphbodyFatPervalue = 0;
+        float minBodyFatPerMan = 12, maxBodyFatPerMan = 20, limitBodyFatPerMan =50;
+        float minBodyFatPerWom = 20, maxBodyFatPerWom = 28, limitBodyFatPerWom =55;
 
         if (gender.equals("1")) {  //남자
-            if (bodyFatPervalue >= 6.0 && bodyFatPervalue <= 11.9) {
-                graphbodyFatPervalue = (bodyFatPervalue - 6) * (float) 5.5;
-                strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+            if ( bodyFatPervalue <= minBodyFatPerMan) {
+                graphbodyFatPervalue = bodyFatPervalue/minBodyFatPerMan*(float)33.3 ;
                 result = 0;
             }
-            else if (bodyFatPervalue >= 12.0 && bodyFatPervalue <= 20.0) {
-                graphbodyFatPervalue = ((bodyFatPervalue - 12) * (float) 4.1) + (float) 33.3;
-                strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+            else if (bodyFatPervalue > minBodyFatPerMan && bodyFatPervalue <= maxBodyFatPerMan) {
+                graphbodyFatPervalue = ((bodyFatPervalue-minBodyFatPerMan)/(maxBodyFatPerMan-minBodyFatPerMan))*(float)33.3 + (float) 33.3;
                 result = 1;
             }
-            else if (bodyFatPervalue >= 20.1 && bodyFatPervalue <= 45.0) {
-                graphbodyFatPervalue = (bodyFatPervalue - 20) + (float) 66.6;
-                strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+            else if (bodyFatPervalue >= maxBodyFatPerMan) {
+                graphbodyFatPervalue = ((bodyFatPervalue-maxBodyFatPerMan)/(limitBodyFatPerMan-maxBodyFatPerMan))*(float)33.3 + (float) 66.6;
                 result = 2;
             }
+            if(bodyFatPervalue > limitBodyFatPerMan )
+                graphbodyFatPervalue = 100;
         }
         else {
-            if (bodyFatPervalue >= 10.0 && bodyFatPervalue <= 19.9) {
-                graphbodyFatPervalue = (bodyFatPervalue - 10) * (float) 3.1;
-                strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+            if (bodyFatPervalue <= minBodyFatPerWom) {
+                graphbodyFatPervalue = bodyFatPervalue/minBodyFatPerWom*(float)33.3 ;
                 result = 0;
             }
-            else if (bodyFatPervalue >= 20.0 && bodyFatPervalue <= 28.0) {
-                graphbodyFatPervalue = ((bodyFatPervalue - 20) * (float) 4.1) + (float) 33.3;
-                strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+            else if (bodyFatPervalue > minBodyFatPerWom && bodyFatPervalue <= maxBodyFatPerWom) {
+                graphbodyFatPervalue = ((bodyFatPervalue - minBodyFatPerWom) / (maxBodyFatPerWom-minBodyFatPerWom))*(float)33.3 + (float) 33.3;
                 result = 1;
             }
-            else if (bodyFatPervalue >= 28.1 && bodyFatPervalue <= 55.0) {
-                graphbodyFatPervalue = ((bodyFatPervalue - 28) * (float) 1.2) + (float) 66.6;
-                strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+            else if (bodyFatPervalue >= maxBodyFatPerWom ) {
+                graphbodyFatPervalue = ((bodyFatPervalue - maxBodyFatPerWom) / (limitBodyFatPerWom-maxBodyFatPerWom))*(float)33.3 + (float) 66.6;
                 result = 2;
             }
+            if(bodyFatPervalue > limitBodyFatPerWom )
+                graphbodyFatPervalue = 100;
         }
+        strgraphbodyFatPervalue = String.format(Locale.US, "%.1f", graphbodyFatPervalue);
+
         return result;
     }
 
     private int judgmentmuscleTable (float standardWeight) {  //근육량 판정 Table 함수
         int result;
         float standardMuscle, muscleindex, graphmuscleIndex = 0;
+        float minMuscleIndex = 90, maxMuscleIndex = 110, limitMuscleIndex = 200;
 
         if (gender.equals("1"))  //표준 근육량 구하는 공식 (남/여가 다르다)
             standardMuscle = standardWeight * (float) 0.85 * (float) 0.559;
         else
-            standardMuscle = standardWeight * (float) 0.77 * (float) 0.549;
+            standardMuscle = standardWeight * (float) 0.77 * (float) 0.545;
         muscleindex = (strTofloat(muscle) / standardMuscle) * 100;  //근육 index
         strMuscleIndex = String.format(Locale.US, "%.1f", muscleindex);
 
-        Log.i(TAG_ACTIVITY, "hk:standardMuscle: "+standardMuscle);
-        Log.i(TAG_ACTIVITY, "hk:muscleindex: "+muscleindex);
+        Log.i(TAG_ACTIVITY, "standardMuscle: "+standardMuscle);
+        Log.i(TAG_ACTIVITY, "muscleindex: "+muscleindex);
 
         //근육그래프 그리는 공식
+        /*
         if (muscleindex <= 70)
             graphmuscleIndex = 0;
         else if (muscleindex <= 130 && muscleindex > 70)
             graphmuscleIndex = (muscleindex - 70) * (float) 1.6;
         else if (muscleindex > 130)
             graphmuscleIndex = 100;
+            */
+        if (muscleindex <= minMuscleIndex)
+            graphmuscleIndex = muscleindex/minMuscleIndex*(float)33.3;
+        else if (muscleindex <= maxMuscleIndex && muscleindex > minMuscleIndex)
+            graphmuscleIndex = ((muscleindex-minMuscleIndex)/(maxMuscleIndex-minMuscleIndex))*(float)33.3 + (float) 33.3;
+        else if (muscleindex > maxMuscleIndex)
+            graphmuscleIndex = ((muscleindex-maxMuscleIndex) / (limitMuscleIndex-maxMuscleIndex))*(float)33.3 + (float) 66.6;
+        if(muscleindex> limitMuscleIndex)
+            graphmuscleIndex = 100;
+
         strgraphmuscleIndex = String.format(Locale.US, "%.1f", graphmuscleIndex);
         //근육그래프 그리는 공식
 
-        Log.i(TAG_ACTIVITY, "hk:strgraphmuscleIndex: "+strgraphmuscleIndex);
+        Log.i(TAG_ACTIVITY, "strgraphmuscleIndex: "+strgraphmuscleIndex);
 
         if (muscleindex <= 89.9)  //판정 table
             result = 0;
@@ -623,7 +649,9 @@ public class PersonCheckupActivity extends AppCompatActivity {
 
     private void BMICal() {  //BMI 계산하는 함수  BMI tab PersonTabActivity로 넘겨야 할 값  strstandardBMI,
         float fBMI, standardBMI, standardWeightforBMI, BMItargetControl, grapfBMI = 0;
+        float maxBMI = (float)25, minBMI = (float)18.5, limitBMI = 50;//minBMI + maxBMI; // 43.3
         fBMI =  strTofloat(weight) / (strTofloat(height) * strTofloat(height)) *10000;
+        /*
         if (fBMI <= 18) {
             grapfBMI = (fBMI - 15) * (float) 11.3;
         }
@@ -632,6 +660,18 @@ public class PersonCheckupActivity extends AppCompatActivity {
         }
         else if (fBMI > 25) {
             grapfBMI = ((fBMI - 25) * (float) 6.6) + (float) 66.6;
+        }*/
+        if (fBMI <= minBMI) {
+            grapfBMI = fBMI/minBMI*(float)33.3 ;
+        }
+        else if (fBMI > minBMI && fBMI <= maxBMI) {
+            grapfBMI = ((fBMI - minBMI) / (maxBMI-minBMI))*(float)33.3 + (float) 33.3;
+        }
+        else if (fBMI > maxBMI) {
+            grapfBMI = ((fBMI - maxBMI) / (limitBMI-maxBMI))*(float)33.3 + (float) 66.6;
+        }
+        if(fBMI > limitBMI){ // if fBMI > 43.3
+            grapfBMI = 100;
         }
         strgrapfBMI = String.format(Locale.US, "%.1f", grapfBMI);  //그래프 그리는 값
         strfBMI = String.format(Locale.US, "%.1f", fBMI);  //BMI
@@ -644,7 +684,7 @@ public class PersonCheckupActivity extends AppCompatActivity {
         strstandardBMI = String.format(Locale.US, "%.1f", standardBMI); //BMI 운동 목표
         BMItargetControl = standardBMI - fBMI;  //BMI 조절 목표
         strBMItargetControl = String.format(Locale.US, "%.1f", BMItargetControl);
-        Log.i(TAG_ACTIVITY, "hk:strBMItargetControl: "+strBMItargetControl);
+        Log.i(TAG_ACTIVITY, "strBMItargetControl: "+strBMItargetControl);
         Log.d(TAG_ACTIVITY, String.format(Locale.US, "strstandardBMI: %s, strBMItargetControl: %s.", strstandardBMI, strBMItargetControl));
     }
 
@@ -652,21 +692,21 @@ public class PersonCheckupActivity extends AppCompatActivity {
         float basemeta, activitymeta, digestmeta, kcal;
         basemeta = strTofloat(ffm) * (float) 21.5 + 370;   //기초대사량
         strbasemeta = String.format(Locale.US, "%.1f", basemeta);
-        Log.i(TAG_ACTIVITY, "hk:strbasemeta: "+strbasemeta);
+        Log.i(TAG_ACTIVITY, "strbasemeta: "+strbasemeta);
         strbasemeta = String.format(Locale.US, "%d", (int)basemeta);
         // 2018-05-08, M20 request handling activity_constant into RI00003, Start
         // activitymeta = basemeta * activity_constant;
         float ac = (float)getActivityConstant();
-        Log.i(TAG_ACTIVITY, "hk:activity_constant : " + activity_constant + " float ac = " + ac);
+        Log.i(TAG_ACTIVITY, "activity_constant : " + activity_constant + " float ac = " + ac);
         activitymeta = basemeta * ac;
         //activitymeta = basemeta * (float) 0.375;  //활동대사량 (0.375는 활동상수로 원래는 서버에서 내려오는 값이나 현재 안내려 와서 0.375로 박아둔다)
         // 2018-05-08, M20 request handling activity_constant into RI00003, End
         stractivitymeta = String.format(Locale.US, "%.1f", activitymeta);
-        Log.i(TAG_ACTIVITY, "hk:stractivitymeta: "+stractivitymeta);
+        Log.i(TAG_ACTIVITY, "stractivitymeta: "+stractivitymeta);
         stractivitymeta = String.format(Locale.US, "%d", (int)activitymeta);
         digestmeta = (basemeta + activitymeta) / (float) 0.9 * (float) 0.1;  //소화 대사량
         strdigestmeta = String.format(Locale.US, "%.1f", digestmeta);
-        Log.i(TAG_ACTIVITY, "hk:strdigestmeta: "+strdigestmeta);
+        Log.i(TAG_ACTIVITY, "strdigestmeta: "+strdigestmeta);
         strdigestmeta = String.format(Locale.US, "%d", (int)digestmeta);
         kcal = basemeta + activitymeta + digestmeta;
 

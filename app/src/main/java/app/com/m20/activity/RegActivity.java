@@ -853,7 +853,7 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                             if (user_gender.equals("M"))
                                 user_gender = "1";
                             else
-                                user_gender = "2";
+                                user_gender = "0";
                             genderdataSaved();
                             user_weight = user_data_Datajobject.getAsJsonObject().get("weight").getAsString();
                             weightdataSaved();

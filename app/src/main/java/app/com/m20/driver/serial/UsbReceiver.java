@@ -528,21 +528,27 @@ public class UsbReceiver extends BroadcastReceiver {
 								}
 								else if (key.equals("B28")) { // 체지방 응답
 									String data1 = array[1]; // 임피던스
-									String data2 = array[2]; // FFM
-									String data3 = array[3]; // 체지방량
-									String data4 = array[4]; // 근육량
-									String data5 = array[5]; // 체수분량
-									String data6 = array[6]; // 체수분량_최소
-									String data7 = array[7]; // 체수분량_최대
-									String data8 = array[8]; // 단백질량
-									String data9 = array[9]; // 단백질량_최소
-									String data10 = array[10]; // 단백질량_최대
-									String data11 = array[11]; // 무기질량
-									String data12 = array[12]; // 무기질_최소
-									String data13 = array[13]; // 무기질_최대
-									String data14 = array[14]; // 체지방 조절량 (음수, 양수)
-									String data15 = array[15]; // 근육 조절량 (음수, 양수)
-									((PersonCheckupActivity)mActivity).bodyFatreceived(data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13,data14,data15);
+									//05-29 14:17:49.329 I 14920    14920    M20_UsbReceiver:                       Receive B28;err2;26.3;N
+									if(data1.compareTo("err2")==0){
+										Log.e(TAG, "Received error from Generator");
+										((PersonCheckupActivity)mActivity).bodyFatreceived("0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0","0.0");
+									}else{
+										String data2 = array[2]; // FFM
+										String data3 = array[3]; // 체지방량
+										String data4 = array[4]; // 근육량
+										String data5 = array[5]; // 체수분량
+										String data6 = array[6]; // 체수분량_최소
+										String data7 = array[7]; // 체수분량_최대
+										String data8 = array[8]; // 단백질량
+										String data9 = array[9]; // 단백질량_최소
+										String data10 = array[10]; // 단백질량_최대
+										String data11 = array[11]; // 무기질량
+										String data12 = array[12]; // 무기질_최소
+										String data13 = array[13]; // 무기질_최대
+										String data14 = array[14]; // 체지방 조절량 (음수, 양수)
+										String data15 = array[15]; // 근육 조절량 (음수, 양수)
+										((PersonCheckupActivity)mActivity).bodyFatreceived(data1,data2,data3,data4,data5,data6,data7,data8,data9,data10,data11,data12,data13,data14,data15);
+									}
 								}
 								else if (key.equals("S11")) {
 									// 기기 ID & Password
