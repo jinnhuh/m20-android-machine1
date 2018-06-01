@@ -410,28 +410,9 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private String make_booking_result() {
-        String result = "";
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append("access_key=3w7z!df2mt5nrh68k43b)gfgs4ra)6kst()ae3jbp!znihy77!");
-        stringBuilder.append("&secret_access_key=()wz!t8fmtg!tq7e9y(!25bxwr!b7)cs24gd3!s9m(k6)ji32s");
-        //stringBuilder.append("&machine_unit_id=" + "11");
-        stringBuilder.append("&machine_unit_id=");
-        stringBuilder.append(Integer.parseInt(getIDSaved()));
-        //stringBuilder.append("&password=" + ")8]25[41[(_30.!277a23a705e9addeefa14d475eb8e36c066");
-        stringBuilder.append("&password=");
-        stringBuilder.append(getPWSaved());
-        //stringBuilder.append("&booking_id=" + "11");
-        stringBuilder.append("&booking_id=");
-        stringBuilder.append(bookingID);
-
-        // body_composition_data 추가
-        stringBuilder.append("&body_composition_data=");
-
-        Gson gson = new Gson();
+    private JsonObject make_body_composition_data(){
         JsonObject object = new JsonObject();
+
         // 2018-05-08, M20 request adding some items into RI00004. Start
         object.addProperty("weight_index", Double.valueOf(weight_index));
         object.addProperty("weight_goal_target", Double.valueOf(weight_goal_target));
@@ -456,10 +437,8 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         object.addProperty("protein_status", Integer.parseInt(protein_status));
         object.addProperty("minerals_status", Integer.parseInt(minerals_status));
         // 2018-05-08, M20 request adding some items into RI00004. End
-        int send_age = 0;
-        if (age != null) {
-            send_age = Integer.parseInt(age);
-        }
+
+        int send_age = Integer.parseInt(age);
         object.addProperty("body_age", send_age);  //나이
         double send_height = Double.valueOf(height);
         object.addProperty("height", send_height);   //키
@@ -526,42 +505,109 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         double send_minerals_standard_max = Double.valueOf(mineral_max);
         object.addProperty("minerals_standard_max", send_minerals_standard_max);  //무기질 max
 
-        String json_body_composition_data = gson.toJson(object);
+//        object.addProperty("weight", 80.0);    //체중
+//        object.addProperty("weight_standard_min", 60.0);  //체중 min 이거는 무슨값?
+//        object.addProperty("weight_standard_max", 90.0);  //체중 max OK  이거는 무슨값?
+//        object.addProperty("muscle", 40.0);  //근육량
+//        object.addProperty("muscle_standard_min", 30.0);  //근육량 min
+//        object.addProperty("muscle_standard_max", 50.0);  //근육량 max
+//        object.addProperty("body_fat_percent", 20.0);  //체지방률
+//        if (gender.equals("1")) {
+//            object.addProperty("body_fat_percent_standard_min", 30.0);  //체지방률  min
+//            object.addProperty("body_fat_percent_standard_max", 40.0);  //체지방률  max
+//        }
+//        else {
+//            object.addProperty("body_fat_percent_standard_min", 10.0);  //체지방률  min
+//            object.addProperty("body_fat_percent_standard_max", 20.0);
+//        }
+//        object.addProperty("body_fat", 17.0);   //체지방
+//        if (gender.equals("1")) {
+//            Log.i("M20", "J.Y.T EndActivity 남 ");
+//            object.addProperty("body_fat_standard_min", 17.0);  //체지방 min
+//            object.addProperty("body_fat_standard_max", 17.0);  //체지방 max
+//        }
+//        else {
+//            Log.i("M20", "J.Y.T EndActivity 여 ");
+//            object.addProperty("body_fat_standard_min", 17.0);  //체지방 min
+//            object.addProperty("body_fat_standard_max", 17.0);  //체지방 max
+//        }
+//        object.addProperty("body_mass", 17.0);  //BMI
+//        object.addProperty("body_mass_standard_min", 17.0);  //BMI  min
+//        object.addProperty("body_mass_standard_max", 17.0);  //BMI max
+//        object.addProperty("body_water", 17.0);  //체수분
+//        object.addProperty("body_water_standard_min", 17.0);  //체수분 min
+//        object.addProperty("body_water_standard_max", 17.0);  //체수분 max
+//        object.addProperty("protein", 17.0);  //단백질
+//        object.addProperty("protein_standard_min", 17.0);  //단백질 min
+//        object.addProperty("protein_standard_max", 17.0);  //단백질 max
+//        object.addProperty("minerals", 17.0);  //무기질
+//        object.addProperty("minerals_standard_min", 17.0);  //무기질 min
+//        object.addProperty("minerals_standard_max", 17.0);  //무기질 max
 
-        stringBuilder.append(json_body_composition_data);
+        return object;
+    }
+	
+    private String make_booking_result() {
+        String result = "";
 
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("access_key=3w7z!df2mt5nrh68k43b)gfgs4ra)6kst()ae3jbp!znihy77!");
+        stringBuilder.append("&secret_access_key=()wz!t8fmtg!tq7e9y(!25bxwr!b7)cs24gd3!s9m(k6)ji32s");
+        //stringBuilder.append("&machine_unit_id=" + "11");
+        stringBuilder.append("&machine_unit_id=");
+        stringBuilder.append(Integer.parseInt(getIDSaved()));
+        //stringBuilder.append("&password=" + ")8]25[41[(_30.!277a23a705e9addeefa14d475eb8e36c066");
+        stringBuilder.append("&password=");
+        stringBuilder.append(getPWSaved());
+        //stringBuilder.append("&booking_id=" + "11");
+        stringBuilder.append("&booking_id=");
+        stringBuilder.append(bookingID);
 
-        // body_composition_details_list 추가
-        stringBuilder.append("&body_composition_details_list=");
+        Gson gson = new Gson();
+        // body_composition_data 추가
+        stringBuilder.append("&body_composition_data=");
 
-        Body_composition_details[]  body_composition_details;
-        body_composition_details = new Body_composition_details[8];
+        if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
 
-        body_part_number_list number_list = new body_part_number_list();
+            JsonObject object = make_body_composition_data();
+            String json_body_composition_data = gson.toJson(object);
 
-        String json_body_composition_details_list;
+            stringBuilder.append(json_body_composition_data);
+        }
 
         try {
             int temp_val = 0;
 
-            for(int i=0;i<body_composition_details.length;i++)  //이거는 사용 안함
-            {
-                temp_val++;
-                number_list.body_part_number_id = 1;
-                number_list.value = 1.0;
+            // body_composition_details_list 추가
+            stringBuilder.append("&body_composition_details_list=");
 
-                body_composition_details[i] = new Body_composition_details();
-                body_composition_details[i].body_part_id = temp_val;
+            if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
 
-                body_composition_details[i].body_part_number_list = new ArrayList<>();
+                Body_composition_details[] body_composition_details;
+                body_composition_details = new Body_composition_details[8];
 
-                // check : 여기는 동적으로 배열로 처리해주어야 함 - 일단 하나만 저장하도록 처리
-                body_composition_details[i].body_part_number_list.add(0,number_list);
+                body_part_number_list number_list = new body_part_number_list();
+
+                String json_body_composition_details_list;
+
+                for (int i = 0; i < body_composition_details.length; i++)  //이거는 사용 안함
+                {
+                    temp_val++;
+                    number_list.body_part_number_id = 1;
+                    number_list.value = 1.0;
+
+                    body_composition_details[i] = new Body_composition_details();
+                    body_composition_details[i].body_part_id = temp_val;
+
+                    body_composition_details[i].body_part_number_list = new ArrayList<>();
+
+                    // check : 여기는 동적으로 배열로 처리해주어야 함 - 일단 하나만 저장하도록 처리
+                    body_composition_details[i].body_part_number_list.add(0, number_list);
+                }
+
+                json_body_composition_details_list = gson.toJson(body_composition_details);
+                stringBuilder.append(json_body_composition_details_list);
             }
-
-            json_body_composition_details_list = gson.toJson(body_composition_details);
-            stringBuilder.append(json_body_composition_details_list);
-
 
             // machine_program_list 추가
             stringBuilder.append("&machine_program_list=");
@@ -571,7 +617,6 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
             //Machine_strength_list strength_list = new Machine_strength_list();
 
 //            int temp_val1 = 0;
-
             for(int i=0;i<machine_program_list.length;i++)
             {
 //                temp_val1++;
@@ -666,7 +711,6 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
                     });
 
 //                    HttpURLConnection connection = httpsURLConnection;
-
                     httpsURLConnection.setRequestMethod("POST");
                     httpsURLConnection.setDoInput(true);
                     httpsURLConnection.setDoOutput(true);
@@ -687,11 +731,11 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
                     StringBuilder responseStringBuilder = new StringBuilder();
                     if (httpsURLConnection.getResponseCode() == HttpURLConnection.HTTP_OK){
                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
+                        String stringLine;
                         for (;;) {
-                            String stringLine = bufferedReader.readLine();
+                            stringLine = bufferedReader.readLine();
                             if (stringLine == null)
                                 break;
-
                             responseStringBuilder.append(stringLine);
                             responseStringBuilder.append('\n');
                         }

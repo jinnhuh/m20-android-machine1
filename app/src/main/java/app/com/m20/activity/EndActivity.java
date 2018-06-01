@@ -129,8 +129,9 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_end);
-        Utils.fullScreen(this);
         Log.i(TAG_ACTIVITY, "onCreate().");
+        Utils.fullScreen(this);
+
 
         readGenderDataSaved();
         readDate();
@@ -395,26 +396,7 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    private String make_booking_result() {
-        String result = "";
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("access_key=3w7z!df2mt5nrh68k43b)gfgs4ra)6kst()ae3jbp!znihy77!");
-        stringBuilder.append("&secret_access_key=()wz!t8fmtg!tq7e9y(!25bxwr!b7)cs24gd3!s9m(k6)ji32s");
-        //stringBuilder.append("&machine_unit_id=" + "11");
-        stringBuilder.append("&machine_unit_id=");
-        stringBuilder.append(Integer.parseInt(getIDSaved()));
-        //stringBuilder.append("&password=" + ")8]25[41[(_30.!277a23a705e9addeefa14d475eb8e36c066");
-        stringBuilder.append("&password=");
-        stringBuilder.append(getPWSaved());
-        //stringBuilder.append("&booking_id=" + "11");
-        stringBuilder.append("&booking_id=");
-        stringBuilder.append(bookingID);
-
-        // body_composition_data 추가
-        stringBuilder.append("&body_composition_data=");
-
-        Gson gson = new Gson();
+    private JsonObject make_body_composition_data(){
         JsonObject object = new JsonObject();
 
         // 2018-05-08, M20 request adding some items into RI00004. Start
@@ -548,41 +530,70 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
 //        object.addProperty("minerals_standard_min", 17.0);  //무기질 min
 //        object.addProperty("minerals_standard_max", 17.0);  //무기질 max
 
-        String json_body_composition_data = gson.toJson(object);
+        return object;
+    }
+	
+    private String make_booking_result() {
+        String result = "";
 
-        stringBuilder.append(json_body_composition_data);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("access_key=3w7z!df2mt5nrh68k43b)gfgs4ra)6kst()ae3jbp!znihy77!");
+        stringBuilder.append("&secret_access_key=()wz!t8fmtg!tq7e9y(!25bxwr!b7)cs24gd3!s9m(k6)ji32s");
+        //stringBuilder.append("&machine_unit_id=" + "11");
+        stringBuilder.append("&machine_unit_id=");
+        stringBuilder.append(Integer.parseInt(getIDSaved()));
+        //stringBuilder.append("&password=" + ")8]25[41[(_30.!277a23a705e9addeefa14d475eb8e36c066");
+        stringBuilder.append("&password=");
+        stringBuilder.append(getPWSaved());
+        //stringBuilder.append("&booking_id=" + "11");
+        stringBuilder.append("&booking_id=");
+        stringBuilder.append(bookingID);
 
+        Gson gson = new Gson();
+        // body_composition_data 추가
+        stringBuilder.append("&body_composition_data=");
 
-        // body_composition_details_list 추가
-        stringBuilder.append("&body_composition_details_list=");
+        if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
 
-        Body_composition_details[]  body_composition_details;
-        body_composition_details = new Body_composition_details[8];
+            JsonObject object = make_body_composition_data();
+            String json_body_composition_data = gson.toJson(object);
 
-        body_part_number_list number_list = new body_part_number_list();
-
-        String json_body_composition_details_list;
+            stringBuilder.append(json_body_composition_data);
+        }
 
         try {
             int temp_val = 0;
 
-            for(int i=0;i<body_composition_details.length;i++)  //이거는 사용 안함
-            {
-                temp_val++;
-                number_list.body_part_number_id = 1;
-                number_list.value = 1.0;
+            // body_composition_details_list 추가
+            stringBuilder.append("&body_composition_details_list=");
 
-                body_composition_details[i] = new Body_composition_details();
-                body_composition_details[i].body_part_id = temp_val;
+            if ((getCountSaved()) == 1 || (getCountSaved() % 5 == 0)) {  //체지방 측정했을 경우에만 저장
 
-                body_composition_details[i].body_part_number_list = new ArrayList<>();
+                Body_composition_details[] body_composition_details;
+                body_composition_details = new Body_composition_details[8];
 
-                // check : 여기는 동적으로 배열로 처리해주어야 함 - 일단 하나만 저장하도록 처리
-                body_composition_details[i].body_part_number_list.add(0,number_list);
+                body_part_number_list number_list = new body_part_number_list();
+
+                String json_body_composition_details_list;
+
+                for (int i = 0; i < body_composition_details.length; i++)  //이거는 사용 안함
+                {
+                    temp_val++;
+                    number_list.body_part_number_id = 1;
+                    number_list.value = 1.0;
+
+                    body_composition_details[i] = new Body_composition_details();
+                    body_composition_details[i].body_part_id = temp_val;
+
+                    body_composition_details[i].body_part_number_list = new ArrayList<>();
+
+                    // check : 여기는 동적으로 배열로 처리해주어야 함 - 일단 하나만 저장하도록 처리
+                    body_composition_details[i].body_part_number_list.add(0, number_list);
+                }
+
+                json_body_composition_details_list = gson.toJson(body_composition_details);
+                stringBuilder.append(json_body_composition_details_list);
             }
-
-            json_body_composition_details_list = gson.toJson(body_composition_details);
-            stringBuilder.append(json_body_composition_details_list);
 
             // machine_program_list 추가
             stringBuilder.append("&machine_program_list=");
@@ -604,7 +615,6 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
                 machine_program_list[i].used_time = getstartTimeSaved();
                 machine_program_list[i].machine_strength_list = new ArrayList<>();
                 for (int k = 0; k < 8; k++) {
-                    //machine_program_list[i].machine_strength_list = new ArrayList<Machine_strength_list>();
                     Machine_strength_list strength_list = new Machine_strength_list();
 
                     // check : 여기는 동적으로 배열로 처리해주어야 함 - 일단 하나만 저장하도록 처리
@@ -723,7 +733,7 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
                     httpsURLConnection.disconnect();
 
                     String res_json = responseStringBuilder.toString();
-                    Log.d(TAG_ACTIVITY, "res_json: " + res_json);
+                    Log.i(TAG_ACTIVITY, "res_json: " + res_json);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
