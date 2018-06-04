@@ -1,6 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
+import java.text.SimpleDateFormat
+import java.util.regex.Pattern
+
+ext{
+    mNextVersionName = getCheckedOutGitCommitHash() + "." + buildTime()
+}
+
 android {
     compileSdkVersion 26
     useLibrary  'org.apache.http.legacy'
@@ -8,8 +15,9 @@ android {
         applicationId "app.com.m20"
         minSdkVersion 22
         targetSdkVersion 23
-        versionCode 2
-        versionName "intro.0"
+        //versionCode 2
+        //versionName "intro.0"
+        //archivesBaseName = "m20_" + project.ext.mNextVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,17 +36,12 @@ android {
     }
 }
 
-task signing(){
-    String app = rootProject.projectDir
-    println "rootProject absolute path =" + app
-//    commandLine 'java -jar signapk.jar platform.x509.pem platform.pk8 app-release-unsigned.apk app-release-signed.apk'
-//    cp ../../app/build/outputs/apk/release/app-release-unsigned.apk .
-//            java -jar signapk.jar platform.x509.pem platform.pk8 app-release-unsigned.apk app-release-signed.apk
-//    ~/android-studio/jre/bin/jarsigner -verify -verbose -certs app-release-signed.apk
-
+task signing(type: Exec){
+    //commandLine '../apk/key/signing.sh'
+    commandLine 'java',  '-jar', '../apk/key/'+'signapk.jar', '../apk/key/'+'platform.x509.pem', '../apk/key/'+'platform.pk8', '../apk/key/'+'app-release-unsigned.apk', '../apk/key/'+'app-release-signed.apk'
 }
 
-//build.dependsOn signing
+build.dependsOn signing
 
 dependencies {
 // 180404 SCHYUN,    compile 'com.jakewharton:butterknife:8.8.1'
@@ -55,4 +58,56 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 // 180404 SCHYUN,    compile 'com.google.code.gson:gson:2.8.0'
     implementation 'com.google.code.gson:gson:2.8.0'
+}
+
+def getCheckedOutGitCommitHash() {
+    'git rev-parse --verify --short HEAD'.execute().text.trim()
+}
+
+def buildTime() {
+    def df = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'") // you can change it
+    df.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"))
+    return df.format(new Date())
+}
+
+task('increaseVersionCode') << {
+    def manifestFile = file("src/main/AndroidManifest.xml")
+    def pattern = Pattern.compile("versionCode=\"(\\d+)\"")
+    def manifestText = manifestFile.getText()
+    def matcher = pattern.matcher(manifestText)
+    matcher.find()
+    def versionCode = Integer.parseInt(matcher.group(1))
+    def manifestContent = matcher.replaceAll("versionCode=\"" + ++versionCode + "\"")
+    manifestFile.write(manifestContent)
+}
+
+task('incrementVersionName') << {
+    def manifestFile = file("src/main/AndroidManifest.xml")
+    def patternVersionNumber = Pattern.compile("versionName=\"(\\d+)\\.(\\d+)\\.(\\d+)\\.(\\d+)\"")
+    def manifestText = manifestFile.getText()
+    def matcherVersionNumber = patternVersionNumber.matcher(manifestText)
+    matcherVersionNumber.find()
+    def majorVersion = Integer.parseInt(matcherVersionNumber.group(1))
+    def minorVersion = Integer.parseInt(matcherVersionNumber.group(2))
+    def pointVersion = Integer.parseInt(matcherVersionNumber.group(3))
+    def buildVersion = Integer.parseInt(matcherVersionNumber.group(4))
+    def mNextVersionName = majorVersion + "." + minorVersion + "." + pointVersion + "." + (buildVersion + 1)
+    def manifestContent = matcherVersionNumber.replaceAll("versionName=\"" + mNextVersionName + "\"")
+    manifestFile.write(manifestContent)
+}
+
+task('changeVersionName') << {
+    def manifestFile = file("src/main/AndroidManifest.xml")
+    def patternVersionNumber = Pattern.compile("versionName=\"(\\w+)\\.(\\w+)\"")
+    def manifestText = manifestFile.getText()
+    def matcherVersionNumber = patternVersionNumber.matcher(manifestText)
+    def manifestContent = matcherVersionNumber.replaceAll("versionName=\"" + project.ext.mNextVersionName + "\"")
+    manifestFile.write(manifestContent)
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig' || task.name == 'build') {
+        task.dependsOn 'increaseVersionCode'
+        task.dependsOn 'changeVersionName'
+    }
 }

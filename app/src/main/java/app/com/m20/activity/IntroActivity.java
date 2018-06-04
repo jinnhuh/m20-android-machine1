@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,6 +59,20 @@ public class IntroActivity extends AppCompatActivity {
         Utils.fullScreen(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
         Log.i(TAG_ACTIVITY, "onCreate().");
+
+        // Print version info
+        PackageInfo pInfo = null;
+        try {
+            pInfo = getPackageManager().getPackageInfo(
+                    this.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        int versionCode = pInfo.versionCode;
+        String versionName = pInfo.versionName;
+
+        Log.e(TAG_ACTIVITY, "VersionCode:"+Integer.toString(versionCode));
+        Log.e(TAG_ACTIVITY, "VersionName:"+versionName);
 
         init();
 
