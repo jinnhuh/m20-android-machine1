@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import app.com.m20.R;
+import app.com.m20.driver.serial.FTDriver;
 import app.com.m20.driver.serial.UsbReceiver;
 import app.com.m20.utils.Utils;
 
