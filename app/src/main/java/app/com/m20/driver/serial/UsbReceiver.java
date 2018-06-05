@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import app.com.m20.activity.DetailStartActivity;
 import app.com.m20.activity.IntroActivity;
@@ -41,6 +43,9 @@ public class UsbReceiver extends BroadcastReceiver {
 
 	private boolean mStop = false;
 	private boolean mRunningMainLoop = false;
+
+	private Timer mUARTtimer= null;
+	private TimerTask mUARTimerTask = null;
 
 	// Default settings
 //	private int mTextFontSize       = 12;
@@ -146,6 +151,35 @@ public class UsbReceiver extends BroadcastReceiver {
 		detachedUi();
 		mStop = true;
 		mSerial.end();
+
+		stopUARTCheckMsg();
+	}
+
+	public void startUARTCheckMsg(){
+		Log.i(TAG, "startUARTCheckMsg()");
+
+		mUARTtimer = new Timer(true);
+		mUARTimerTask = new TimerTask() {
+			@Override
+			public void run() {
+				Log.v("M20_Utils","타이머 작동중 ");
+				writeDataToSerial("S98;N"); // UART 연결 확인 요청
+			}
+			@Override
+			public boolean cancel() {
+				Log.v("","타이머 종료");
+				return super.cancel();
+			}
+		};
+		mUARTtimer.schedule(mUARTimerTask, 1100, 5000);
+	}
+
+	public void stopUARTCheckMsg(){
+		Log.i(TAG, "stopUARTCheckMsg()");
+		if(mUARTimerTask != null) {
+			mUARTimerTask.cancel();
+			mUARTimerTask = null;
+		}
 	}
 
 	public void writeDataToSerial(String strWrite) {
@@ -209,6 +243,8 @@ public class UsbReceiver extends BroadcastReceiver {
 			Log.i(TAG, "start mainloop");
 		}
 		new Thread(mLoop).start();
+
+		startUARTCheckMsg();
 	}
 
 	private Runnable mLoop = new Runnable() {
@@ -562,6 +598,11 @@ public class UsbReceiver extends BroadcastReceiver {
 									// Connector 이상 유무
 									String Connector_Check = array[1];
 									((IntroActivity) mActivity).setConnectCheck(Connector_Check);
+								}
+								else if (key.equals("S98")) {
+									// UART 연결 확인 결과
+									String UART_Check = array[1];
+									Log.i(TAG, "S98 received( " + UART_Check + " )" );
 								}
 								else if (key.equals("C60")) {
 									// 운동 시작 후 리모컨으로 전체 강도를 바꿀 수 있다

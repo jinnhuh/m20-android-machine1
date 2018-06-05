@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
 import android.view.WindowManager;
 import java.util.Locale;
 import app.com.m20.R;
 import app.com.m20.driver.serial.FTDriver;
 import app.com.m20.driver.serial.UsbReceiver;
+import app.com.m20.utils.Utils;
 
 /**
  * Created by Administrator on 2018-03-12.
@@ -52,7 +54,9 @@ public class BodyFactWanningActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_bodyfactwanning);
+        Utils.fullScreen(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
 
         Log.i(TAG_ACTIVITY, "onCreate().");

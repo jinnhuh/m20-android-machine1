@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import java.util.regex.Pattern;
 import app.com.m20.R;
 import app.com.m20.driver.serial.FTDriver;
 import app.com.m20.driver.serial.UsbReceiver;
+import app.com.m20.utils.Utils;
 
 /**
  * Created by Administrator on 2018-03-23.
@@ -57,7 +59,9 @@ public class WeightDisplayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_weightdisplay);
+        Utils.fullScreen(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  //화면 안꺼지게
         Log.i(TAG_ACTIVITY, "onCreate().");
 

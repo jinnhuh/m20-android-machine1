@@ -127,6 +127,7 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_lateend);
         Log.i(TAG_ACTIVITY, "onCreate().");
+        Utils.fullScreen(this);
 
         Resources res = getResources();
         //사용자 이름 불러 온다
@@ -141,8 +142,6 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         String text = String.format(res.getString(R.string.late_end_size), str_name, str_time);
         TextView tv = findViewById(R.id.mainTitle1);
         tv.setText(text);
-
-        Utils.fullScreen(this);
 
         readGenderDataSaved();
         readDate();

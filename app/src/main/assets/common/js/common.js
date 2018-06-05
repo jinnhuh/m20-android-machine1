@@ -118,36 +118,52 @@ $(function () {
 	document.getElementById("activity_meta_prog").style.width = strGraphActiviyMeta + "%";
 
 
-    if (bodyWaterEval == 0 )
+    if (bodyWaterEval == 0 ){
         bodyWaterEval = "표준이하"
+        document.getElementById("bodyWaterEval").style.color = "red"
+    }
     else if (bodyWaterEval == 1 )
         bodyWaterEval = "표준"
-    else
+    else{
         bodyWaterEval = "표준이상"
+        document.getElementById("bodyWaterEval").style.color = "red"
+    }
 	document.getElementById("bodyWaterEval").innerHTML = bodyWaterEval;
 
-    if (proteinEval == 0 )
+    if (proteinEval == 0 ){
         proteinEval = "표준이하"
+        document.getElementById("proteinEval").style.color = "red"
+    }
     else if (proteinEval == 1 )
         proteinEval = "표준"
-    else
+    else{
         proteinEval = "표준이상"
+        document.getElementById("proteinEval").style.color = "red"
+    }
 	document.getElementById("proteinEval").innerHTML = proteinEval;
 
-    if (mineralsEval == 0 )
+    if (mineralsEval == 0 ){
         mineralsEval = "표준이하"
+        document.getElementById("mineralsEval").style.color = "red"
+    }
     else if (mineralsEval == 1 )
         mineralsEval = "표준"
-    else
+    else{
         mineralsEval = "표준이상"
+        document.getElementById("mineralsEval").style.color = "red"
+    }
 	document.getElementById("mineralsEval").innerHTML = mineralsEval;
 
-    if (bodyFatPer2Eval == 0 )
+    if (bodyFatPer2Eval == 0 ){
         bodyFatPer2Eval = "표준이하"
+        document.getElementById("bodyFatPer2Eval").style.color = "red"
+    }
     else if (bodyFatPer2Eval == 1 )
         bodyFatPer2Eval = "표준"
-    else
+    else{
         bodyFatPer2Eval = "표준이상"
+        document.getElementById("bodyFatPer2Eval").style.color = "red"
+    }
 	document.getElementById("bodyFatPer2Eval").innerHTML = bodyFatPer2Eval;
 
 	var myDate = new Date();

@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -39,6 +41,8 @@ public class IntroActivity extends AppCompatActivity {
     private static final String ACTION_USB_PERMISSION = "kr.co.andante.mobiledgs.USB_PERMISSION";
 
     BroadcastReceiver mBR;
+
+    private Handler mCCHandler = null;
 
     private void init() {
         Realm.init(this);
@@ -111,6 +115,9 @@ public class IntroActivity extends AppCompatActivity {
         ImageView imageView = findViewById(R.id.introTitle);
         imageView.setOnClickListener((v) -> {  //부팅시에 logo를 클릭하여 예약 번호 입력 화면으로 진입
             boolean isConnected = false;
+
+            saveDummyData();
+
             if(!mSerial.isConnected()) {
                 if (mSerial.begin(mBaudrate)) {
                     mUsbReceiver.loadDefaultSettingValues();
@@ -124,8 +131,7 @@ public class IntroActivity extends AppCompatActivity {
                 isConnected = true;
             }
             if(isConnected) {
-                Log.i(TAG_ACTIVITY, "Send S67;N.");
-                mUsbReceiver.writeDataToSerial("S67;N"); // Connect Check 요청
+                sendConnectCheckMsg();
             }
 
             //Log.i(TAG_ACTIVITY, "Start RegActivity.");
@@ -144,6 +150,26 @@ public class IntroActivity extends AppCompatActivity {
             //}
         //}, 5000);
     }
+    private void sendConnectCheckMsg(){
+        Log.i(TAG_ACTIVITY, "sendConnectCheckMsg() Send S67;N.");
+        mUsbReceiver.writeDataToSerial("S67;N"); // Connect Check 요청
+
+        mCCHandler = new Handler();
+        mCCHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i(TAG_ACTIVITY, "Connect Check : No Response");
+                // TODO: hkpark
+                // Connect Check에 대한 응답이 없는 경우 UART 오류로 간주 하고,
+                // 관제센터 시스템 상태 전송 (오류)
+            }
+        }, 5000);
+
+        // TODO: hkpark
+        // 모래시계 띄우기
+
+    }
+
 
 /*
     // 장치별 유니크 아이디
@@ -171,6 +197,12 @@ public class IntroActivity extends AppCompatActivity {
         super.onDestroy();
         if (mBR!= null)
             unregisterReceiver(mBR);
+
+        if( mCCHandler != null ) {
+            Log.i(TAG_ACTIVITY, "call mCCHandler.removeMessages()");
+            mCCHandler.removeMessages(0);
+            mCCHandler = null;
+        }
     }
 
     @Override
@@ -180,9 +212,13 @@ public class IntroActivity extends AppCompatActivity {
 
     public void setConnectCheck(String str) {
         String msg = null;
-
         Log.i(TAG_ACTIVITY, "setConnectCheck().");
-//        MediaPlayer mediaPlayer = new MediaPlayer();
+
+        if( mCCHandler != null ) {
+            Log.i(TAG_ACTIVITY, "call mCCHandler.removeMessages()");
+            mCCHandler.removeMessages(0);
+            mCCHandler = null;
+        }
 
         switch (str) {
             case "1":  // Connector 비 정상
@@ -382,5 +418,11 @@ public class IntroActivity extends AppCompatActivity {
         //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         //mediaPlayer.setLooping(false);
         //mediaPlayer.start();
+    }
+    private void saveDummyData(){
+//        SharedPreferences age =getSharedPreferences("dummy_data", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = age.edit();
+//
+//        editor.apply();
     }
 }

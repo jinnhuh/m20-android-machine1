@@ -276,7 +276,9 @@ public class PersonCheckupActivity extends AppCompatActivity {
 //
 //                super.handleMessage(msg);
 //                //0735.7, 56.8, 15.6, 32.3, 41.7, 38.3, 46.8, 11.3, 10.3, 12.6, 03.86, 03.57, 04.36, -05.3, 01.1 end
+//                //표준이하 bodyFatreceived("0735.7", "56.8", "10.6", "32.3", "37.7", "38.3", "46.8", "9.3", "10.3", "12.6", "02.86", "03.57", "04.36", "-05.3", "01.1");
 //                bodyFatreceived("0735.7", "56.8", "15.6", "32.3", "41.7", "38.3", "46.8", "11.3", "10.3", "12.6", "03.86", "03.57", "04.36", "-05.3", "01.1");
+//                //표준이상 bodyFatreceived("0735.7", "56.8", "30.6", "32.3", "47.7", "38.3", "46.8", "13.3", "10.3", "12.6", "04.86", "03.57", "04.36", "-05.3", "01.1");
 //                //0484.3;62.1;10.8;35.3;45.5;38.3;46.8;12.3;10.3;12.6;04.22;03.57;04.36;-00.0;00.0;N
 //                //bodyFatreceived("0484.3", "62.1", "10.8", "35.3", "45.5", "38.3", "46.8", "12.3", "10.3", "12.6", "04.22", "03.57", "04.36", "-00.0", "00.0");
 ////                startActivity(new Intent(PersonCheckupActivity.this, PersonTabActivity.class));
@@ -817,29 +819,48 @@ public class PersonCheckupActivity extends AppCompatActivity {
     private String exerciseRecommend(int judgmentValue, int judgmentbodyFatvalue, int judgmentmusclevalue) {  //추천 운동 판정
         String result = null;
 
-        if ((judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 0) ||
-                (judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0) ||
-                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0))
+        if (
+                (judgmentValue == 2 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0)||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 0)||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0)||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 0))
             result = "근육강화";
-        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) ||
-                (judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
-                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1) ||
+        else if ((judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
                 (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) ||
+
                 (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2) ||
-                (judgmentValue == 1 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1) ||
+
                 (judgmentValue == 2 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1) ||
+
+                (judgmentValue == 2 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1) ||
                 (judgmentValue == 2 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2))
             result = "근력강화";
-        else if ((judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1) ||
+        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
+
+                (judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1) ||
                 (judgmentValue == 1 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
-                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 2) ||
+
                 (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0) ||
-                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1))
+                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 2 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 2) )
             result = "체지방";
-        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 2 && judgmentmusclevalue == 0))
+        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 0) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 0))
             result ="마른체형 근육";
-        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1))
+        else if ((judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 1 && judgmentmusclevalue == 1) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 2) ||
+                (judgmentValue == 0 && judgmentbodyFatvalue == 0 && judgmentmusclevalue == 1))
             result ="마른체형 근력";
+        else {
+            result = "체지방";
+            Log.e(TAG_ACTIVITY, "Not found match case" + result);
+        }
 
         Log.d(TAG_ACTIVITY, "exerciseRecommend " + result);
 
