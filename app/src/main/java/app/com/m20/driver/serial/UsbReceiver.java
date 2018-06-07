@@ -152,7 +152,7 @@ public class UsbReceiver extends BroadcastReceiver {
 		mStop = true;
 		mSerial.end();
 
-		stopUARTCheckMsg();
+		//stopUARTCheckMsg();
 	}
 
 	public void startUARTCheckMsg(){
@@ -244,7 +244,7 @@ public class UsbReceiver extends BroadcastReceiver {
 		}
 		new Thread(mLoop).start();
 
-		startUARTCheckMsg();
+		//startUARTCheckMsg();
 	}
 
 	private Runnable mLoop = new Runnable() {

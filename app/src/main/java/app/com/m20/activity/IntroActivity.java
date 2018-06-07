@@ -42,7 +42,7 @@ public class IntroActivity extends AppCompatActivity {
 
     BroadcastReceiver mBR;
 
-    private Handler mCCHandler = null;
+//    private Handler mCCHandler = null;
 
     private void init() {
         Realm.init(this);
@@ -154,20 +154,19 @@ public class IntroActivity extends AppCompatActivity {
         Log.i(TAG_ACTIVITY, "sendConnectCheckMsg() Send S67;N.");
         mUsbReceiver.writeDataToSerial("S67;N"); // Connect Check 요청
 
-        mCCHandler = new Handler();
-        mCCHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.i(TAG_ACTIVITY, "Connect Check : No Response");
-                // TODO: hkpark
-                // Connect Check에 대한 응답이 없는 경우 UART 오류로 간주 하고,
-                // 관제센터 시스템 상태 전송 (오류)
-            }
-        }, 5000);
+//        mCCHandler = new Handler();
+//        mCCHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Log.i(TAG_ACTIVITY, "Connect Check : No Response");
+//                // TODO: hkpark
+//                // Connect Check에 대한 응답이 없는 경우 UART 오류로 간주 하고,
+//                // 관제센터 시스템 상태 전송 (오류)
+//            }
+//        }, 5000);
 
         // TODO: hkpark
         // 모래시계 띄우기
-
     }
 
 
@@ -198,11 +197,11 @@ public class IntroActivity extends AppCompatActivity {
         if (mBR!= null)
             unregisterReceiver(mBR);
 
-        if( mCCHandler != null ) {
-            Log.i(TAG_ACTIVITY, "call mCCHandler.removeMessages()");
-            mCCHandler.removeMessages(0);
-            mCCHandler = null;
-        }
+//        if( mCCHandler != null ) {
+//            Log.i(TAG_ACTIVITY, "call mCCHandler.removeMessages()");
+//            mCCHandler.removeMessages(0);
+//            mCCHandler = null;
+//        }
     }
 
     @Override
@@ -214,11 +213,11 @@ public class IntroActivity extends AppCompatActivity {
         String msg = null;
         Log.i(TAG_ACTIVITY, "setConnectCheck().");
 
-        if( mCCHandler != null ) {
-            Log.i(TAG_ACTIVITY, "call mCCHandler.removeMessages()");
-            mCCHandler.removeMessages(0);
-            mCCHandler = null;
-        }
+//        if( mCCHandler != null ) {
+//            Log.i(TAG_ACTIVITY, "call mCCHandler.removeMessages()");
+//            mCCHandler.removeMessages(0);
+//            mCCHandler = null;
+//        }
 
         switch (str) {
             case "1":  // Connector 비 정상
@@ -424,5 +423,13 @@ public class IntroActivity extends AppCompatActivity {
 //        SharedPreferences.Editor editor = age.edit();
 //
 //        editor.apply();
+
+        SharedPreferences prefs =getSharedPreferences("user_name", MODE_PRIVATE);
+        if(prefs!=null) {
+            String str_name = prefs.getString("user_name", "0"); //키값, 디폴트값
+            Log.i(TAG_ACTIVITY, "user_name: " + str_name);
+        }else{
+            Log.i(TAG_ACTIVITY, "user_name: null ");
+        }
     }
 }

@@ -1333,9 +1333,10 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                     mUsbReceiver.writeDataToSerial("S22;N");  //운동 끝나면  보낸다
                     now_sequence = null;  //종료시 초기화
                     enddataSaved();  //운동 종료 할때 저장하는 data
+                    finish();
+
                     Intent i = new Intent(DetailStartActivity.this, LateEndActivity .class);
                     startActivity(i);
-                    finish();
                 }
 //                else {
 //                    Log.d(TAG_ACTIVITY, "J.Y.T DetailStartActivity 계속 운동 해라");

@@ -53,6 +53,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
     String ffm;
     String bodyfat;
     String muscle;
+    String muscle_min;
+    String muscle_max;
     String totalbodywater;
     String totalbodywater_min;
     String totalbodywater_max;
@@ -460,8 +462,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
         editor.putString("Data_strstandardWeightMin",strstandardWeightMin ); //체중(min)
         editor.putString("Data_strstandardWeightMax",strstandardWeightMax ); //체중(max)
         editor.putString("Data_muscle",muscle ); //근육량
-        editor.putString("Data_musclemin","21.6" ); //근육량(min) 어떤 값인지 몰라서 일단 근육량
-        editor.putString("Data_musclemax","26.4" ); //근육량(max) 어떤 값인지 몰라서 일단 근육량
+        editor.putString("Data_musclemin",muscle_min ); //근육량(min) 어떤 값인지 몰라서 일단 근육량
+        editor.putString("Data_musclemax",muscle_max ); //근육량(max) 어떤 값인지 몰라서 일단 근육량
         editor.putString("Data_strbodyFatPervalue",strbodyFatPervalue ); //체지방률
         if (gender.equals("1")) {
             editor.putString("Data_strmanPerMin","12.0" );   //체지방률 (min)  어떤 값인지 몰라서 일단 체지방 (min)
@@ -606,6 +608,8 @@ public class PersonCheckupActivity extends AppCompatActivity {
         int result;
         float standardMuscle, muscleindex, graphmuscleIndex = 0;
         float minMuscleIndex = 90, maxMuscleIndex = 110, limitMuscleIndex = 200;
+        float f_muscle_min, f_muscle_max =0;
+        String str_standardMuscle=null;
 
         if (gender.equals("1"))  //표준 근육량 구하는 공식 (남/여가 다르다)
             standardMuscle = standardWeight * (float) 0.85 * (float) 0.559;
@@ -614,8 +618,21 @@ public class PersonCheckupActivity extends AppCompatActivity {
         muscleindex = (strTofloat(muscle) / standardMuscle) * 100;  //근육 index
         strMuscleIndex = String.format(Locale.US, "%.1f", muscleindex);
 
+        /* 2018-06-07, updated 요구 기능 정의서
+        근육량 min, Max  --> 근육량 = (근육량 index /100 ) *표준 근육량
+        근육량 (min) = (90/100) * (표준 근육량) =연산값 (요구 기능 정의서에 있는 24는 해당 케이스에서의 표준 근육량임)
+        근육량 (max) =(110/100) * (표준 근육량) =연산값
+         */
+        str_standardMuscle = String.format(Locale.US, "%.1f", standardMuscle);
+        f_muscle_min = ((float)90/(float)100)* Float.parseFloat(str_standardMuscle);
+        f_muscle_max = ((float)110/(float)100)* Float.parseFloat(str_standardMuscle);
+        muscle_min = String.format(Locale.US, "%.1f", f_muscle_min);
+        muscle_max = String.format(Locale.US, "%.1f", f_muscle_max);
+
         Log.i(TAG_ACTIVITY, "standardMuscle: "+standardMuscle);
         Log.i(TAG_ACTIVITY, "muscleindex: "+muscleindex);
+        Log.i(TAG_ACTIVITY, "muscle_min: "+muscle_min);
+        Log.i(TAG_ACTIVITY, "muscle_max: "+muscle_max);
 
         //근육그래프 그리는 공식
         /*
