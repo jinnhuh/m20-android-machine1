@@ -47,6 +47,8 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import app.com.m20.BuildConfig;
 import app.com.m20.db.DbManagement;
 import app.com.m20.R;
 import app.com.m20.driver.serial.UsbReceiver;
@@ -482,27 +484,28 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                     finish();
 
                 }
-//                else if (et.getText().toString().equals("000000")) {
-////                    bookingendTimeSaved("1000000");     // SCHYUN, Add for just TEST.
-//
-//                    //Intent i = new Intent(RegActivity.this, DetailActivity.class);  //테스트
-//                    Intent i = new Intent(RegActivity.this, MenuActivity.class); //정상
-//                    //테스트
-////                    user_name = "전용태";
-////                    user_age = "45";
-////                    user_gender = "1";
-////                    user_weight = "76.9";
-////                    user_height = "176.5";
-////                    //Intent i = new Intent(this, WelcomeActivity.class);
-////                    i.putExtra("name",user_name);
-////                    i.putExtra("age", user_age);
-////                    i.putExtra("gender", user_gender);
-////                    i.putExtra("weight", user_weight);
-////                    i.putExtra("height", user_height);
-////                    i.putExtra("detailTo", "1");
-//                    startActivity(i);
-//                    finish();
-//                }
+                else if (BuildConfig.TEST_LEVEL2==true && et.getText().toString().equals("000000")) {
+                    Log.i(TAG_ACTIVITY, "BuildConfig.TEST_LEVEL2 = true ");
+//                    bookingendTimeSaved("1000000");     // SCHYUN, Add for just TEST.
+
+                    //Intent i = new Intent(RegActivity.this, DetailActivity.class);  //테스트
+                    Intent i = new Intent(RegActivity.this, MenuActivity.class); //정상
+                    //테스트
+//                    user_name = "전용태";
+//                    user_age = "45";
+//                    user_gender = "1";
+//                    user_weight = "76.9";
+//                    user_height = "176.5";
+//                    //Intent i = new Intent(this, WelcomeActivity.class);
+//                    i.putExtra("name",user_name);
+//                    i.putExtra("age", user_age);
+//                    i.putExtra("gender", user_gender);
+//                    i.putExtra("weight", user_weight);
+//                    i.putExtra("height", user_height);
+//                    i.putExtra("detailTo", "1");
+                    startActivity(i);
+                    finish();
+                }
                 else {
 /*
                     if (mSerial.begin(mBaudrate)) {
@@ -921,7 +924,12 @@ public class RegActivity extends AppCompatActivity implements View.OnClickListen
                             }
                         }
                         programNameSaved();
-                        usedCount(booking_total_machine_used_count,user_name, user_age, user_gender, user_weight, user_height);
+                        if(BuildConfig.TEST_LEVEL2==true) {
+                            Log.i(TAG_ACTIVITY, "BuildConfig.TEST_LEVEL2 = true ");
+                            usedCount(5,user_name, user_age, user_gender, user_weight, user_height);
+                        }else {
+                            usedCount(booking_total_machine_used_count, user_name, user_age, user_gender, user_weight, user_height);
+                        }
                     }
                     else {
                         runOnUiThread(new Runnable() {

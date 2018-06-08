@@ -153,6 +153,7 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
         mediaPlayer.setLooping(false);
         mediaPlayer.start();
 
+        Log.i(TAG_ACTIVITY, "mediaPlayer.setOnCompletionListener() before");
         mediaPlayer.setOnCompletionListener((tmp) -> {
             Handler handler = new Handler() {
                 public void handleMessage(Message msg) {
@@ -161,13 +162,16 @@ public class EndActivity extends AppCompatActivity implements View.OnClickListen
                     finish();
                 }
             };
+            Log.i(TAG_ACTIVITY, "handler.sendEmptyMessageDelayed() before");
             handler.sendEmptyMessageDelayed(0, 5000);
         });
+        Log.i(TAG_ACTIVITY, "mediaPlayer.setOnCompletionListener() after");
         RelativeLayout relativeLayout = findViewById(R.id.rrLayout);
         relativeLayout.setOnClickListener((v)-> {
             //startActivity(new Intent(EndActivity.this, IntroActivity.class));
             //finish();
         });
+        Log.i(TAG_ACTIVITY, "onCreate() end");
     }
 
     @Override

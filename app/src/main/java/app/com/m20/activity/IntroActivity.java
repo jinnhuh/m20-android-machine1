@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import app.com.m20.BuildConfig;
 import app.com.m20.R;
 import app.com.m20.db.DbManagement;
 import app.com.m20.driver.serial.FTDriver;
@@ -219,6 +220,11 @@ public class IntroActivity extends AppCompatActivity {
 //            mCCHandler = null;
 //        }
 
+        if(BuildConfig.TEST_LEVEL1==true) {
+            Log.i(TAG_ACTIVITY, "BuildConfig.TEST_LEVEL1 = true ");
+            str = "0";
+        }
+
         switch (str) {
             case "1":  // Connector 비 정상
                 msg = "Connector 비 정상.";
@@ -265,8 +271,6 @@ public class IntroActivity extends AppCompatActivity {
             startActivity(i);
             //finish();
         }
-
-        //if (str.equals("0") || str.equals("1") ) {  //정상이면 입력 화면으로 이동
         if (str.equals("0")) {  //정상이면 입력 화면으로 이동
             startActivity(new Intent(IntroActivity.this, RegActivity.class));
             finish();

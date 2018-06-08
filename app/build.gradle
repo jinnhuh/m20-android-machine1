@@ -29,6 +29,10 @@ android {
         debug{
             //debuggable false
         }
+        buildTypes.each{
+            it.buildConfigField('boolean', 'TEST_LEVEL1', TEST_LEVEL1)
+            it.buildConfigField('boolean', 'TEST_LEVEL2', TEST_LEVEL2)
+        }
     }
     compileOptions {
         targetCompatibility 1.8
@@ -91,8 +95,8 @@ task('incrementVersionName') << {
     def minorVersion = Integer.parseInt(matcherVersionNumber.group(2))
     def pointVersion = Integer.parseInt(matcherVersionNumber.group(3))
     def buildVersion = Integer.parseInt(matcherVersionNumber.group(4))
-    def mNextVersionName = majorVersion + "." + minorVersion + "." + pointVersion + "." + (buildVersion + 1)
-    def manifestContent = matcherVersionNumber.replaceAll("versionName=\"" + mNextVersionName + "\"")
+    def mNextVersionName1 = majorVersion + "." + minorVersion + "." + pointVersion + "." + (buildVersion + 1)
+    def manifestContent = matcherVersionNumber.replaceAll("versionName=\"" + mNextVersionName1 + "\"")
     manifestFile.write(manifestContent)
 }
 

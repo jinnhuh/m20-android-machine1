@@ -163,6 +163,7 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
         mediaPlayer.setLooping(false);
         mediaPlayer.start();
 
+        Log.i(TAG_ACTIVITY, "mediaPlayer.setOnCompletionListener() before");
         mediaPlayer.setOnCompletionListener((tmp) -> {
 
             Handler handler = new Handler() {
@@ -172,15 +173,18 @@ public class LateEndActivity extends AppCompatActivity implements View.OnClickLi
                     finish();
                 }
             };
+            Log.i(TAG_ACTIVITY, "handler.sendEmptyMessageDelayed() before");
             handler.sendEmptyMessageDelayed(0, 5000);
 
         });
+        Log.i(TAG_ACTIVITY, "mediaPlayer.setOnCompletionListener() after");
 
 //        RelativeLayout relativeLayout = findViewById(R.id.rrLayout);
 //        relativeLayout.setOnClickListener((v) -> {
 //            startActivity(new Intent(LateEndActivity.this, IntroActivity.class));
 //            finish();
 //        });
+        Log.i(TAG_ACTIVITY, "onCreate() end");
     }
 
     @Override
