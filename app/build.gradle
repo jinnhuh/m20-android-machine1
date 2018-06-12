@@ -9,15 +9,23 @@ ext{
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('../apk/key/platform.keystore')
+            keyAlias 'platformkey'
+            keyPassword ''
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 26
-    useLibrary  'org.apache.http.legacy'
+    useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "app.com.m20"
         minSdkVersion 22
         targetSdkVersion 23
         //versionCode 2
         //versionName "intro.0"
-        //archivesBaseName = "m20_" + project.ext.mNextVersionName
+        archivesBaseName = "m20_" + project.ext.mNextVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -25,11 +33,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             zipAlignEnabled true
+            signingConfig   signingConfigs.release
         }
-        debug{
+        debug {
             //debuggable false
         }
-        buildTypes.each{
+        buildTypes.each {
             it.buildConfigField('boolean', 'TEST_LEVEL1', TEST_LEVEL1)
             it.buildConfigField('boolean', 'TEST_LEVEL2', TEST_LEVEL2)
         }
@@ -48,19 +57,19 @@ task signing(type: Exec){
 build.dependsOn signing
 
 dependencies {
-// 180404 SCHYUN,    compile 'com.jakewharton:butterknife:8.8.1'
+    // 180404 SCHYUN,    compile 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
-// 180404 SCHYUN,    compile 'com.ssomai:android.scalablelayout:2.1.6'
+    // 180404 SCHYUN,    compile 'com.ssomai:android.scalablelayout:2.1.6'
     implementation 'com.ssomai:android.scalablelayout:2.1.6'
     apply plugin: 'realm-android'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-// 180404 SCHYUN,    compile 'com.google.code.gson:gson:2.8.0'
+    // 180404 SCHYUN,    compile 'com.google.code.gson:gson:2.8.0'
     implementation 'com.google.code.gson:gson:2.8.0'
 }
 
@@ -110,8 +119,9 @@ task('changeVersionName') << {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig' || task.name == 'build') {
+    if (task.name == 'generateReleaseBuildConfig' || task.name == 'generateDebugBuildConfig' /*|| task.name == 'build'*/) {
         task.dependsOn 'increaseVersionCode'
         task.dependsOn 'changeVersionName'
     }
 }
+

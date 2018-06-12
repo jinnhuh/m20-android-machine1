@@ -8,3 +8,7 @@ java -jar signapk.jar platform.x509.pem platform.pk8 app-release-unsigned.apk ap
 #apksigner는 검증 결과 출력이 없어서 jarsigner로 확인
 #~/Android/Sdk/build-tools/27.0.3/apksigner verify app-release-signed.apk
 
+# 2070  ~/android-studio/jre/bin/keytool -list -printcert -jarfile app/build/outputs/apk/release/app-release.apk 
+# 2071  ~/android-studio/jre/bin/keytool -list -v -keystore apk/key/platform.keystore 
+
+

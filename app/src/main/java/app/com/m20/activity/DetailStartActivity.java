@@ -204,10 +204,6 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
         TextView textView = findViewById(R.id.txtTitle);
         SharedPreferences setting = getSharedPreferences("setting", 0);
         textView.setText(setting.getString("main_title", ""));
-        SharedPreferences time =getSharedPreferences("booking_end_time", MODE_PRIVATE);
-        String booking_end_time = time.getString("end_time", "0"); //키값, 디폴트값
-        Log.d(TAG_ACTIVITY, "Booking end time = " + booking_end_time);
-        endtimecheck(booking_end_time);   //end time 과 현재 시간 체크하자
 
         startTimedataSaved(); //시작 시간 저장
 
@@ -242,6 +238,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
                 mCountDown = new CountDownTimer(1000 * 60 * seperatetime, 1000) {
                     public void onTick(long millisUntilFinished) {
+                        //Log.i(TAG_ACTIVITY, "onTick() at mCountDown timer");
                         iEllapse = (int) millisUntilFinished / 1000;
                         secToHHMMSS(iEllapse);
                         mEllapse.setText(timerBuffer);
@@ -257,6 +254,14 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                         finish();
                     }
                 }.start();
+
+                SharedPreferences time =getSharedPreferences("booking_end_time", MODE_PRIVATE);
+                String booking_end_time = time.getString("end_time", "0"); //키값, 디폴트값
+
+                //booking_end_time = "14:30:00"; // for debug
+                Log.d(TAG_ACTIVITY, "Booking end time = " + booking_end_time);
+                endtimecheck(booking_end_time);   //end time 과 현재 시간 체크하자
+
             }
 
             ImageButton imageButton = findViewById(R.id.btn_play);
@@ -457,6 +462,10 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void waveform() {
+        if (mUsbReceiver == null) {
+            Log.i(TAG_ACTIVITY, "mUsbReceiver is null, do nothing ");
+            return;
+        }
         if (playID.equals("근육강화")) {
             if (iEllapse == 1199) {
                 now_sequence = "근육강화_1";
@@ -1287,6 +1296,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     protected void onDestroy() {
+        Log.i(TAG_ACTIVITY, "called onDestory()");
         if (mUsbReceiver != null) {
             mUsbReceiver.closeUsbSerial();
             unregisterReceiver(mUsbReceiver);
@@ -1302,6 +1312,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
             mFirstAllSender = null;
         }
         if (mCountDown != null) {
+            Log.i(TAG_ACTIVITY, "called mCountDown.cancel()");
             mCountDown.cancel();
             mCountDown = null;
         }
@@ -1328,15 +1339,23 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
 //                Log.d(TAG_ACTIVITY, numnewtime + " >= " + numnew_booking_end_time);
                 if (numnewtime >= numnew_booking_end_time) {
-                    Log.i(TAG_ACTIVITY, "Send S22;N");
+                    Log.i(TAG_ACTIVITY, "onReceive() Send S22;N in BR");
 
                     mUsbReceiver.writeDataToSerial("S22;N");  //운동 끝나면  보낸다
                     now_sequence = null;  //종료시 초기화
+                    if(mCountDown!=null) {
+                        Log.i(TAG_ACTIVITY, "called mCountDown.cancel() in BR");
+                        mCountDown.cancel();
+                        mCountDown = null;
+                    }
                     enddataSaved();  //운동 종료 할때 저장하는 data
-                    finish();
 
+                    Log.i(TAG_ACTIVITY, "start LateEndActivity");
                     Intent i = new Intent(DetailStartActivity.this, LateEndActivity .class);
                     startActivity(i);
+                    Log.i(TAG_ACTIVITY, "call finish() before");
+                    finish();
+
                 }
 //                else {
 //                    Log.d(TAG_ACTIVITY, "J.Y.T DetailStartActivity 계속 운동 해라");
@@ -1510,8 +1529,10 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
                 //////////////////////////////////
 
 
-                if(mCountDown != null)
+                if(mCountDown != null) {
                     mCountDown.cancel();
+                    mCountDown = null;
+                }
                 if(mAllSender != null) {
                     mAllSender.cancel();
                     iAlltimer = 0;
@@ -1544,6 +1565,7 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
                 if (mCountDown != null) {
                     mCountDown.cancel(); // 정지
+                    mCountDown = null;
                 }
                 if(mAllSender != null) {
                     mAllSender.cancel();
@@ -2137,8 +2159,10 @@ public class DetailStartActivity extends AppCompatActivity implements View.OnCli
 
         displayAllStrengthValue();
 
-        if(mCountDown != null)
+        if(mCountDown != null) {
             mCountDown.cancel();
+            mCountDown = null;
+        }
         if(mAllSender != null) {
             mAllSender.cancel();
             iAlltimer = 0;
